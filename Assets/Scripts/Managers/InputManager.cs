@@ -24,6 +24,16 @@ public class InputManager : MonoBehaviour
         uiMap = inputActions.FindActionMap("UI");
 
         uiMap.Enable(); // Should always be enabled.
+
+        // Set initial state based on GameManager
+        if (GameManager.Instance?.GameState == GameStates.PLAYING)
+        {
+            playerMap.Enable();
+        }
+        else
+        {
+            playerMap.Disable(); // Ensure it starts disabled for menu states
+        }
     }
 
     /// <summary>
