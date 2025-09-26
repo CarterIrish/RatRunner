@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,10 +24,6 @@ public class InputManager : MonoBehaviour
         uiMap = inputActions.FindActionMap("UI");
 
         uiMap.Enable(); // Should always be enabled.
-        if (GameManager.Instance?.GameState == GameStates.PLAYING)
-        {
-            playerMap.Enable();
-        }
     }
 
     /// <summary>
@@ -43,7 +38,7 @@ public class InputManager : MonoBehaviour
             return;
         }
 
-        if (context.started && GameManager.Instance?.GameState == GameStates.PLAYING)
+        if (context.started)
         {
             Debug.Log("Player Moving");
             playerScript.isMoving = true;
@@ -62,7 +57,7 @@ public class InputManager : MonoBehaviour
             return;
         }
 
-        if (context.started && GameManager.Instance?.GameState == GameStates.PLAYING)
+        if (context.started)
         {
             Debug.Log("Turn Right");
             playerScript.isTurningRight = true;
@@ -81,7 +76,7 @@ public class InputManager : MonoBehaviour
             return;
         }
 
-        if (context.started && GameManager.Instance?.GameState == GameStates.PLAYING)
+        if (context.started)
         {
             Debug.Log("Turn Left");
             playerScript.isTurningLeft = true;
