@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 
@@ -9,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// This enum serves to hold all core game loop states
 /// </summary>
-public enum GAME_STATES
+public enum GameStates
 {
     START,
     PLAYING,
@@ -18,19 +15,26 @@ public enum GAME_STATES
 }
 
 /// <summary>
-/// This class serves to manage core game loop
+/// Singleton GameManager class serves to manage core game loop
 /// </summary>
 public class GameManager : MonoBehaviour
 {
+    /// <summary>
+    /// Gets the singleton instance.
+    /// </summary>
+    /// <value>
+    /// The instance.
+    /// </value>
+    public static GameManager Instance { get; private set; }
 
-    private GAME_STATES _gameState = GAME_STATES.START;  // Initilze _gameState field for local maniupualtion    
+    private GameStates _gameState = GameStates.START; 
     /// <summary>
     /// Gets the state of the game.
     /// </summary>
     /// <value>
     /// The state of the game.
     /// </value>
-    public GAME_STATES GameState
+    public GameStates GameState
     {
         get { return _gameState; }
     }
@@ -39,16 +43,33 @@ public class GameManager : MonoBehaviour
     /// Changes the state of the game.
     /// </summary>
     /// <param name="newState">The new state.</param>
-    public void ChangeGameState(GAME_STATES newState)
+    public void ChangeGameState(GameStates newState)
     {
         _gameState = newState;
     }
+
+    private void Awake()
+    {
+        // Check if an instance of the GameManager exists
+        if (Instance == null)
+        {
+            // If empty assign this
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            // else destroy the gameObject
+            Destroy(gameObject);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        if(_gameState != GAME_STATES.START)
+        if(_gameState != GameStates.START)
         {
-            _gameState = GAME_STATES.START;
+            _gameState = GameStates.START;
         }
     }
 
@@ -58,16 +79,16 @@ public class GameManager : MonoBehaviour
         // Gamestate machine
         switch (_gameState)
         {
-            case GAME_STATES.START:
+            case GameStates.START:
                 HandleStartState();
                 break;
-            case GAME_STATES.PLAYING:
+            case GameStates.PLAYING:
                 HandlePlayingState();
                 break;
-            case GAME_STATES.PAUSED:
+            case GameStates.PAUSED:
                 HandlePausedState();
                 break;
-            case GAME_STATES.GAME_OVER:
+            case GameStates.GAME_OVER:
                 HandleGameOverState();
                 break;
         }
@@ -75,9 +96,17 @@ public class GameManager : MonoBehaviour
     }
 
     #region Gameplay Loop Methods Below
+
+    //TODO: Add start state logic
     private void HandleStartState() { }
+
+    //TODO: Add playing state logic
     private void HandlePlayingState() { }
+
+    //TODO: Add paused state logic
     private void HandlePausedState() { }
+
+    //TODO: Add gameover state logic
     private void HandleGameOverState() { }
     #endregion
 }
