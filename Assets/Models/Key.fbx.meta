@@ -3,7 +3,12 @@ guid: 54cd43b437b3c1f40bc9f7760ecb4ef3
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rusty_metal_05
+    second: {fileID: 2100000, guid: ccf2dd8a5adfca3499d9c840108f7bab, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
