@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class Items : MonoBehaviour
 {
-    //reference to inventory
-    [SerializeField]
-    private Inventory inventory;
-
-    //variable in the inspector to choose what type of item it is
-    public items item;
+    // what type of item this is
+    public Inventory.items itemType;
 
     // Start is called before the first frame update
     void Start()
@@ -23,12 +19,10 @@ public class Items : MonoBehaviour
         
     }
 
-    void OnTriggerEnter(Collider collider)
+    // Called when player picks up the item
+    public void Pickup(Inventory inventory)
     {
-        if (collider.tag == "Player")
-        {
-            Destroy(gameObject);
-            inventory.inventory.Add(item);
-        }
+        inventory.inventory.Add(itemType);
+        Destroy(gameObject);
     }
 }
