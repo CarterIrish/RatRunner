@@ -25,7 +25,10 @@ public class InputManager : MonoBehaviour
         uiMap = inputActions.FindActionMap("UI");
 
         uiMap.Enable(); // Should always be enabled.
-        playerMap.Enable();
+        if (GameManager.Instance?.GameState == GameStates.PLAYING)
+        {
+            playerMap.Enable();
+        }
     }
 
     /// <summary>
@@ -95,11 +98,13 @@ public class InputManager : MonoBehaviour
             {
                 case (GameStates.START):
                 {
+                    playerMap.Enable();
                     GameManager.Instance.ChangeGameState(GameStates.PLAYING);
                     break;
                 }
                 case (GameStates.GAME_OVER):
                 {
+                        playerMap.Disable();
                     GameManager.Instance.ChangeGameState(GameStates.START);
                     break;
                 }
@@ -117,11 +122,13 @@ public class InputManager : MonoBehaviour
             {
                 case (GameStates.PLAYING):
                 {
+                        playerMap.Disable();
                     GameManager.Instance.ChangeGameState(GameStates.PAUSED);
                     break;
                 }
                 case (GameStates.PAUSED):
                 {
+                        playerMap.Enable();
                     GameManager.Instance.ChangeGameState(GameStates.PLAYING);
                     break;
                 }
