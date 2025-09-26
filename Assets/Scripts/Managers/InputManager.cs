@@ -93,6 +93,10 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called when [enter pressed].
+    /// </summary>
+    /// <param name="context">The context.</param>
     public void OnEnterPressed(InputAction.CallbackContext context)
     {
         if(context.started)
@@ -117,6 +121,10 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called when [escape pressed].
+    /// </summary>
+    /// <param name="context">The context.</param>
     public void OnEscapePressed(InputAction.CallbackContext context)
     {
         if(context.started)
