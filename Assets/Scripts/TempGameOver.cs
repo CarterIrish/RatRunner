@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TempGameOver : MonoBehaviour
 {
+    public InputManager inMGN;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,8 @@ public class TempGameOver : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Game Over hit");
+        inMGN.SetPlayerInputState(false);
         GameManager.Instance.ChangeGameState(GameStates.GAME_OVER);
+
     }
 }
