@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     /// </value>
     public static GameManager Instance { get; private set; }
 
+    [SerializeField]
     private GameStates _gameState = GameStates.START; 
     /// <summary>
     /// Gets the state of the game.

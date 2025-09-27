@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,7 @@ public class InputManager : MonoBehaviour
     private InputActionMap playerMap;
     private InputActionMap uiMap;
 
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,18 @@ public class InputManager : MonoBehaviour
         else
         {
             playerMap.Disable(); // Ensure it starts disabled for menu states
+        }
+    }
+
+    public void SetPlayerInputState(bool state)
+    {
+        if(!state)
+        {
+            playerMap.Disable();
+        }
+        else
+        {
+            playerMap.Enable();
         }
     }
 
