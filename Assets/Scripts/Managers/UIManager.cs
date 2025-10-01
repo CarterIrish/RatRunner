@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 ///  Singleton UI manager instance
@@ -29,6 +30,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
     #region UI Methods below
     #endregion
 
