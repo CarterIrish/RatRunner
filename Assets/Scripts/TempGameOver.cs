@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TempGameOver : MonoBehaviour
 {
@@ -21,6 +22,6 @@ public class TempGameOver : MonoBehaviour
     {
         Debug.Log("Game Over hit");
         GameManager.Instance.ChangeGameState(GameStates.GAME_OVER);
-
+        SceneManager.LoadScene("GameOver");
     }
 }

@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
         {
             // If empty assign this
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -32,7 +32,7 @@ public class UIManager : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
     #region UI Methods below
     #endregion
