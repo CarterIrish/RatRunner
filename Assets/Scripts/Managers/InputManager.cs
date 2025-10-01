@@ -128,19 +128,19 @@ public class InputManager : MonoBehaviour
         {
             Debug.Log("Enter Pressed");
             if (GameManager.Instance == null) return;
-            switch (GameManager.Instance.GameState)
-            {
-                case (GameStates.START):
-                {
-                    GameManager.Instance.ChangeGameState(GameStates.PLAYING);
-                    break;
-                }
-                case (GameStates.GAME_OVER):
-                {
-                    GameManager.Instance.ChangeGameState(GameStates.START);
-                    break;
-                }
-            }    
+            //switch (GameManager.Instance.GameState)
+            //{
+            //    case (GameStates.START):
+            //    {
+            //        GameManager.Instance.ChangeGameState(GameStates.PLAYING);
+            //        break;
+            //    }
+            //    case (GameStates.GAME_OVER):
+            //    {
+            //        GameManager.Instance.ChangeGameState(GameStates.START);
+            //        break;
+            //    }
+            //}    
         }
     }
 

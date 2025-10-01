@@ -9,7 +9,7 @@ public class TakeHit : MonoBehaviour
         // end the game when enemy collides with player
         if (other.CompareTag("Enemy"))
         {
-            GameManager.Instance.ChangeGameState(GameStates.GAME_OVER);
+            UIManager.Instance.LoadScene("GameOver");
 
             // stop enemy from moving
             EnemyNavigation enemyScript = other.gameObject.GetComponent<EnemyNavigation>();

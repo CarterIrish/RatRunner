@@ -8,10 +8,8 @@ using UnityEngine;
 /// </summary>
 public enum GameStates
 {
-    START,
     PLAYING,
     PAUSED,
-    GAME_OVER
 }
 
 /// <summary>
@@ -28,7 +26,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [SerializeField]
-    private GameStates _gameState = GameStates.START; 
+    private GameStates _gameState = GameStates.PLAYING; 
     /// <summary>
     /// Gets the state of the game.
     /// </summary>
@@ -68,9 +66,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(_gameState != GameStates.START)
+        if(_gameState != GameStates.PLAYING)
         {
-            _gameState = GameStates.START;
+            _gameState = GameStates.PLAYING;
         }
     }
 
@@ -80,35 +78,22 @@ public class GameManager : MonoBehaviour
         // Gamestate machine
         switch (_gameState)
         {
-            case GameStates.START:
-                HandleStartState();
-                break;
             case GameStates.PLAYING:
                 HandlePlayingState();
                 break;
             case GameStates.PAUSED:
                 HandlePausedState();
                 break;
-            case GameStates.GAME_OVER:
-                HandleGameOverState();
-                break;
         }
 
     }
 
     #region Gameplay Loop Methods Below
-
-    //TODO: Add start state logic
-    private void HandleStartState() { }
-
     //TODO: Add playing state logic
     private void HandlePlayingState() { }
 
     //TODO: Add paused state logic
     private void HandlePausedState() { }
-
-    //TODO: Add gameover state logic
-    private void HandleGameOverState() { }
     #endregion
 }
 
