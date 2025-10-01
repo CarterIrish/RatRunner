@@ -20,7 +20,6 @@ public class TempGameOver : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Game Over hit");
-        inMGN.SetPlayerInputState(false);
         GameManager.Instance.ChangeGameState(GameStates.GAME_OVER);
 
     }

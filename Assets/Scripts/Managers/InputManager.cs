@@ -38,16 +38,27 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public void SetPlayerInputState(bool state)
+    /// <summary>
+    /// Runs on each unity update, ensures consistent
+    /// input maps accross game states.
+    /// </summary>
+    private void Update()
     {
-        if(!state)
+        // Check the game state to update input maps
+        switch (GameManager.Instance?.GameState)
         {
-            playerMap.Disable();
+            case GameStates.PLAYING:
+                {
+                    playerMap.Enable();
+                    break;
+                }
+            default:
+                {
+                    playerMap.Disable();
+                    break;
+                }
         }
-        else
-        {
-            playerMap.Enable();
-        }
+
     }
 
     /// <summary>
@@ -121,13 +132,11 @@ public class InputManager : MonoBehaviour
             {
                 case (GameStates.START):
                 {
-                    playerMap.Enable();
                     GameManager.Instance.ChangeGameState(GameStates.PLAYING);
                     break;
                 }
                 case (GameStates.GAME_OVER):
                 {
-                        playerMap.Disable();
                     GameManager.Instance.ChangeGameState(GameStates.START);
                     break;
                 }
@@ -149,13 +158,11 @@ public class InputManager : MonoBehaviour
             {
                 case (GameStates.PLAYING):
                 {
-                        playerMap.Disable();
                     GameManager.Instance.ChangeGameState(GameStates.PAUSED);
                     break;
                 }
                 case (GameStates.PAUSED):
                 {
-                        playerMap.Enable();
                     GameManager.Instance.ChangeGameState(GameStates.PLAYING);
                     break;
                 }
