@@ -332,6 +332,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 9f4cba3e469288c4ea6250f24c742509, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: bb5fa5fdb20826b4db221f15bbbd4b0c, type: 2}
     - target: {fileID: 919132149155446097, guid: 9f4cba3e469288c4ea6250f24c742509, type: 3}
       propertyPath: m_Name
       value: Tunnel_T
@@ -1430,7 +1434,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 9f4cba3e469288c4ea6250f24c742509, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 600.219
+      value: 598.219
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9f4cba3e469288c4ea6250f24c742509, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1438,7 +1442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9f4cba3e469288c4ea6250f24c742509, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -54.858917
+      value: -56.858917
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9f4cba3e469288c4ea6250f24c742509, type: 3}
       propertyPath: m_LocalRotation.w
