@@ -31,6 +31,14 @@ public class EnemyNavigation : MonoBehaviour
         //    agent.destination = target.position;
         //}
 
-        agent.destination = target.position;
+        // only tracks player in playing game state
+        if (GameManager.Instance.GameState == GameStates.PLAYING)
+        {
+            agent.destination = target.position;
+        }
+        else
+        {
+            agent.destination = transform.position;
+        }
     }
 }
