@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,13 +9,12 @@ public class Items : MonoBehaviour
     [SerializeField]
     private Inventory inventory;
 
-    //variable in the inspector to choose what type of item it is
-    public items item;
+    //choose what item this is in the inspector
+    public ItemsEnum item;
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
