@@ -11,6 +11,10 @@ public class Inventory : MonoBehaviour
     //players inventory
     public List<ItemsEnum> inventory;
 
+    //reference to the door
+    [SerializeField]
+    private GameObject door;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +24,12 @@ public class Inventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        foreach (ItemsEnum i in inventory)
+        {
+            if (i == ItemsEnum.key)
+            {
+                door.SetActive(false);
+            }
+        }
     }
 }
