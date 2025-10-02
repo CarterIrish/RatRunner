@@ -13,6 +13,9 @@ public class EnemyNavigation : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+
+        // temporary for playtest
+        target = transform;
     }
 
     // Update is called once per frame

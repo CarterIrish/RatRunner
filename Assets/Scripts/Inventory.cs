@@ -15,6 +15,10 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private GameObject door;
 
+    public EnemyNavigation enemyScript;
+
+    public Transform playerTransform;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +33,8 @@ public class Inventory : MonoBehaviour
             if (i == ItemsEnum.key)
             {
                 door.SetActive(false);
+
+                enemyScript.target = playerTransform;
             }
         }
     }
