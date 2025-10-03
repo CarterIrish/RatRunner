@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         // move if input is received
         if (isMoving)
         {
-            velocity = transform.forward * speed * Time.fixedDeltaTime;
+            velocity = -transform.forward * speed * Time.fixedDeltaTime;
             transform.position += velocity;
         }
     }
