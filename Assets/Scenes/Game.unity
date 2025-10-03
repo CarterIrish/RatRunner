@@ -3989,7 +3989,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42851cc3d9a17274b800e89dd93e7949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 1451188818}
+  inventory: {fileID: 2069917218}
   item: 0
 --- !u!4 &730882574 stripped
 Transform:
