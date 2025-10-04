@@ -1,3 +1,45 @@
+# Rat Runner
+
+A survival horror game about a rat exploring dangerous sewers, gathering resources, and upgrading its abilities to escape.
+
+**Genre:** Survival Scavenger / Horror / Rougelike
+**Platform:** PC (Unity 2023.2.20f1)  
+**Team:** Alt+F5  
+**Course:** [IGME.320 - Game Design & Devlopment II]  
+**Development Period:** September 2025 - Present
+
+## About
+
+Rat Runner combines tense exploration with roguelike mechanics in an eerie sewer environment. Players control a rat navigating a dark, maze-like sewer system, collecting items and upgrades while avoiding or outrunning enemies. Death returns you to your colony base where you can purchase permanent upgrades for future runs.
+
+### Design Pillars
+- **Tense Exploration** - Navigate unknown maze environments under pressure
+- **Eerie Atmosphere** - Dark, quiet sewers with lurking threats
+- **Survival Mechanics** - Death loop with persistent upgrades
+
+## Current Features
+- First-person player movement and camera controls
+- Enemy AI with pursuit behavior
+- Item collection and inventory system
+- Door-key puzzle mechanics
+- Game state management (Pause, Playing, Game Over)
+- NavMesh-based pathfinding
+
+## Team
+- **Maya** - Concept Art/Design, UI/UX Programming
+- **Brice** - Items & Inventory Programming
+- **Jake** - Player & Enemy Programming  
+- **Carter** - GameManager, Map Creation
+- **Chris** - 3D Graphics & Assets
+
+## Development
+
+[Link to High Concept Document](https://docs.google.com/document/d/11iVND_ZGL1XZPyJbP12Lntm7AS66SD5DEYu6A4077Js/edit?usp=sharing)
+
+---
+
+# Changelog
+
 ## [Sprint 2 - Week 2] - 2025-09-26 to 2025-10-03
 
 ### Added
