@@ -59,13 +59,21 @@ Rat Runner combines tense exploration with roguelike mechanics in an eerie sewer
   
 - **Level Design:**
   - Playtest map created from reference sketch (Carter)
-  - Basic start room - requires polish (Carter)
-  - Testing tunnels with default materials (Carter)
+  - Basic start room asset - requires polish (Carter)
   - Updated maze demo environment (Carter)
 
 - **UI/Game State:**
   - Game Over state and temporary transition screen (Carter)
   - Code documentation for input manager callbacks (Carter)
+
+- **Game Art:** (Chris)
+   - Crated tunnel assets
+      - T-connector, cross-junction, straight pipe, left & right bends
+   - Created rat asset
+   - Created cheese asset 
+   - Created thread & shard assets
+   - Created ket asset
+   - Created needle asset
 
 ### Changed
 
