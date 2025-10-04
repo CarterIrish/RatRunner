@@ -34,7 +34,7 @@ Rat Runner combines tense exploration with roguelike mechanics in an eerie sewer
 
 ## Development
 
-[Link to High Concept Document](https://docs.google.com/document/d/11iVND_ZGL1XZPyJbP12Lntm7AS66SD5DEYu6A4077Js/edit?usp=sharing)
+[Link to High Concept Document](https://docs.google.com/document/d/e/2PACX-1vRN4v44V8mjBcOPSkB2Yl0jgf-J6qtahjTJwznlAHGf2UYgckZKTMoXCYlzLRgnN6s2SkB-l_eS0BuG/pub)
 
 ---
 
