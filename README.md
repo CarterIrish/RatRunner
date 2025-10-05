@@ -54,6 +54,8 @@ Rat Runner combines tense exploration with roguelike mechanics in an eerie sewer
   - Enemy AI system that follows and chases the player (Jake)
   
 - **Item & Puzzle Systems:**
+  - LockedDoor script for handling key-based door unlocking (Carter)
+  - Event-based item pickup system with collision handling (Carter)
   - Door unlocking mechanic - doors deactivate when player collects key (Brice)
   - Key-inventory integration for puzzle progression (Jake)
   - Updated key asset model (Brice)
@@ -82,12 +84,16 @@ Rat Runner combines tense exploration with roguelike mechanics in an eerie sewer
 - Rearranged player hierarchy in scene structure 
 - Disabled player movement commands when UI is active (Carter)
 - Improved input handling with UI map swaps (Carter)
+- Refactored inventory system to use event listeners instad of direct class/object references (Carter)
+- Updated enemy nav to integrate with event system (Carter)
 
 ### Fixed
 
 - Player tipping/rotation bug during movement (Jake)
 - Pause state bug that prevented proper game pausing (Carter)
 - Merge conflicts from enemy feature branch integration (Jake)
+- Fixed memory leak in LockedDoor event listener cleanup (Carter)
+- Removed redundant scene load in TempGameOver script (Carter)
 
 ### Removed
 
