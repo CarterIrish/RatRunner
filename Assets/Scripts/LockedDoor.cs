@@ -23,7 +23,7 @@ public class LockedDoor : MonoBehaviour
     private void OnDisable()
     {
         // Remove the listener once required item is collected
-        Inventory.OnItemAdded.AddListener(OnItemPickedUp);
+        Inventory.OnItemAdded.RemoveListener(OnItemPickedUp);
     }
 
     /// <summary>

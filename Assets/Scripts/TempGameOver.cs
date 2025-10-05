@@ -50,7 +50,6 @@ public class TempGameOver : MonoBehaviour
         {        
             Debug.Log($"Game Over hit {other.gameObject.name}");
             UIManager.Instance.LoadScene("GameOver");
-            SceneManager.LoadScene("GameOver");
         }
     }
 }

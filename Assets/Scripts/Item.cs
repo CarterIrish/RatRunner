@@ -21,6 +21,7 @@ public class Item : MonoBehaviour
             {
                 inventory.AddItem(item);
             }
+
             // Destory the game object when finished
             Destroy(gameObject);
         }
