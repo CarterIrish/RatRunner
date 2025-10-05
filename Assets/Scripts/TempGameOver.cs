@@ -1,26 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class TempGameOver : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    // Game over condition
+    private bool gameOverCond = false;
+
+    [SerializeField]
+    private ItemsEnum requiredItem = ItemsEnum.key;
+
+    /// <summary>
+    /// Called when [enable].
+    /// </summary>
+    private void OnEnable()
     {
-        
+        // Add listener to item pickup event
+        Inventory.OnItemAdded.AddListener(OnItemPickedUp);
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Called when [disable].
+    /// </summary>
+    private void OnDisable()
     {
-        
+        // Remove listener
+        Inventory.OnItemAdded.RemoveListener(OnItemPickedUp);
     }
 
+    /// <summary>
+    /// Called when [item picked up].
+    /// </summary>
+    /// <param name="item">The item.</param>
+    private void OnItemPickedUp(ItemsEnum item)
+    {
+        // If item is our required 
+        if(item == requiredItem)
+        {
+            gameOverCond = true;
+        }
+    }
+
+    /// <summary>
+    /// Called when [trigger enter].
+    /// </summary>
+    /// <param name="other">The other object.</param>
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Game Over hit");
-        UIManager.Instance.LoadScene("GameOver");
-        SceneManager.LoadScene("GameOver");
+        if(gameOverCond)
+        {        
+            Debug.Log($"Game Over hit {other.gameObject.name}");
+            UIManager.Instance.LoadScene("GameOver");
+            SceneManager.LoadScene("GameOver");
+        }
     }
 }

@@ -1,41 +1,28 @@
-using System;
-using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 //enum to hold our items 
 public enum ItemsEnum { key, suspiciousPowder, thread, cloth, spring };
 
 public class Inventory : MonoBehaviour
 {
+    /// <summary>
+    /// The on item added event
+    /// </summary>
+    public static UnityEvent<ItemsEnum> OnItemAdded = new UnityEvent<ItemsEnum>();
+
     //players inventory
     public List<ItemsEnum> inventory;
 
-    //reference to the door
-    [SerializeField]
-    private GameObject door;
-
-    public EnemyNavigation enemyScript;
-
-    public Transform playerTransform;
-
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// Adds the item to inventory.
+    /// </summary>
+    /// <param name="item">The item to add.</param>
+    public void AddItem(ItemsEnum item)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        foreach (ItemsEnum i in inventory)
-        {
-            if (i == ItemsEnum.key)
-            {
-                door.SetActive(false);
-
-                enemyScript.target = playerTransform;
-            }
-        }
+        inventory.Add(item);
+        OnItemAdded.Invoke(item);
     }
 }
