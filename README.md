@@ -3,6 +3,7 @@
 A survival horror game about a rat exploring dangerous sewers, gathering resources, and upgrading its abilities to escape.
 
 **Genre:** Survival Scavenger / Horror / Rougelike
+
 **Platform:** PC (Unity 2023.2.20f1)  
 **Team:** Alt+F5  
 **Course:** [IGME.320 - Game Design & Devlopment II]  
