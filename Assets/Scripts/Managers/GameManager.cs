@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 
@@ -17,6 +18,8 @@ public enum GameStates
 /// </summary>
 public class GameManager : MonoBehaviour
 {
+    public GameObject pauseMenuUI;
+
     /// <summary>
     /// Gets the singleton instance.
     /// </summary>
@@ -75,16 +78,31 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            _gameState = GameStates.PAUSED;
+        }
+
+        if (_gameState == GameStates.PAUSED)
+        {
+            PauseGame();
+        }
+        else
+        {
+            ResumeGame();
+        }
+
+
         // Gamestate machine
         switch (_gameState)
-        {
-            case GameStates.PLAYING:
-                HandlePlayingState();
-                break;
-            case GameStates.PAUSED:
-                HandlePausedState();
-                break;
-        }
+            {
+                case GameStates.PLAYING:
+                    HandlePlayingState();
+                    break;
+                case GameStates.PAUSED:
+                    HandlePausedState();
+                    break;
+            }
 
     }
 
@@ -94,6 +112,28 @@ public class GameManager : MonoBehaviour
 
     //TODO: Add paused state logic
     private void HandlePausedState() { }
+
+    //resumes the game
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        pauseMenuUI.SetActive(false);
+        _gameState = GameStates.PLAYING;
+    }
+
+    //pauses the game
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+        pauseMenuUI.SetActive(true);
+    }
+
+    //quits to menu
+    public void QuitToMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Menu");
+    }
     #endregion
 }
 
