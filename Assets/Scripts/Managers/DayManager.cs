@@ -6,6 +6,7 @@ public class DayManager : MonoBehaviour
 {
     public static DayManager Instance { get; private set; }
 
+    [SerializeField]
     private int currentDay = 1;
 
     [SerializeField]
@@ -20,6 +21,9 @@ public class DayManager : MonoBehaviour
     public GameObject player;
 
     public List<GameObject> enemies;
+
+    [SerializeField]
+    private Inventory inventory;
 
     private void Awake()
     {
@@ -62,6 +66,21 @@ public class DayManager : MonoBehaviour
                 Debug.Log("Missing an enemy reference.");
             }
         }
+
+        //load in the correct data into the game
+        GameData data = SaveSystem.LoadGameData();
+
+        //if there is a current save load the data
+        if (data != null)
+        {
+            currentDay = data.day;
+            inventory.inventory = new List<ItemsEnum>(data.inventoryData);
+        }
+        else
+        {
+            Debug.Log("No save file found, starting fresh.");
+        }
+
     }
 
     /// <summary>
@@ -74,6 +93,7 @@ public class DayManager : MonoBehaviour
         if (currentDay > maxDays)
         {
             UIManager.Instance.LoadScene("GameOver");
+            SaveSystem.DeleteGameData();
         }
 
         // bring player back to start
@@ -84,6 +104,12 @@ public class DayManager : MonoBehaviour
         for (int i = 0; i < enemyPositions.Count; i++) 
         {
             enemies[i].transform.position = enemyPositions[i];
+        }
+
+        //saves the players inventory and the current day if the player is on a valid day
+        if (currentDay <= maxDays)
+        {
+            SaveSystem.SaveGameData(inventory, currentDay);
         }
     }
 }

@@ -20,11 +20,16 @@ public class GameData
     {
         //itemsInGame = GameObject.FindGameObjectsWithTag("Item");
 
-        day = this.day;
+        inventoryData = new List<ItemsEnum>();
 
-        for (int i = 0; i < inventory.inventory.Count;i++)
+        this.day = day;
+
+        if (inventory != null)
         {
-            inventoryData.Add(inventory.inventory[i]);
+            for (int i = 0; i < inventory.inventory.Count; i++)
+            {
+                inventoryData.Add(inventory.inventory[i]);
+            }
         }
     }
 }

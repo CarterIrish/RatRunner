@@ -46,4 +46,18 @@ public static class SaveSystem
             return null;
         }
     }
+
+    public static void DeleteGameData()
+    {
+        string path = Application.persistentDataPath + "/game-data.data";
+
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
+        else
+        {
+            Debug.LogWarning("No save file found to delete.");
+        }
+    }
 }

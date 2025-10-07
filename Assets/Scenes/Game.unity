@@ -784,6 +784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a1265cc247f5b74c96fbf1f15593afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentDay: 1
   maxDays: 3
   startPos: {x: 69.4, y: 36.19, z: 65.4}
   enemyPositions:
@@ -791,6 +792,7 @@ MonoBehaviour:
   player: {fileID: 838813785}
   enemies:
   - {fileID: 1742848469}
+  inventory: {fileID: 2069917218}
 --- !u!4 &233775289
 Transform:
   m_ObjectHideFlags: 0
