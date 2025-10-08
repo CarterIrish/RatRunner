@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // grab rigidbody from player
+        // grab rigidbody from pivot
         playerBody = GetComponent<Rigidbody>();
     }
 

@@ -48,10 +48,10 @@ public class DayManager : MonoBehaviour
             }
         }
 
-        // make sure player isn't null
+        // make sure pivot isn't null
         if (player == null)
         {
-            Debug.Log("Missing reference to player");
+            Debug.Log("Missing reference to pivot");
         }
 
         // make sure enemy references aren't null
@@ -65,7 +65,7 @@ public class DayManager : MonoBehaviour
     }
 
     /// <summary>
-    /// progresses to the next day if player has some left, ends game if player out of days
+    /// progresses to the next day if pivot has some left, ends game if pivot out of days
     /// </summary>
     public void NextDay()
     {
@@ -76,7 +76,7 @@ public class DayManager : MonoBehaviour
             UIManager.Instance.LoadScene("GameOver");
         }
 
-        // bring player back to start
+        // bring pivot back to start
         player.transform.position = startPos;
         player.transform.rotation = Quaternion.identity;
 

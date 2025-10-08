@@ -19,7 +19,7 @@ public class InputManager : MonoBehaviour
     {
         if (playerScript == null)
         {
-            Debug.Log("Missing player script.");
+            Debug.Log("Missing pivot script.");
         }
 
         playerMap = inputActions.FindActionMap("Player");
@@ -62,7 +62,7 @@ public class InputManager : MonoBehaviour
     }
 
     /// <summary>
-    /// tell player to move when "w" is pressed
+    /// tell pivot to move when "w" is pressed
     /// </summary>
     /// <param name="context"></param>
     public void OnMove(InputAction.CallbackContext context)
@@ -81,7 +81,7 @@ public class InputManager : MonoBehaviour
     }
 
     /// <summary>
-    /// tell player to turn right when "d" is pressed
+    /// tell pivot to turn right when "d" is pressed
     /// </summary>
     /// <param name="context"></param>
     public void OnTurnRight(InputAction.CallbackContext context)
@@ -100,7 +100,7 @@ public class InputManager : MonoBehaviour
     }
 
     /// <summary>
-    /// tell player to turn left when "a" is pressed
+    /// tell pivot to turn left when "a" is pressed
     /// </summary>
     /// <param name="context"></param>
     public void OnTurnLeft(InputAction.CallbackContext context)

@@ -53,7 +53,7 @@ public class EnemyNavigation : MonoBehaviour
         //    agent.destination = target.position;
         //}
 
-        // only tracks player in playing game state
+        // only tracks pivot in playing game state
         if (GameManager.Instance.GameState == GameStates.PLAYING)
         {
             agent.destination = target.position;
@@ -77,18 +77,18 @@ public class EnemyNavigation : MonoBehaviour
     }
 
     /// <summary>
-    /// Starts hunting the player.
+    /// Starts hunting the pivot.
     /// </summary>
     private void StartHunting()
     {
-        // Gathers player object
+        // Gathers pivot object
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         // Checks if null
         if (player != null)
         {
             // Assigns target
             target = player.transform;
-            Debug.Log("Start hunting player");
+            Debug.Log("Start hunting pivot");
         }
     }
 }

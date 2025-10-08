@@ -12,7 +12,7 @@ public class TakeHit : MonoBehaviour
     {
 
         Debug.Log($"TakeHit >> Generic: {other.name}");
-        // end the game when enemy collides with player
+        // end the game when enemy collides with pivot
         if (other.CompareTag("Enemy"))
         {
             DayManager.Instance.NextDay();

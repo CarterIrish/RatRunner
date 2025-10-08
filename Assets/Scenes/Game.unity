@@ -4996,6 +4996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pivot: {fileID: 1903149295}
+  inputActions: {fileID: -944628639613478452, guid: 5777f153b98d5c647933fb6d2ebe8af7, type: 3}
   distance: 1.06
   height: 0.75
   mouseSens: 0.55
@@ -7959,8 +7960,16 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 93aa2e5b-562d-4070-b4f9-2f69b6d515f9
     m_ActionName: 'UI/Escape[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6036c114-0d95-476b-902a-b5dd1b7c7ca8
+    m_ActionName: 'Player/Look[/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b4751129-47b1-4bf1-9860-fc4c126c6fb7
+    m_ActionName: 'Player/Zoom[/Mouse/scroll/y]'
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -9622,7 +9631,7 @@ GameObject:
   - component: {fileID: 1903149295}
   m_Layer: 0
   m_Name: CameraPivot
-  m_TagString: Untagged
+  m_TagString: pivot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9636,7 +9645,7 @@ Transform:
   m_GameObject: {fileID: 1903149294}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.669, z: -2.33}
+  m_LocalPosition: {x: 0, y: 2.87, z: -2.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

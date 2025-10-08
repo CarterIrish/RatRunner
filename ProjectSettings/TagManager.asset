@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - pivot
   layers:
   - Default
   - TransparentFX

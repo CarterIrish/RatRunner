@@ -11,10 +11,10 @@ public class Item : MonoBehaviour
     /// <param name="collider">The collider.</param>
     void OnTriggerEnter(Collider collider)
     {
-        // If collided with player
+        // If collided with pivot
         if (collider.tag == "Player")
         {
-            // Get the inventory of player who collided
+            // Get the inventory of pivot who collided
             Inventory inventory = collider.gameObject.GetComponentInChildren<Inventory>();
             // If inventory is not null add item
             if (inventory != null)

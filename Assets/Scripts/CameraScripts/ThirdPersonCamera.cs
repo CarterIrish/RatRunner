@@ -3,52 +3,64 @@ using UnityEngine;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
-
     public Transform pivot;
-    //public Transform pivot;
-    [SerializeField]
-    float distance;
-    [SerializeField]
-    float height;
-    [SerializeField]
-    float mouseSens;
-    [SerializeField]
-    float zoomSpeed;
-    [SerializeField]
-    float minDistance;
-    [SerializeField]
-    float maxDistance;
 
-    float yaw;
-    float pitch;
+    [SerializeField]
+    private InputActionAsset inputActions;
+    private InputAction lookAction;
+    private InputAction zoomAction;
+
+    [SerializeField]
+    private float distance;
+    [SerializeField]
+    private float height;
+    [SerializeField]
+    private float mouseSens;
+    [SerializeField]
+    private float zoomSpeed;
+    [SerializeField]
+    private float minDistance;
+    [SerializeField]
+    private float maxDistance;
+
+    private float yaw;
+    private float pitch;
 
     // Start is called before the first frame update
     void Start()
     {
-        //if(!pivot) pivot = GameObject.FindGameObjectWithTag("pivot").transform;
+        InputActionMap player = inputActions.FindActionMap("Player");
+        lookAction = player.FindAction("Look");
+        zoomAction = player.FindAction("Zoom");
+
+        if (pivot==null) pivot = GameObject.FindGameObjectWithTag("pivot").transform;
         yaw = pivot.eulerAngles.y;
         distance = 5f;
         height = 2f;
         mouseSens = 100f;
-        zoomSpeed = 10f;
+        zoomSpeed = 100f;
         minDistance = 2f;
         maxDistance = 15f;
     }
 
     private void LateUpdate()
-    {                                                                               
-        if (Mouse.current != null)
+    {
+        // Get look input
+        if (lookAction != null)
         {
-            Vector2 mouseDelta = Mouse.current.delta.ReadValue();
-            yaw += mouseDelta.x * mouseSens * Time.deltaTime;
-            pitch -= mouseDelta.y * mouseSens * Time.deltaTime;
+            Vector2 lookDelta = lookAction.ReadValue<Vector2>();
+            yaw += lookDelta.x * mouseSens * Time.deltaTime;
+            pitch -= lookDelta.y * mouseSens * Time.deltaTime;
             pitch = Mathf.Clamp(pitch, -20f, 80f);
         }
 
-        float scroll = Mouse.current.scroll.ReadValue().y;
-        distance -= scroll * zoomSpeed * Time.deltaTime;
-        distance = Mathf.Clamp(distance, minDistance, maxDistance);
-
+        // Get zoom input
+        if (zoomAction != null)
+        {
+            float scroll = zoomAction.ReadValue<float>();
+            distance -= scroll * zoomSpeed * Time.deltaTime;
+            distance = Mathf.Clamp(distance, minDistance, maxDistance);
+        }
 
 
         // Calc cam position
@@ -58,6 +70,7 @@ public class ThirdPersonCamera : MonoBehaviour
             Mathf.Cos(yaw * Mathf.Deg2Rad) * distance
             );
 
+        // Check cam clipping into wall
         Vector3 desiredPos = pivot.position + offset;
         RaycastHit hit;
         if(Physics.Raycast(pivot.position, offset.normalized, out hit, distance))
