@@ -5019,8 +5019,8 @@ MonoBehaviour:
   thirdPersonCam: {fileID: 963194229}
   firstPersonCam: {fileID: 963194231}
   fixedCam: {fileID: 963194232}
-  startingMode: 0
-  currentMode: 0
+  startingMode: 2
+  currentMode: 2
 --- !u!114 &963194231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5050,10 +5050,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputActions: {fileID: -944628639613478452, guid: 5777f153b98d5c647933fb6d2ebe8af7, type: 3}
-  baseOffset: {x: 0.5, y: 1.5, z: -3}
-  zoomSpeed: 2
-  minZoom: -5
-  maxZoom: -1
+  baseOffset: {x: -0.06, y: 8.16, z: 4.42}
+  zoomSpeed: 100
+  minZoom: -10
+  maxZoom: 10
 --- !u!1001 &980194916
 PrefabInstance:
   m_ObjectHideFlags: 0

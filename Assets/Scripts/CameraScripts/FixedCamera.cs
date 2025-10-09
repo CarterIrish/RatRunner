@@ -7,13 +7,13 @@ public class FixedCamera : MonoBehaviour
     [SerializeField] private InputActionAsset inputActions;
     private InputAction zoomAction;
 
-    [SerializeField] private Vector3 baseOffset = new Vector3(0.5f, 1.5f, -3f);
+    [SerializeField] private Vector3 baseOffset = new Vector3(-0.06f, 8.16f, 4.42f);
 
-    [SerializeField] private float zoomSpeed = 2f;
+    [SerializeField] private float zoomSpeed = 0.1f;
 
-    [SerializeField] private float minZoom = -5f;
+    [SerializeField] private float minZoom = -10f;
 
-    [SerializeField] private float maxZoom = -1f;
+    [SerializeField] private float maxZoom = 10f;
 
     private float currentZoom = -3f;
 
@@ -30,12 +30,13 @@ public class FixedCamera : MonoBehaviour
         if(zoomAction != null)
         {
             float scroll = zoomAction.ReadValue<float>();
-            currentZoom += scroll * zoomSpeed * Time.deltaTime;
+            currentZoom += scroll * zoomSpeed;
             currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
         }
 
-        transform.localPosition = new Vector3(baseOffset.x, baseOffset.y, baseOffset.z);
-        transform.localRotation = Quaternion.Euler(0, 180, 0);
+        
+        transform.localPosition = new Vector3(baseOffset.x, baseOffset.y, currentZoom);
+        transform.localRotation = Quaternion.Euler(28, 180, 0);
     }
 
 
