@@ -9972,7 +9972,6 @@ GameObject:
   - component: {fileID: 1710725306}
   - component: {fileID: 1710725305}
   - component: {fileID: 1710725304}
-  - component: {fileID: 1710725308}
   m_Layer: 5
   m_Name: Pause
   m_TagString: Untagged
@@ -10063,18 +10062,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1710725308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1710725303}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d353d8fcdd83b7448998036792929d7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1742848469
 GameObject:
   m_ObjectHideFlags: 0
@@ -10223,6 +10210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d353d8fcdd83b7448998036792929d7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseUI: {fileID: 248813797}
 --- !u!4 &1794247598
 Transform:
   m_ObjectHideFlags: 0
@@ -11225,7 +11213,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630fb377454dd8548833a01df2a0f376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenuUI: {fileID: 248813797}
   _gameState: 0
 --- !u!1 &2017199429 stripped
 GameObject:
