@@ -4995,7 +4995,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a157904cd5ac22944b0287b8aaf6452e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {fileID: 1903149295}
+  pivotTransform: {fileID: 1903149295}
+  playerTransform: {fileID: 838813789}
   inputActions: {fileID: -944628639613478452, guid: 5777f153b98d5c647933fb6d2ebe8af7, type: 3}
   distance: 1.06
   height: 0.75
@@ -5032,6 +5033,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91f04d6655cb16a4a9fda188c6e87ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pivotTransform: {fileID: 1903149295}
+  playerTransform: {fileID: 838813789}
+  inputActions: {fileID: -944628639613478452, guid: 5777f153b98d5c647933fb6d2ebe8af7, type: 3}
+  mouseSens: 100
 --- !u!114 &963194232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9645,7 +9650,7 @@ Transform:
   m_GameObject: {fileID: 1903149294}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.87, z: -2.17}
+  m_LocalPosition: {x: 0, y: 0.64, z: -4.832}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11102,5 +11107,5 @@ SceneRoots:
   - {fileID: 442345579}
   - {fileID: 380983254}
   - {fileID: 381366944}
-  - {fileID: 838813789}
   - {fileID: 233775289}
+  - {fileID: 838813789}

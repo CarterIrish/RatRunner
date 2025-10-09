@@ -29,10 +29,11 @@ public class CameraManager : MonoBehaviour
         // Check if assigned, if not grab automatically
         if (thirdPersonCam == null) thirdPersonCam = GetComponent<ThirdPersonCamera>();
        
-        if(firstPersonCam ==null) firstPersonCam = GetComponent<FirstPersonCamera>();
+        if(firstPersonCam == null) firstPersonCam = GetComponent<FirstPersonCamera>();
         
-        if(fixedCam==null) fixedCam = GetComponent<FixedCamera>();
+        if(fixedCam == null) fixedCam = GetComponent<FixedCamera>();
 
+        // Initalize starting cam profile
         SetCameraMode(startingMode);
     }
 
@@ -57,19 +58,16 @@ public class CameraManager : MonoBehaviour
                 fixedCam.enabled = false;
                 firstPersonCam.enabled = false;
                 thirdPersonCam.enabled = true;
-                Debug.Log("Camera Mode: Third Person");
                 break;
             case CameraMode.FirstPerson:
                 fixedCam.enabled = false;
                 firstPersonCam.enabled = true;
                 thirdPersonCam.enabled = false;
-                Debug.Log("Camera Mode: First Person");
                 break;
             case CameraMode.Fixed:
                 fixedCam.enabled = true;
                 firstPersonCam.enabled = false;
                 thirdPersonCam.enabled = false;
-                Debug.Log("Camera Mode: Fixed");
                 break;
         }
 

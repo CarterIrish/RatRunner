@@ -3,25 +3,19 @@ using UnityEngine;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
-    public Transform pivot;
+    [SerializeField] private Transform pivotTransform;
+    [SerializeField] private Transform playerTransform;
 
-    [SerializeField]
-    private InputActionAsset inputActions;
+    [SerializeField] private InputActionAsset inputActions;
     private InputAction lookAction;
     private InputAction zoomAction;
 
-    [SerializeField]
-    private float distance;
-    [SerializeField]
-    private float height;
-    [SerializeField]
-    private float mouseSens;
-    [SerializeField]
-    private float zoomSpeed;
-    [SerializeField]
-    private float minDistance;
-    [SerializeField]
-    private float maxDistance;
+    [SerializeField] private float distance;
+    [SerializeField] private float height;
+    [SerializeField] private float mouseSens;
+    [SerializeField] private float zoomSpeed;
+    [SerializeField] private float minDistance;
+    [SerializeField] private float maxDistance;
 
     private float yaw;
     private float pitch;
@@ -29,12 +23,14 @@ public class ThirdPersonCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InputActionMap player = inputActions.FindActionMap("Player");
-        lookAction = player.FindAction("Look");
-        zoomAction = player.FindAction("Zoom");
+        InputActionMap playerMap = inputActions.FindActionMap("Player");
+        lookAction = playerMap.FindAction("Look");
+        zoomAction = playerMap.FindAction("Zoom");
 
-        if (pivot==null) pivot = GameObject.FindGameObjectWithTag("pivot").transform;
-        yaw = pivot.eulerAngles.y;
+        if (pivotTransform==null) pivotTransform = GameObject.FindGameObjectWithTag("pivotTransform").transform;
+        if (playerTransform == null) playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+
+        yaw = playerTransform.eulerAngles.y;
         distance = 5f;
         height = 2f;
         mouseSens = 100f;
@@ -54,6 +50,11 @@ public class ThirdPersonCamera : MonoBehaviour
             pitch = Mathf.Clamp(pitch, -20f, 80f);
         }
 
+        if(playerTransform != null)
+        {
+            playerTransform.rotation = Quaternion.Euler(0, yaw, 0);
+        }
+
         // Get zoom input
         if (zoomAction != null)
         {
@@ -71,9 +72,9 @@ public class ThirdPersonCamera : MonoBehaviour
             );
 
         // Check cam clipping into wall
-        Vector3 desiredPos = pivot.position + offset;
+        Vector3 desiredPos = pivotTransform.position + offset;
         RaycastHit hit;
-        if(Physics.Raycast(pivot.position, offset.normalized, out hit, distance))
+        if(Physics.Raycast(pivotTransform.position, offset.normalized, out hit, distance))
         {
             transform.position = hit.point - offset.normalized * 0.2f;
         }
@@ -81,7 +82,7 @@ public class ThirdPersonCamera : MonoBehaviour
         {
             transform.position = desiredPos;
         }
-        transform.LookAt(pivot);
+        transform.LookAt(pivotTransform);
     }
 
 }
