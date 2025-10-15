@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 //enum to hold our items 
-public enum ItemsEnum { key, suspiciousPowder, thread, cloth, spring };
+public enum ItemsEnum { key, suspiciousPowder, thread, cloth, spring, cheese };
 
 public class Inventory : MonoBehaviour
 {
