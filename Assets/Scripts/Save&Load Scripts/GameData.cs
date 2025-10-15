@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
@@ -9,7 +10,7 @@ public class GameData
     //data we want to save
     public int day;
     public List<ItemsEnum> inventoryData;
-    //public List<GameObject> itemsInGame;
+    public Dictionary<string, List<float[]>> itemDictionary;
 
     /// <summary>
     /// constructor that sets all the data we want to save to the actual data in game
@@ -18,9 +19,11 @@ public class GameData
     /// <param name="day"></param>
     public GameData(Inventory inventory, int day)
     {
-        //itemsInGame = GameObject.FindGameObjectsWithTag("Item");
-
+        itemDictionary = new Dictionary<string, List<float[]>>();
         inventoryData = new List<ItemsEnum>();
+
+        //fill the dictionary with all the games current items
+        CollectAllItems();
 
         this.day = day;
 
@@ -30,6 +33,34 @@ public class GameData
             {
                 inventoryData.Add(inventory.inventory[i]);
             }
+        }
+    }
+
+
+    /// <summary>
+    /// finds all items in the game and saves their names and positions
+    /// </summary>
+    public void CollectAllItems()
+    {
+        itemDictionary.Clear();
+
+        //list containing all items
+        GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
+
+        //loop through the items and add its position into the array and save it into the dictionary
+        foreach (GameObject item in items)
+        {
+            Vector3 pos = item.transform.position;
+            float[] positionArray = new float[3] { pos.x, pos.y, pos.z };
+
+            // If this item name hasn't been added yet, initialize its list
+            if (!itemDictionary.ContainsKey(item.name))
+            {
+                itemDictionary[item.name] = new List<float[]>();
+            }
+
+            // Add this item's position to the list
+            itemDictionary[item.name].Add(positionArray);
         }
     }
 }

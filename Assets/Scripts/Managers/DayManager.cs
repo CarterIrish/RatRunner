@@ -75,6 +75,7 @@ public class DayManager : MonoBehaviour
         {
             currentDay = data.day;
             inventory.inventory = new List<ItemsEnum>(data.inventoryData);
+            LoadItems(data);
         }
         else
         {
@@ -110,6 +111,46 @@ public class DayManager : MonoBehaviour
         if (currentDay <= maxDays)
         {
             SaveSystem.SaveGameData(inventory, currentDay);
+        }
+    }
+
+
+    /// <summary>
+    /// loads in all of the items that got saved
+    /// </summary>
+    /// <param name="data"></param>
+    private void LoadItems(GameData data)
+    {
+        //if there is no items to load return nothing
+        if (data.itemDictionary == null || data.itemDictionary.Count == 0)
+        {
+            Debug.Log("No saved items to load.");
+            return;
+        }
+
+        //loop through every key value pair in the saved dictionary
+        foreach (KeyValuePair<string, List<float[]>> entry in data.itemDictionary)
+        {
+            //create containers to hold the saved data
+            string itemName = entry.Key;
+            List<float[]> positions = entry.Value;
+
+            //loads a prefab with the same name in the dictionary key into a game object
+            GameObject prefab = Resources.Load<GameObject>($"Prefabs/{itemName}");
+
+            //if a prefab does not exist throw an error message and skip it
+            if (prefab == null)
+            {
+                Debug.LogWarning($"No prefab found for item '{itemName}' in Resources/Prefabs/. Skipping...");
+                continue;
+            }
+
+            //loop through each array in the list of positions and instantiate the item based on the positions and prefab
+            foreach (float[] posArray in positions)
+            {
+                Vector3 position = new Vector3(posArray[0], posArray[1], posArray[2]);
+                Instantiate(prefab, position, Quaternion.identity);
+            }
         }
     }
 }
