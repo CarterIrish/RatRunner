@@ -58,6 +58,9 @@ Rat Runner combines tense exploration with roguelike mechanics in an eerie sewer
 - **UI Assets:** (Chess)
   - Game Over screen artwork
   - Pause screen artwork
+ 
+- **UI Feedback** (Jake)
+  - Day progression notification system - UI element displays when day increases
 
 ### Changed
 
