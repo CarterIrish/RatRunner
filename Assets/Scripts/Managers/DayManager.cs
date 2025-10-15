@@ -71,8 +71,18 @@ public class DayManager : MonoBehaviour
         GameData data = SaveSystem.LoadGameData();
 
         //if there is a current save load the data
-        if (data != null)
+        if (data != null && data.day >= 1)
         {
+            //list containing all items
+            GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
+
+            //delete every default item in the scene
+            for (int i = items.Length - 1; i >= 0; i--)
+            {
+                Destroy(items[i]);
+            }
+
+            //load correct items based on save
             currentDay = data.day;
             inventory.inventory = new List<ItemsEnum>(data.inventoryData);
             LoadItems(data);
