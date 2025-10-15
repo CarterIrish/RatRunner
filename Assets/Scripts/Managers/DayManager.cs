@@ -133,7 +133,7 @@ public class DayManager : MonoBehaviour
         {
             //create containers to hold the saved data
             string itemName = entry.Key;
-            List<float[]> positions = entry.Value;
+            List<float[]> transformations = entry.Value;
 
             //loads a prefab with the same name in the dictionary key into a game object
             GameObject prefab = Resources.Load<GameObject>($"Prefabs/{itemName}");
@@ -145,11 +145,14 @@ public class DayManager : MonoBehaviour
                 continue;
             }
 
-            //loop through each array in the list of positions and instantiate the item based on the positions and prefab
-            foreach (float[] posArray in positions)
+            //loop through each array in the list of transformations and instantiate the item based on the transformations and prefab
+            foreach (float[] transArray in transformations)
             {
-                Vector3 position = new Vector3(posArray[0], posArray[1], posArray[2]);
-                Instantiate(prefab, position, Quaternion.identity);
+                Vector3 position = new Vector3(transArray[0], transArray[1], transArray[2]);
+                Quaternion rotation = new Quaternion(transArray[3], transArray[4], transArray[5], transArray[6]);
+                Vector3 scale = new Vector3(transArray[7], transArray[8], transArray[9]);
+                Instantiate(prefab, position, rotation);
+                Instance.transform.localScale = scale;
             }
         }
     }

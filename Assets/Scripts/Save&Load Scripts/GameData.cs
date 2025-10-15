@@ -47,11 +47,15 @@ public class GameData
         //list containing all items
         GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
 
-        //loop through the items and add its position into the array and save it into the dictionary
+        //loop through the items and add its transformations into the array and save it into the dictionary
         foreach (GameObject item in items)
         {
-            Vector3 pos = item.transform.position;
-            float[] positionArray = new float[3] { pos.x, pos.y, pos.z };
+            float[] transformArray = new float[10]
+            {
+                item.transform.position.x, item.transform.position.y, item.transform.position.z,
+                item.transform.rotation.x, item.transform.rotation.y, item.transform.rotation.z, item.transform.rotation.w,
+                item.transform.localScale.x, item.transform.localScale.y, item.transform.localScale.z
+            };
 
             // If this item name hasn't been added yet, initialize its list
             if (!itemDictionary.ContainsKey(item.name))
@@ -59,8 +63,8 @@ public class GameData
                 itemDictionary[item.name] = new List<float[]>();
             }
 
-            // Add this item's position to the list
-            itemDictionary[item.name].Add(positionArray);
+            // Add this item's transformations to the list
+            itemDictionary[item.name].Add(transformArray);
         }
     }
 }
