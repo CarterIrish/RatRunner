@@ -15,8 +15,7 @@ public class EnemyNavigation : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
 
-        // temporary for playtest
-        target = transform;
+        StartHunting();
     }
 
     /// <summary>
@@ -72,7 +71,7 @@ public class EnemyNavigation : MonoBehaviour
     {
         if(item == ItemsEnum.key)
         {
-            StartHunting();
+            // StartHunting();
         }
     }
 
