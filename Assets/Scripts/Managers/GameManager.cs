@@ -1,4 +1,8 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Events;
+using System;
+
 
 
 
@@ -17,6 +21,7 @@ public enum GameStates
 /// </summary>
 public class GameManager : MonoBehaviour
 {
+
     /// <summary>
     /// Gets the singleton instance.
     /// </summary>
@@ -24,6 +29,10 @@ public class GameManager : MonoBehaviour
     /// The instance.
     /// </value>
     public static GameManager Instance { get; private set; }
+
+    // Pause menu events
+    public static UnityEvent OnGamePaused = new UnityEvent();
+    public static UnityEvent OnGameResumed = new UnityEvent();
 
     [SerializeField]
     private GameStates _gameState = GameStates.PLAYING; 
@@ -38,14 +47,7 @@ public class GameManager : MonoBehaviour
         get { return _gameState; }
     }
 
-    /// <summary>
-    /// Changes the state of the game.
-    /// </summary>
-    /// <param name="newState">The new state.</param>
-    public void ChangeGameState(GameStates newState)
-    {
-        _gameState = newState;
-    }
+
 
     private void Awake()
     {
@@ -75,26 +77,89 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
+
+
         // Gamestate machine
         switch (_gameState)
-        {
-            case GameStates.PLAYING:
-                HandlePlayingState();
-                break;
-            case GameStates.PAUSED:
-                HandlePausedState();
-                break;
-        }
+            {
+                case GameStates.PLAYING:
+                    HandlePlayingState();
+                    break;
+                case GameStates.PAUSED:
+                    HandlePausedState();
+                    break;
+            }
 
     }
 
-    #region Gameplay Loop Methods Below
-    //TODO: Add playing state logic
-    private void HandlePlayingState() { }
+    private void HandlePlayingState()
+    {
+        // update day timer eventually
+        // check any game over conditions
+    }
 
-    //TODO: Add paused state logic
-    private void HandlePausedState() { }
-    #endregion
+    private void HandlePausedState()
+    {
+    }
+
+    /// <summary>
+    /// Changes the state of the game.
+    /// </summary>
+    /// <param name="newState">The new state.</param>
+    public void ChangeGameState(GameStates newState)
+    {
+        // Change the state
+        _gameState = newState;
+
+        // Call appropriate method based on new state
+        switch (newState)
+        {
+            case GameStates.PAUSED:
+                PauseGame();
+                break;
+            case GameStates.PLAYING:
+                ResumeGame();
+                break;
+        }
+    }
+
+    // Resumes the game
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        OnGameResumed.Invoke();
+    }
+
+    // Pauses the game
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+        OnGamePaused.Invoke();
+    }
+
+    // Quits to menu
+    public void QuitToMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Menu");
+    }
+
+    /// <summary>
+    /// Public method for UI buttons to resume the game
+    /// </summary>
+    public void ResumeFromUI()
+    {
+        ChangeGameState(GameStates.PLAYING);
+    }
+
+    /// <summary>
+    /// Public method for UI buttons to pause the game
+    /// </summary>
+    public void PauseFromUI()
+    {
+        ChangeGameState(GameStates.PAUSED);
+    }
 }
 
 

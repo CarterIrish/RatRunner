@@ -5,6 +5,7 @@ public class TempGameOver : MonoBehaviour
 {
     // Game over condition
     private bool gameOverCond = false;
+    private bool escaped = false;
 
     [SerializeField]
     private ItemsEnum requiredItem = ItemsEnum.key;
