@@ -62,6 +62,9 @@ Rat Runner combines tense exploration with roguelike mechanics in an eerie sewer
 - **UI Feedback** (Jake)
   - Day progression notification system - UI element displays when day increases
 
+- **Game Layers** (Carter)
+   - Added `Player` layer to the game scene as part of camera clipping bug fix.
+
 ### Changed
 
 - **Scene Updates:** (Chess)
@@ -75,6 +78,8 @@ Rat Runner combines tense exploration with roguelike mechanics in an eerie sewer
 
 - **Camera Bugs:** (Carter)
   - Fixed rat stutter bug caused by Update vs FixedUpdate timing mismatch
+  - Fixed camera clipping into Rat model caused by raycast collision with Rat/Player object
+    - Now ignores the new `Player` layer
 
 - **Enemy AI Bugs:** (Jake)
   - Fixed bug where enemy wouldn't target player after loading a saved game
