@@ -75,6 +75,10 @@ public class UIManager : MonoBehaviour
     {
         SaveSystem.DeleteGameData();
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        if (sceneName == "Game")
+        {
+            GameManager.Instance.ChangeGameState(GameStates.PLAYING);
+        }
     }
 
     /// <summary>
