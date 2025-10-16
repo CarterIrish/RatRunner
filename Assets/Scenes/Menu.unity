@@ -829,7 +829,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1003287045}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: LoadScene
+        m_MethodName: LoadSceneNewGame
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
