@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour
     // Reference to the pauseUI
     public GameObject pauseUI;
 
+    public GameObject dayUI;
+
     private void Awake()
     {
         // Check if an instance of the UI manager exists
@@ -89,6 +91,7 @@ public class UIManager : MonoBehaviour
         if (pauseUI != null)
         {
             pauseUI.SetActive(true);
+            dayUI.SetActive(false);
         }
     }
 
@@ -100,6 +103,7 @@ public class UIManager : MonoBehaviour
         if (pauseUI != null)
         {
             pauseUI.SetActive(false);
+            dayUI.SetActive(true);
         }
     }
 }
