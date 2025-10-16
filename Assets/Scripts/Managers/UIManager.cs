@@ -64,6 +64,16 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Loads a new game.
+    /// </summary>
+    /// <param name="sceneName">Name of the scene.</param>
+    public void LoadSceneNewGame(string sceneName)
+    {
+        SaveSystem.DeleteGameData();
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+    }
+
+    /// <summary>
     /// Shows the pause UI.
     /// </summary>
     public void ShowPauseUI()
