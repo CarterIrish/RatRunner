@@ -4341,7 +4341,7 @@ GameObject:
   - component: {fileID: 838813786}
   - component: {fileID: 838813792}
   - component: {fileID: 838813790}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -4999,7 +4999,7 @@ GameObject:
   - component: {fileID: 963194232}
   - component: {fileID: 963194231}
   - component: {fileID: 963194233}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -6790,6 +6790,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5b8453bb8ffb11744b3900c279f6a6a3, type: 3}
       propertyPath: m_Name
       value: Rat
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5b8453bb8ffb11744b3900c279f6a6a3, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5b8453bb8ffb11744b3900c279f6a6a3, type: 3}
       propertyPath: m_TagString
@@ -10106,7 +10110,7 @@ GameObject:
   - component: {fileID: 1789614206}
   - component: {fileID: 1789614208}
   - component: {fileID: 1789614207}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DayText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10315,7 +10319,7 @@ GameObject:
   - component: {fileID: 1824063157}
   - component: {fileID: 1824063156}
   - component: {fileID: 1824063155}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10504,7 +10508,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1903149295}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CameraPivot
   m_TagString: pivot
   m_Icon: {fileID: 0}
@@ -11937,7 +11941,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2069917217}
   - component: {fileID: 2069917218}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
