@@ -74,9 +74,15 @@ public class ThirdPersonCamera : MonoBehaviour
         // Check cam clipping into wall
         Vector3 desiredPos = pivotTransform.position + offset;
         RaycastHit hit;
-        if(Physics.Raycast(pivotTransform.position, offset.normalized, out hit, distance))
+
+        // Ignore Player layer to prevent raycast from hitting the player's own colliders
+        int layerMask = ~LayerMask.GetMask("Player");
+
+        if(Physics.Raycast(pivotTransform.position, offset.normalized, out hit, offset.magnitude, layerMask))
         {
-            transform.position = hit.point - offset.normalized * 0.2f;
+            // Use hit.distance to stay at safe distance from wall
+            float safeDistance = Mathf.Max(0.2f, hit.distance - 0.2f);
+            transform.position = pivotTransform.position + offset.normalized * safeDistance;
         }
         else
         {
