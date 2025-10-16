@@ -27,6 +27,7 @@ public class DayManager : MonoBehaviour
     [SerializeField]
     private Inventory inventory;
 
+    [SerializeField]
     private TextMeshProUGUI text;
 
     private float timer = 0;
@@ -72,10 +73,6 @@ public class DayManager : MonoBehaviour
                 Debug.Log("Missing an enemy reference.");
             }
         }
-
-        // find the text object attached to the player
-        Transform textObject = player.transform.Find("Canvas").Find("DayText");
-        text = textObject.GetComponent<TextMeshProUGUI>();
 
         //load in the correct data into the game
         GameData data = SaveSystem.LoadGameData();
