@@ -61,6 +61,10 @@ public class UIManager : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        if(sceneName == "Game")
+        {
+            GameManager.Instance.ChangeGameState(GameStates.PLAYING);
+        }
     }
 
     /// <summary>
