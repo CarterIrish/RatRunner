@@ -19,11 +19,13 @@ public class GameOverManager : MonoBehaviour
         {
             Debug.Log("Player failed");
         }
+
+        WinOrLose();
     }
 
     public void WinOrLose()
     {
-        if (GameManager.Instance.PlayerEscaped)
+        if (GameManager.Instance.PlayerEscaped == true)
         {
             escapedScreen.SetActive(true);
             loseScreen.SetActive(false);
