@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using System;
+using NUnit.Framework.Constraints;
 
 
 
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
     public static UnityEvent OnGamePaused = new UnityEvent();
     public static UnityEvent OnGameResumed = new UnityEvent();
 
+
     [SerializeField]
     private GameStates _gameState = GameStates.PLAYING; 
     /// <summary>
@@ -47,6 +49,10 @@ public class GameManager : MonoBehaviour
         get { return _gameState; }
     }
 
+
+
+    // Player win/lose condition
+    public bool PlayerEscaped { get ; private set; } = false;
 
 
     private void Awake()
@@ -103,11 +109,11 @@ public class GameManager : MonoBehaviour
     {
     }
 
-    /// <summary>
+    /// <summary>       Her
     /// Changes the state of the game.
     /// </summary>
     /// <param name="newState">The new state.</param>
-    public void ChangeGameState(GameStates newState)
+    public void  ChangeGameState(GameStates newState)
     {
         // Change the state
         _gameState = newState;
@@ -160,6 +166,17 @@ public class GameManager : MonoBehaviour
     {
         ChangeGameState(GameStates.PAUSED);
     }
+
+    public void SetPlayerEscaped(bool escaped)
+    {
+        PlayerEscaped = escaped;
+    }
+
+    public void ResetGameOverState()
+    {
+        PlayerEscaped = false;  
+    }
+
 }
 
 

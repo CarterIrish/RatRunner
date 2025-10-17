@@ -63,7 +63,7 @@ public class UIManager : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
-        if(sceneName == "Game")
+        if(sceneName == "Game" && GameManager.Instance != null)
         {
             GameManager.Instance.ChangeGameState(GameStates.PLAYING);
         }
@@ -77,7 +77,7 @@ public class UIManager : MonoBehaviour
     {
         SaveSystem.DeleteGameData();
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
-        if (sceneName == "Game")
+        if (sceneName == "Game" && GameManager.Instance != null)
         {
             GameManager.Instance.ChangeGameState(GameStates.PLAYING);
         }

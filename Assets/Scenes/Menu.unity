@@ -998,6 +998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseUI: {fileID: 0}
+  dayUI: {fileID: 0}
 --- !u!1 &1023368873
 GameObject:
   m_ObjectHideFlags: 0

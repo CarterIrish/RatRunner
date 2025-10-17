@@ -137,6 +137,7 @@ public class DayManager : MonoBehaviour
 
         if (currentDay > maxDays)
         {
+            GameManager.Instance.SetPlayerEscaped(false);
             UIManager.Instance.LoadScene("GameOver");
             SaveSystem.DeleteGameData();
         }
