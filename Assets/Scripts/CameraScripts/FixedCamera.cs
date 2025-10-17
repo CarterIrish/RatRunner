@@ -1,5 +1,4 @@
-﻿using System.Transactions;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class FixedCamera : MonoBehaviour

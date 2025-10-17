@@ -1,8 +1,6 @@
-using System;
-using UnityEditor.Callbacks;
+
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
+
 
 public class CameraManager : MonoBehaviour
 {
