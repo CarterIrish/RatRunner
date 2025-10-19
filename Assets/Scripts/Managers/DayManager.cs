@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DayManager : MonoBehaviour
@@ -8,7 +9,7 @@ public class DayManager : MonoBehaviour
     public static DayManager Instance { get; private set; }
 
     [SerializeField]
-    private int currentDay = 1;
+    private int currentDay = 3;
 
     [SerializeField]
     private int maxDays = 3;
@@ -29,7 +30,17 @@ public class DayManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI text;
 
+    [SerializeField]
+    private TextMeshProUGUI UIText;
+
     private float timer = 0;
+
+    [SerializeField]
+    private CanvasGroup daysScreen;
+    private float fadeDuration = 1.0f;
+
+    [SerializeField]
+    private AudioSource caughtAudio;
 
     private void Awake()
     {
@@ -101,6 +112,12 @@ public class DayManager : MonoBehaviour
         ChangeDayText();
     }
 
+    private void Start()
+    {
+        if (daysScreen != null)
+            daysScreen.alpha = 0f;
+    }
+
     private void Update()
     {
         // increment timer
@@ -108,22 +125,98 @@ public class DayManager : MonoBehaviour
 
         // change the position and size of the day text for the first 1.5 seconds 
         // after spawning in or changing days
-        if (timer < 2.0f)
-        {
-            StartCoroutine(MoveToTarget(1.5f, new Vector3(0, 0, 0)));
-            StartCoroutine(Scale(1.5f, new Vector3(2, 2, 2)));
-        }
-        else // return to original position and scale
-        {
-            // get tranform of text object
-            RectTransform textTransform = text.GetComponent<RectTransform>();
+        //if (timer < 2.0f)
+        //{
+        //    StartCoroutine(MoveToTarget(1.5f, new Vector3(0, 0, 0)));
+        //    StartCoroutine(Scale(1.5f, new Vector3(2, 2, 2)));
+        //}
+        //else // return to original position and scale
+        //{
+        //    // get tranform of text object
+        //    RectTransform textTransform = text.GetComponent<RectTransform>();
+        //
+        //    // change text position
+        //    textTransform.localPosition = new Vector3(-843, 491, 0);
+        //
+        //    // change text size
+        //    textTransform.localScale = new Vector3(1, 1, 1);
+        //}
+    }
 
-            // change text position
-            textTransform.localPosition = new Vector3(-843, 491, 0);
-
-            // change text size
-            textTransform.localScale = new Vector3(1, 1, 1);
+    public void OnPlayerCaught()
+    {
+        if (currentDay <= 1) // final day
+        {
+            GameManager.Instance.SetPlayerEscaped(false);
+            UIManager.Instance.LoadScene("GameOver");
+            SaveSystem.DeleteGameData();
         }
+        else
+        {
+            StartCoroutine(HandleDayTransition());
+        }
+    }
+
+    private IEnumerator HandleDayTransition()
+    {
+        // Fade to black
+        yield return StartCoroutine(Fade(0f, 1f, fadeDuration));
+
+        // Play audio
+        if (caughtAudio != null)
+            caughtAudio.Play();
+
+        // Update day count
+        currentDay--;
+        ChangeDayText();
+
+        // Reset player position
+        player.transform.position = startPos;
+        player.transform.rotation = Quaternion.identity;
+
+        // Reset enemy positions
+        for (int i = 0; i < enemyPositions.Count; i++)
+        {
+            enemies[i].transform.position = enemyPositions[i];
+        }
+
+        // Wait for audio to finish or a short delay
+        yield return new WaitForSeconds(caughtAudio != null ? caughtAudio.clip.length : 1f);
+
+        // Save progress if applicable
+        if (currentDay <= maxDays && currentDay > 0)
+            SaveSystem.SaveGameData(inventory, currentDay);
+
+        // Fade back to gameplay
+        yield return StartCoroutine(Fade(1f, 0f, fadeDuration));
+
+        // Check for game over
+        if (currentDay <= 0)
+        {
+            GameManager.Instance.SetPlayerEscaped(false);
+            UIManager.Instance.LoadScene("GameOver");
+            SaveSystem.DeleteGameData();
+        }
+    }
+
+    /// <summary>
+    /// handles fading theh screen in and out
+    /// </summary>
+    /// <param name="startAlpha"></param>
+    /// <param name="endAlpha"></param>
+    /// <param name="duration"></param>
+    /// <returns></returns>
+    private IEnumerator Fade(float startAlpha, float endAlpha, float duration)
+    {
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            daysScreen.alpha = Mathf.Lerp(startAlpha, endAlpha, t);
+            yield return null;
+        }
+        daysScreen.alpha = endAlpha;
     }
 
     /// <summary>
@@ -132,9 +225,9 @@ public class DayManager : MonoBehaviour
     public void NextDay()
     {
         timer = 0;
-        currentDay++;
+        currentDay--;
 
-        if (currentDay > maxDays)
+        if (currentDay == 0)
         {
             GameManager.Instance.SetPlayerEscaped(false);
             UIManager.Instance.LoadScene("GameOver");
@@ -169,7 +262,17 @@ public class DayManager : MonoBehaviour
             return;
         }
 
-        text.text = "Day: " + currentDay;
+        if (currentDay > 1)
+        {
+            text.text = currentDay + " Days Left.";
+            UIText.text = currentDay + " Days Left.";
+        }
+        else
+        {
+            text.text = "Final Day.";
+            UIText.text = "Final Day.";
+        }
+        
     }
 
     /// <summary>

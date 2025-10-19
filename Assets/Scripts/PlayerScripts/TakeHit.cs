@@ -14,7 +14,7 @@ public class TakeHit : MonoBehaviour
         // end the game when enemy collides with player
         if (other.CompareTag("Enemy"))
         {
-            DayManager.Instance.NextDay();
+            DayManager.Instance.OnPlayerCaught();
         }
     }
 }
