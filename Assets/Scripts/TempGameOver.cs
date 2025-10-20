@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class TempGameOver : MonoBehaviour
 {
@@ -49,6 +49,7 @@ public class TempGameOver : MonoBehaviour
         if(gameOverCond)
         {        
             Debug.Log($"Game Over hit {other.gameObject.name}");
+            GameManager.Instance.SetPlayerEscaped(true);
             UIManager.Instance.LoadScene("GameOver");
         }
     }

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class TakeHit : MonoBehaviour
@@ -15,14 +14,7 @@ public class TakeHit : MonoBehaviour
         // end the game when enemy collides with player
         if (other.CompareTag("Enemy"))
         {
-            Debug.Log($"TakeHit >> Player: {other.name}");
-            UIManager.Instance.LoadScene("GameOver");
-
-            // stop enemy from moving
-            EnemyNavigation enemyScript = other.gameObject.GetComponent<EnemyNavigation>();
-            enemyScript.target = other.transform;
-
-            Debug.Log("Enemy hit");
+            DayManager.Instance.NextDay();
         }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,8 +14,7 @@ public class EnemyNavigation : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
 
-        // temporary for playtest
-        target = transform;
+        StartHunting();
     }
 
     /// <summary>
@@ -54,7 +52,7 @@ public class EnemyNavigation : MonoBehaviour
         //}
 
         // only tracks player in playing game state
-        if (GameManager.Instance.GameState == GameStates.PLAYING)
+        if (GameManager.Instance != null && GameManager.Instance.GameState == GameStates.PLAYING)
         {
             agent.destination = target.position;
         }
@@ -72,7 +70,7 @@ public class EnemyNavigation : MonoBehaviour
     {
         if(item == ItemsEnum.key)
         {
-            StartHunting();
+            // StartHunting();
         }
     }
 

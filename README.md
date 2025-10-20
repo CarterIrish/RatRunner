@@ -41,6 +41,99 @@ Rat Runner combines tense exploration with roguelike mechanics in an eerie sewer
 
 # Changelog
 
+## [Sprint 3 - Week 2] - 2025-10-13 to 2025-10-19
+
+### Added
+
+- **Save/Load System:** (Brice)
+  - Complete save and load functionality with binary file storage
+  - Automatic save after each day
+  - Item position saving and loading system
+  - Game data parsing and restoration on load
+  - Resources folder structure with prefabs for Key and Cheese items
+
+- **Camera System:**
+  - CameraFollow.cs script (Jake) integrated into camera profile structure (Carter)
+
+- **UI Assets:** (Chess)
+  - Game Over screen artwork
+  - Pause screen artwork
+ 
+- **UI Feedback** (Jake)
+  - Day progression notification system - UI element displays when day increases
+
+- **Game Layers** (Carter)
+   - Added `Player` layer to the game scene as part of camera clipping bug fix.
+
+### Changed
+
+- **Scene Updates:** (Chess)
+  - Updated Game, GameOver, and Menu scenes with new UI elements
+  - Improved visual presentation across game states
+
+- **Game Art** (Chris)
+  - Updated tunnels with higher detail models
+
+### Fixed
+
+- **Camera Bugs:** (Carter)
+  - Fixed rat stutter bug caused by Update vs FixedUpdate timing mismatch
+  - Fixed camera clipping into Rat model caused by raycast collision with Rat/Player object
+    - Now ignores the new `Player` layer
+
+- **Enemy AI Bugs:** (Jake)
+  - Fixed bug where enemy wouldn't target player after loading a saved game
+
+- **Save System Bugs:** (Brice)
+  - Resolved item duplication issue when loading saved games
+  - Items now properly track picked-up state
+
+## [Sprint 3 - Week 1] - 2025-10-06 to 2025-10-12
+
+### Added
+
+- **Day System:** (Jake)
+  - Day Manager with basic functionality for tracking game progression
+  - Day-based gameplay loop foundation
+
+- **Save System Foundation:** (Brice)
+  - Initial save feature for inventory and day count
+  - Binary file serialization for game data
+  - GameData and SaveSystem scripts
+
+- **Camera System:** (Carter)
+  - Camera Manager for handling multiple camera profiles
+  - Three camera profiles: First-person, Third-person, and Fixed
+  - Third-person camera with mouse-based controls
+  - Input Actions integration for camera controls
+  - Improved zoom responsiveness on fixed camera
+  - Camera switching framework
+
+- **Pause System:** (Chess)
+  - Pause menu UI implementation
+  - Continue button functionality
+
+- **Menu/UI Assets:** (Chess)
+  - Title screen artwork and implementation
+  - Custom typography (Green Fuz and Magiera Script fonts)
+  - Updated GameOver and Menu scenes
+
+### Changed
+
+- **Code Architecture:** (Carter)
+  - Refactored pause UI code from GameManager to UIManager
+  - Decoupled game state management from UI handling
+  - Updated input handling across multiple scripts for new camera system
+
+- **Player Tag System:** (Carter)
+  - Added player tag to ProjectSettings for better entity identification
+
+### Fixed
+
+- **UI Bugs:** (Carter)
+  - Fixed pause menu UI bug preventing proper menu interaction
+  - Resolved missing Unity scene update issues
+
 ## [Sprint 2 - Week 2] - 2025-09-26 to 2025-10-03
 
 ### Added
