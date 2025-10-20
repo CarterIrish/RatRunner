@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a366920d0f8e2cf4ab17407803ca0be3
+timeCreated: 1512737429
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 62597
+  packageName: Abandoned Factory (Lite)
+  packageVersion: 1.6
+  assetPath: Assets/TirgamesAssets/Factory/Models/Materials/LampCeiling01Night.mat
+  uploadId: 746142

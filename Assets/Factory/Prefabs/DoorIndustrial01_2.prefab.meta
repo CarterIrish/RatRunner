@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e4c1a3fa2b351a04a85df21fa3e96580
+timeCreated: 1526709115
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 62597
+  packageName: Abandoned Factory (Lite)
+  packageVersion: 1.6
+  assetPath: Assets/TirgamesAssets/Factory/Prefabs/DoorIndustrial01_2.prefab
+  uploadId: 746142

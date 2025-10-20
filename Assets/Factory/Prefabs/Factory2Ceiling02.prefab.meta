@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: aac3f9c5e29417449b3d93e8cea32bb0
+timeCreated: 1526720570
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 62597
+  packageName: Abandoned Factory (Lite)
+  packageVersion: 1.6
+  assetPath: Assets/TirgamesAssets/Factory/Prefabs/Factory2Ceiling02.prefab
+  uploadId: 746142

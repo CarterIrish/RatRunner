@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ca0a23529950a9c43992702d0bf82204
+timeCreated: 1514460752
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 62597
+  packageName: Abandoned Factory (Lite)
+  packageVersion: 1.6
+  assetPath: Assets/TirgamesAssets/Factory/Models/Materials/CommonSteelRoof01.mat
+  uploadId: 746142

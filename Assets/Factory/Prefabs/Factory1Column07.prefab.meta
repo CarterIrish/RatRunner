@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f73ed55a7f40fcf4ba842aca3205ac00
+timeCreated: 1526473615
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 62597
+  packageName: Abandoned Factory (Lite)
+  packageVersion: 1.6
+  assetPath: Assets/TirgamesAssets/Factory/Prefabs/Factory1Column07.prefab
+  uploadId: 746142

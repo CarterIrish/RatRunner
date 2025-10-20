@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a374f229b771eaa4886cbe9a20784361
+timeCreated: 1512592419
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 62597
+  packageName: Abandoned Factory (Lite)
+  packageVersion: 1.6
+  assetPath: Assets/TirgamesAssets/Factory/Prefabs/FireExtinguisher01_2.prefab
+  uploadId: 746142

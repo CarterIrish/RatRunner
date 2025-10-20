@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b34fbe951068d3844b5b62afb58a741d
+timeCreated: 1481889364
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 62597
+  packageName: Abandoned Factory (Lite)
+  packageVersion: 1.6
+  assetPath: Assets/TirgamesAssets/Factory/Prefabs/Crane01_2.prefab
+  uploadId: 746142

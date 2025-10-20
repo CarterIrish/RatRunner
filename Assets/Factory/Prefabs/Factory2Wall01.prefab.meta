@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7adea88153935f849bcdd9885657d094
+timeCreated: 1526731085
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 62597
+  packageName: Abandoned Factory (Lite)
+  packageVersion: 1.6
+  assetPath: Assets/TirgamesAssets/Factory/Prefabs/Factory2Wall01.prefab
+  uploadId: 746142

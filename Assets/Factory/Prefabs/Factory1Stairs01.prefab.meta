@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c5c41937c51018d4a9f4837ad25b5685
+timeCreated: 1526551824
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 62597
+  packageName: Abandoned Factory (Lite)
+  packageVersion: 1.6
+  assetPath: Assets/TirgamesAssets/Factory/Prefabs/Factory1Stairs01.prefab
+  uploadId: 746142
