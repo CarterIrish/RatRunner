@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 16b7d755e8a9e82448cebb7861be060c
+timeCreated: 1482645349
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 62597
+  packageName: Abandoned Factory (Lite)
+  packageVersion: 1.6
+  assetPath: Assets/TirgamesAssets/Factory/Models/Materials/CommonConcreteWall01.mat
+  uploadId: 746142

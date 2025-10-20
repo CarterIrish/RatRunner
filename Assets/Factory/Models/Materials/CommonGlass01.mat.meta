@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3ac964ff782560747846ae0cd49d12d2
+timeCreated: 1480758328
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 62597
+  packageName: Abandoned Factory (Lite)
+  packageVersion: 1.6
+  assetPath: Assets/TirgamesAssets/Factory/Models/Materials/CommonGlass01.mat
+  uploadId: 746142

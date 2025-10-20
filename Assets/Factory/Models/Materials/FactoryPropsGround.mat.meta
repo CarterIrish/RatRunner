@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1891f64416650144eb272606e6afa06c
+timeCreated: 1524377631
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 62597
+  packageName: Abandoned Factory (Lite)
+  packageVersion: 1.6
+  assetPath: Assets/TirgamesAssets/Factory/Models/Materials/FactoryPropsGround.mat
+  uploadId: 746142

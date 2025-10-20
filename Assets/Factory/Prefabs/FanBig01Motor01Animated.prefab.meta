@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ddab92f78afd35c45ab45e8e5ffb5c50
+timeCreated: 1525322923
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 62597
+  packageName: Abandoned Factory (Lite)
+  packageVersion: 1.6
+  assetPath: Assets/TirgamesAssets/Factory/Prefabs/FanBig01Motor01Animated.prefab
+  uploadId: 746142
