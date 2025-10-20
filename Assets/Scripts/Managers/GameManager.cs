@@ -3,10 +3,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
 
-
-
-
-
 /// <summary>
 /// This enum serves to hold all core game loop states
 /// </summary>
