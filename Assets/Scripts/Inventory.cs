@@ -16,13 +16,27 @@ public class Inventory : MonoBehaviour
     //players inventory
     public List<ItemsEnum> inventory;
 
+    private Dictionary<ItemsEnum, int> _inventory;
+
+
     /// <summary>
     /// Adds the item to inventory.
     /// </summary>
     /// <param name="item">The item to add.</param>
-    public void AddItem(ItemsEnum item)
+    public void AddItem(ItemsEnum item, int quantity)
     {
         inventory.Add(item);
+
+        if (_inventory.ContainsKey(item))
+        {
+            // Add the item to the dictionary by incrementing the quantity tied to the key
+            _inventory[item] += quantity;
+        }
         OnItemAdded.Invoke(item);
+    }
+
+    public bool HasItem(ItemsEnum item, int quantity)
+    {
+        return _inventory.ContainsKey(item) && _inventory[item] >= quantity;  
     }
 }

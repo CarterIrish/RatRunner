@@ -19,7 +19,7 @@ public class Item : MonoBehaviour
             // If inventory is not null add item
             if (inventory != null)
             {
-                inventory.AddItem(item);
+                inventory.AddItem(item, 1);
             }
 
             // Destory the game object when finished
