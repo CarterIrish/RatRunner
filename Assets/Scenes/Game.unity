@@ -1617,7 +1617,7 @@ MonoBehaviour:
   player: {fileID: 838813785}
   enemies:
   - {fileID: 1742848469}
-  inventory: {fileID: 2069917218}
+  playerInventory: {fileID: 2069917218}
   text: {fileID: 1789614207}
   UIText: {fileID: 815983131}
   daysScreen: {fileID: 1200535964}
@@ -8078,8 +8078,8 @@ Transform:
   m_Children:
   - {fileID: 373959785}
   - {fileID: 963194228}
-  - {fileID: 2069917217}
   - {fileID: 1903149295}
+  - {fileID: 2069917217}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 360, z: 0}
 --- !u!54 &838813790
@@ -20293,7 +20293,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a56d126e8cc8c468f6848547e194ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: 
 --- !u!1001 &2079494704
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -14,13 +14,13 @@ public class Item : MonoBehaviour
         // If collided with player
         if (collider.tag == "Player")
         {
-            // Get the inventory of player who collided
+            // Get the playerInventory of player who collided
             Inventory inventory = collider.gameObject.GetComponentInChildren<Inventory>();
             if(inventory == null)
             {
                 Debug.LogWarning("Inventory null at Item trigger enter");
             }
-            // If inventory is not null add item
+            // If playerInventory is not null add item
             if (inventory != null)
             {
                 inventory.AddItem(item, 1);

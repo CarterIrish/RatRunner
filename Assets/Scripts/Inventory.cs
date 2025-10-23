@@ -1,11 +1,10 @@
 
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using TMPro.Examples;
 using UnityEngine;
 using UnityEngine.Events;
 
 //enum to hold our items 
+[System.Serializable]
 public enum ItemsEnum { key, suspiciousPowder, thread, cloth, spring, cheese };
 
 public class Inventory : MonoBehaviour
@@ -15,43 +14,58 @@ public class Inventory : MonoBehaviour
     /// </summary>
     public static UnityEvent<ItemsEnum> OnItemAdded = new UnityEvent<ItemsEnum>();
 
-    //players inventory
-    public List<ItemsEnum> inventory;
+    //players playerInventory
+    //public List<ItemsEnum> playerInventory;
 
-    private Dictionary<ItemsEnum, int> _inventory = new Dictionary<ItemsEnum, int>();
+    public Dictionary<ItemsEnum, int> inventoryData { get => inventory; }
+    private Dictionary<ItemsEnum, int> inventory = new Dictionary<ItemsEnum, int>();
 
 
     /// <summary>
-    /// Adds the item to inventory.
+    /// Adds the item to playerInventory.
     /// </summary>
     /// <param name="item">The item to add.</param>
     public void AddItem(ItemsEnum item, int quantity)
     {
-        inventory.Add(item);
+        //playerInventory.Add(item);
 
-        if (_inventory.ContainsKey(item))
+        if (inventory.ContainsKey(item))
         {
             // Add the item to the dictionary by incrementing the quantity tied to the key
-            _inventory[item] += quantity;
+            inventory[item] += quantity;
         }
         else
         {
-            _inventory.Add(item, 1);
+            inventory.Add(item, 1);
         }
 
         // Debug stuff
-        //Dictionary<ItemsEnum, int>.KeyCollection keys = _inventory.Keys;
-        //string debugString = "";
-        //foreach (ItemsEnum key in keys)
-        //{
-        //    debugString += ($"{key} : {_inventory[key]} \n");
-        //}
-        //Debug.Log(debugString);
+        Dictionary<ItemsEnum, int>.KeyCollection keys = inventory.Keys;
+        string debugString = "";
+        foreach (ItemsEnum key in keys)
+        {
+            debugString += ($"{key} : {inventory[key]} \n");
+        }
+        Debug.Log(debugString);
         OnItemAdded.Invoke(item);
     }
 
     public bool HasItem(ItemsEnum item, int quantity)
     {
-        return _inventory.ContainsKey(item) && _inventory[item] >= quantity;  
+        return inventory.ContainsKey(item) && inventory[item] >= quantity;  
+    }
+
+
+    // Load data into the playerInventory
+    public void LoadData(Dictionary<ItemsEnum, int> data)
+    {
+        inventory.Clear();
+        if (data != null)
+        {
+            foreach (KeyValuePair<ItemsEnum, int> kvp in data)
+            {
+                inventory[kvp.Key] = kvp.Value;
+            }
+        }
     }
 }

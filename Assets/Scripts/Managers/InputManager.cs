@@ -75,7 +75,7 @@ public class InputManager : MonoBehaviour
 
         if (context.started)
         {
-            Debug.Log("Player Moving");
+
             playerScript.isMoving = true;
         }
     }
@@ -94,7 +94,7 @@ public class InputManager : MonoBehaviour
 
         if (context.started)
         {
-            Debug.Log("Turn Right");
+
             playerScript.isTurningRight = true;
         }
     }
@@ -113,7 +113,7 @@ public class InputManager : MonoBehaviour
 
         if (context.started)
         {
-            Debug.Log("Turn Left");
+
             playerScript.isTurningLeft = true;
         }
     }
@@ -126,7 +126,7 @@ public class InputManager : MonoBehaviour
     {
         if(context.started)
         {
-            Debug.Log("Enter Pressed");
+
             if (GameManager.Instance == null) return;
             //switch (GameManager.Instance.GameState)
             //{

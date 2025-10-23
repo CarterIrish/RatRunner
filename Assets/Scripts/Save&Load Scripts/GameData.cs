@@ -2,12 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[System.Serializable]
+public class SerializableInventory
+{
+    public List<ItemsEnum> keys = new List<ItemsEnum>();
+    public List<int> values = new List<int>();
+
+    public void FromDictionary(Dictionary<ItemsEnum, int> dict)
+    {
+        keys.Clear();
+        values.Clear();
+        foreach(KeyValuePair<ItemsEnum, int> kvp in dict)
+        {
+            keys.Add(kvp.Key);
+            values.Add(kvp.Value);
+        }
+    }
+
+    public Dictionary<ItemsEnum, int> ToDictionary()
+    {
+        Dictionary<ItemsEnum, int> dict = new Dictionary<ItemsEnum, int>();
+        for(int i = 0; i<keys.Count;i++)
+        {
+            dict[keys[i]] = values[i];
+        }
+        return dict;
+    }
+
+}
+
+
+
+
 [System.Serializable]
 public class GameData
 {
     //data we want to save
     public int day;
-    public List<ItemsEnum> inventoryData;
+    public SerializableInventory inventoryData = new SerializableInventory();
     public Dictionary<string, List<float[]>> itemDictionary;
 
     /// <summary>
@@ -18,20 +51,22 @@ public class GameData
     public GameData(Inventory inventory, int day)
     {
         itemDictionary = new Dictionary<string, List<float[]>>();
-        inventoryData = new List<ItemsEnum>();
 
         //fill the dictionary with all the games current items
         CollectAllItems();
 
         this.day = day;
 
+        
         if (inventory != null)
         {
-            for (int i = 0; i < inventory.inventory.Count; i++)
-            {
-                inventoryData.Add(inventory.inventory[i]);
-            }
+            inventoryData.FromDictionary(inventory.inventoryData);
         }
+    }
+
+    public Dictionary<ItemsEnum, int> GetInventoryDictionary()
+    {
+        return inventoryData.ToDictionary();
     }
 
 

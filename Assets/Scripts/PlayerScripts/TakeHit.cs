@@ -10,7 +10,6 @@ public class TakeHit : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        Debug.Log($"TakeHit >> Generic: {other.name}");
         // end the game when enemy collides with player
         if (other.CompareTag("Enemy"))
         {

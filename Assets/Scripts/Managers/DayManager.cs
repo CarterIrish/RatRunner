@@ -25,7 +25,7 @@ public class DayManager : MonoBehaviour
     public List<GameObject> enemies;
 
     [SerializeField]
-    private Inventory inventory;
+    private Inventory playerInventory;
 
     [SerializeField]
     private TextMeshProUGUI text;
@@ -57,7 +57,7 @@ public class DayManager : MonoBehaviour
         // make sure starting position is set
         if (startPos == Vector3.zero)
         {
-            Debug.Log("Insert Starting Position");
+            startPos = gameObject.transform.position;
         }
 
         // make sure enemy positions are set
@@ -84,12 +84,13 @@ public class DayManager : MonoBehaviour
             }
         }
 
-        //load in the correct data into the game
-        GameData data = SaveSystem.LoadGameData();
+        //load in the correct loadedData into the game
+        GameData loadedData = SaveSystem.LoadGameData();
 
-        //if there is a current save load the data
-        if (data != null && data.day >= 1)
+        //if there is a current save load the loadedData
+        if (loadedData != null && loadedData.day >= 1)
         {
+            Debug.Log("LoadingData");
             //list containing all items
             GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
 
@@ -100,9 +101,9 @@ public class DayManager : MonoBehaviour
             }
 
             //load correct items based on save
-            currentDay = data.day;
-            inventory.inventory = new List<ItemsEnum>(data.inventoryData);
-            LoadItems(data);
+            currentDay = loadedData.day;
+            playerInventory.LoadData(loadedData.GetInventoryDictionary());
+            LoadItems(loadedData);
         }
         else
         {
@@ -185,7 +186,7 @@ public class DayManager : MonoBehaviour
 
         // Save progress if applicable
         if (currentDay <= maxDays && currentDay > 0)
-            SaveSystem.SaveGameData(inventory, currentDay);
+            SaveSystem.SaveGameData(playerInventory, currentDay);
 
         // Fade back to gameplay
         yield return StartCoroutine(Fade(1f, 0f, fadeDuration));
@@ -244,10 +245,10 @@ public class DayManager : MonoBehaviour
             enemies[i].transform.position = enemyPositions[i];
         }
 
-        //saves the players inventory and the current day if the player is on a valid day
+        //saves the players playerInventory and the current day if the player is on a valid day
         if (currentDay <= maxDays)
         {
-            SaveSystem.SaveGameData(inventory, currentDay);
+            SaveSystem.SaveGameData(playerInventory, currentDay);
         }
     }
 
@@ -340,7 +341,7 @@ public class DayManager : MonoBehaviour
         //loop through every key value pair in the saved dictionary
         foreach (KeyValuePair<string, List<float[]>> entry in data.itemDictionary)
         {
-            //create containers to hold the saved data
+            //create containers to hold the saved loadedData
             string itemName = entry.Key;
             List<float[]> transformations = entry.Value;
 
