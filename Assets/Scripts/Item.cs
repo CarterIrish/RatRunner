@@ -16,6 +16,10 @@ public class Item : MonoBehaviour
         {
             // Get the inventory of player who collided
             Inventory inventory = collider.gameObject.GetComponentInChildren<Inventory>();
+            if(inventory == null)
+            {
+                Debug.LogWarning("Inventory null at Item trigger enter");
+            }
             // If inventory is not null add item
             if (inventory != null)
             {

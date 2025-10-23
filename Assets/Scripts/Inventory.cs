@@ -1,5 +1,7 @@
 
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using TMPro.Examples;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,7 +18,7 @@ public class Inventory : MonoBehaviour
     //players inventory
     public List<ItemsEnum> inventory;
 
-    private Dictionary<ItemsEnum, int> _inventory;
+    private Dictionary<ItemsEnum, int> _inventory = new Dictionary<ItemsEnum, int>();
 
 
     /// <summary>
@@ -32,6 +34,19 @@ public class Inventory : MonoBehaviour
             // Add the item to the dictionary by incrementing the quantity tied to the key
             _inventory[item] += quantity;
         }
+        else
+        {
+            _inventory.Add(item, 1);
+        }
+
+        // Debug stuff
+        //Dictionary<ItemsEnum, int>.KeyCollection keys = _inventory.Keys;
+        //string debugString = "";
+        //foreach (ItemsEnum key in keys)
+        //{
+        //    debugString += ($"{key} : {_inventory[key]} \n");
+        //}
+        //Debug.Log(debugString);
         OnItemAdded.Invoke(item);
     }
 
