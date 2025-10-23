@@ -1,11 +1,16 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyNavigation : MonoBehaviour
 {
     public Transform target;
     private float distance;
     private NavMeshAgent agent;
+    public List<Transform> targetList;
+    public bool trackingPlayer = false;
 
 
 
@@ -14,7 +19,7 @@ public class EnemyNavigation : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
 
-        StartHunting();
+        // StartHunting();
     }
 
     /// <summary>
@@ -51,6 +56,24 @@ public class EnemyNavigation : MonoBehaviour
         //    agent.destination = target.position;
         //}
 
+        // if enemy reaches a point in a room and isn't tracking player, go to the next point in the list
+        if (targetList != null && !trackingPlayer)
+        {
+            if (distance < 4.0f)
+            {
+                int index = targetList.IndexOf(target);
+
+                if (index == targetList.Count - 1)
+                {
+                    target = targetList[0];
+                }
+                else
+                {
+                    target = targetList[index + 1];
+                }
+            }
+        }
+
         // only tracks player in playing game state
         if (GameManager.Instance != null && GameManager.Instance.GameState == GameStates.PLAYING)
         {
@@ -77,7 +100,7 @@ public class EnemyNavigation : MonoBehaviour
     /// <summary>
     /// Starts hunting the player.
     /// </summary>
-    private void StartHunting()
+    public void StartHunting()
     {
         // Gathers player object
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -86,7 +109,24 @@ public class EnemyNavigation : MonoBehaviour
         {
             // Assigns target
             target = player.transform;
+            trackingPlayer = true;
             Debug.Log("Start hunting player");
+        }
+    }
+
+    /// <summary>
+    /// Stops hunting the player
+    /// </summary>
+    public void StopHunting()
+    {
+        trackingPlayer = false;
+        if (targetList != null)
+        {
+            target = targetList[0];
+        }
+        else
+        {
+            target = transform;
         }
     }
 }
