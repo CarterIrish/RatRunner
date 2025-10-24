@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
 
     // Reference to the pauseUI
     public GameObject pauseUI;
+    public GameObject settingsUI;
 
     public GameObject dayUI;
 
@@ -105,5 +106,23 @@ public class UIManager : MonoBehaviour
             pauseUI.SetActive(false);
             dayUI.SetActive(true);
         }
+    }
+
+    public void ShowSettingsUI()
+    {
+        if (settingsUI != null)
+            settingsUI.SetActive(true);
+
+        if (pauseUI != null)
+            pauseUI.SetActive(false);
+    }
+
+    public void HideSettingsUI()
+    {
+        if (settingsUI != null)
+            settingsUI.SetActive(false);
+
+        if (pauseUI != null)
+            pauseUI.SetActive(true);
     }
 }
