@@ -31,8 +31,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature.002|Armature.002Action
-      takeName: Armature.002|Armature.002Action
+      name: Point.002|Armature.002Action (1)
+      takeName: Point.002|Armature.002Action
       internalID: 5138602965388526686
       firstFrame: 0
       lastFrame: 249
@@ -43,7 +43,7 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 0
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
