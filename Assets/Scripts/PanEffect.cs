@@ -37,10 +37,12 @@ public class PanEffect : MonoBehaviour
 
     private void Update()
     {
+        float t = Time.unscaledTime; // Use unscaled time so it keeps running during pause
+
         // --- Pan effect ---
-        float xOffset = Mathf.PerlinNoise(Time.time * panSpeed, 0f) * panAmount.x - panAmount.x / 2f;
-        float yOffset = Mathf.PerlinNoise(0f, Time.time * panSpeed) * panAmount.y - panAmount.y / 2f;
-        float zOffset = Mathf.PerlinNoise(Time.time * panSpeed, Time.time * panSpeed) * panAmount.z - panAmount.z / 2f;
+        float xOffset = Mathf.PerlinNoise(t * panSpeed, 0f) * panAmount.x - panAmount.x / 2f;
+        float yOffset = Mathf.PerlinNoise(0f, t * panSpeed) * panAmount.y - panAmount.y / 2f;
+        float zOffset = Mathf.PerlinNoise(t * panSpeed, t * panSpeed) * panAmount.z - panAmount.z / 2f;
 
         Vector3 newPos = startPos + new Vector3(xOffset, yOffset, zOffset);
 
@@ -52,16 +54,13 @@ public class PanEffect : MonoBehaviour
         // --- Flicker effect ---
         if (enableFlicker)
         {
-            float alpha = Mathf.Lerp(minAlpha, 1f, Mathf.PerlinNoise(Time.time * flickerSpeed, 1f));
+            float alpha = Mathf.Lerp(minAlpha, 1f, Mathf.PerlinNoise(t * flickerSpeed, 1f));
             if (isUI && uiImage != null)
-            {
                 uiImage.color = new Color(uiImage.color.r, uiImage.color.g, uiImage.color.b, alpha);
-            }
             else if (spriteRenderer != null)
-            {
                 spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, alpha);
-            }
         }
     }
+
 }
 
