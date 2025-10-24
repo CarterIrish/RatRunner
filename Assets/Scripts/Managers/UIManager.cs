@@ -49,6 +49,8 @@ public class UIManager : MonoBehaviour
 
     private void OnDisable()
     {
+        GameManager.OnGamePaused.RemoveAllListeners();
+        GameManager.OnGameResumed.RemoveAllListeners();
         // Only unsubscribe if this is the singleton instance
         if (Instance == this)
         {
