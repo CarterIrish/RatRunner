@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public AudioSource audioSource;
+    public AudioSource atmosphere;
+    public AudioSource itemPickUp;
+    public AudioSource buttonHover;
+    public AudioSource buttonPress;
+    public AudioSource enemyNearby;
+    
     // Start is called before the first frame update
     void Start()
     {
-        audioSource.Play();
+        atmosphere.Play();
     }
 
     // Update is called once per frame
