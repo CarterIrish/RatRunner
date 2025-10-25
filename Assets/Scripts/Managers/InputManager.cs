@@ -1,12 +1,12 @@
 
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class InputManager : MonoBehaviour
 {
     // Event for interact key press
-    public static event Action OnInteractPressed;
+    public static UnityEvent OnInteractPressed = new UnityEvent();
 
     [SerializeField]
     private PlayerMovement playerScript;
@@ -160,6 +160,11 @@ public class InputManager : MonoBehaviour
             if (GameManager.Instance == null) return;
             switch (GameManager.Instance.GameState)
             {
+                case (GameStates.CRAFTING):
+                {
+                    GameManager.Instance.ChangeGameState(GameStates.PLAYING);
+                    break;
+                }
                 case (GameStates.PLAYING):
                 {
                     GameManager.Instance.ChangeGameState(GameStates.PAUSED);
@@ -184,7 +189,7 @@ public class InputManager : MonoBehaviour
         if (context.started)
         {
             // Invoke the event
-            OnInteractPressed?.Invoke();
+            OnInteractPressed.Invoke();
         }
     }
 

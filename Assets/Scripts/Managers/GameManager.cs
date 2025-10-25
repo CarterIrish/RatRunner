@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using System;
 
 
 /// <summary>
@@ -10,6 +11,7 @@ public enum GameStates
 {
     PLAYING,
     PAUSED,
+    CRAFTING
 }
 
 /// <summary>
@@ -29,6 +31,10 @@ public class GameManager : MonoBehaviour
     // Pause menu events
     public static UnityEvent OnGamePaused = new UnityEvent();
     public static UnityEvent OnGameResumed = new UnityEvent();
+
+    // Crafting menu events
+    public static UnityEvent OnWorkbenchOpened = new UnityEvent();
+    public static UnityEvent OnWorkbenchClosed = new UnityEvent();
 
 
     [SerializeField]
@@ -78,8 +84,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-
 
         // Gamestate machine
         switch (_gameState)
@@ -90,7 +94,18 @@ public class GameManager : MonoBehaviour
                 case GameStates.PAUSED:
                     HandlePausedState();
                     break;
+                case GameStates.CRAFTING:
+                    HandleCraftingState();
+                    break;
+
             }
+
+    }
+
+    private void HandleCraftingState()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 
     }
 
@@ -108,16 +123,23 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
-    /// <summary>       
+
+    /// <summary>
     /// Changes the state of the game.
     /// </summary>
     /// <param name="newState">The new state.</param>
     public void  ChangeGameState(GameStates newState)
     {
+        // Fire exit events for the state we're leaving
+        if (_gameState == GameStates.CRAFTING)
+        {
+            OnWorkbenchClosed.Invoke();
+        }
+
         // Change the state
         _gameState = newState;
 
-        // Call appropriate method based on new state
+        // Fire entry events for the state we're entering
         switch (newState)
         {
             case GameStates.PAUSED:
@@ -125,6 +147,9 @@ public class GameManager : MonoBehaviour
                 break;
             case GameStates.PLAYING:
                 ResumeGame();
+                break;
+            case GameStates.CRAFTING:
+                OnWorkbenchOpened.Invoke();
                 break;
         }
     }

@@ -50,6 +50,34 @@ public class Inventory : MonoBehaviour
         OnItemAdded.Invoke(item);
     }
 
+    /// <summary>
+    /// Removes the item.
+    /// </summary>
+    /// <param name="item">The item.</param>
+    /// <param name="quantity">The quantity.</param>
+    public void RemoveItem(ItemsEnum item, int quantity)
+    {
+        if(inventory.ContainsKey(item))
+        {
+            inventory[item] -= quantity;
+        }
+
+        if (inventory[item] <= 0)
+        {
+            inventory.Remove(item);
+        }
+
+        Debug.Log($"Removed {quantity}x {item}");
+    }
+
+    /// <summary>
+    /// Determines whether the inventory has specified item.
+    /// </summary>
+    /// <param name="item">The item.</param>
+    /// <param name="quantity">The quantity.</param>
+    /// <returns>
+    ///   <c>true</c> if the specified item exists; otherwise, <c>false</c>.
+    /// </returns>
     public bool HasItem(ItemsEnum item, int quantity)
     {
         return inventory.ContainsKey(item) && inventory[item] >= quantity;  
@@ -69,6 +97,11 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Gets the item count.
+    /// </summary>
+    /// <param name="type">The type.</param>
+    /// <returns></returns>
     public int GetItemCount(ItemsEnum type)
     {
         int count = 0;

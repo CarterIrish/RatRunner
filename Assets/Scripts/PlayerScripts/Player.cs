@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net.Security;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,7 +17,9 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _cameraPivot;
     [SerializeField] private InputActionAsset _inputAction;
     [SerializeField] private InputActionMap _playerInputMap;
-    
+
+    // Upgrade tracking: Key = upgrade type, Value = upgrade level
+    private Dictionary<UpgradesEnum, int> _upgrades = new Dictionary<UpgradesEnum, int>();
 
     public Transform Transform { get => _transform; private set => _transform = value; }
     public PlayerMovement Movement { get => _movement; private set => _movement = value; }
@@ -25,7 +28,8 @@ public class Player : MonoBehaviour
     public Camera MainCamera { get => _mainCamera; private set => _mainCamera = value; }
     public GameObject CameraPivot { get => _cameraPivot; private set => _cameraPivot = value; }
     public InputActionAsset InputAction { get => _inputAction; private set => _inputAction = value; }
-    public InputActionMap PlayerInputMap { get => _playerInputMap; private set => _playerInputMap = value; } 
+    public InputActionMap PlayerInputMap { get => _playerInputMap; private set => _playerInputMap = value; }
+    public Dictionary<UpgradesEnum, int> Upgrades { get => _upgrades; private set => _upgrades = value; }
 
 
     private void Awake()
