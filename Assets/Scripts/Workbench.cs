@@ -66,12 +66,7 @@ public class Workbench : MonoBehaviour
         if (Keyboard.current.digit1Key.wasPressedThisFrame) TryCraftRecipe(0);
         else if (Keyboard.current.digit2Key.wasPressedThisFrame) TryCraftRecipe(1);
         else if (Keyboard.current.digit3Key.wasPressedThisFrame) TryCraftRecipe(2);
-        else if (Keyboard.current.digit4Key.wasPressedThisFrame) TryCraftRecipe(3);
-        else if (Keyboard.current.digit5Key.wasPressedThisFrame) TryCraftRecipe(4);
-        else if (Keyboard.current.digit6Key.wasPressedThisFrame) TryCraftRecipe(5);
-        else if (Keyboard.current.digit7Key.wasPressedThisFrame) TryCraftRecipe(6);
-        else if (Keyboard.current.digit8Key.wasPressedThisFrame) TryCraftRecipe(7);
-        else if (Keyboard.current.digit9Key.wasPressedThisFrame) TryCraftRecipe(8);
+
     }
 
     /// <summary>
@@ -166,7 +161,7 @@ public class Workbench : MonoBehaviour
             index++;
         }
 
-        Debug.Log("\nPress 1-9 to craft, ESC to close");
+        Debug.Log("\nPress 1-3 to craft, ESC to close");
     }
 
     /// <summary>
