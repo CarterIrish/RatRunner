@@ -1,9 +1,13 @@
 
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
+    // Event for interact key press
+    public static event Action OnInteractPressed;
+
     [SerializeField]
     private PlayerMovement playerScript;
 
@@ -19,7 +23,7 @@ public class InputManager : MonoBehaviour
     {
         if (playerScript == null)
         {
-            Debug.Log("Missing player script.");
+            Debug.Log("Missing _currentPlayer script.");
         }
 
         playerMap = inputActions.FindActionMap("Player");
@@ -62,7 +66,7 @@ public class InputManager : MonoBehaviour
     }
 
     /// <summary>
-    /// tell player to move when "w" is pressed
+    /// tell _currentPlayer to move when "w" is pressed
     /// </summary>
     /// <param name="context"></param>
     public void OnMove(InputAction.CallbackContext context)
@@ -81,7 +85,7 @@ public class InputManager : MonoBehaviour
     }
 
     /// <summary>
-    /// tell player to turn right when "d" is pressed
+    /// tell _currentPlayer to turn right when "d" is pressed
     /// </summary>
     /// <param name="context"></param>
     public void OnTurnRight(InputAction.CallbackContext context)
@@ -100,7 +104,7 @@ public class InputManager : MonoBehaviour
     }
 
     /// <summary>
-    /// tell player to turn left when "a" is pressed
+    /// tell _currentPlayer to turn left when "a" is pressed
     /// </summary>
     /// <param name="context"></param>
     public void OnTurnLeft(InputAction.CallbackContext context)
@@ -167,6 +171,20 @@ public class InputManager : MonoBehaviour
                     break;
                 }
             }
+        }
+    }
+
+    /// <summary>
+    /// Called when [interact pressed] (E key).
+    /// Broadcasts to any listening objects (Workbench, NPCs, etc.)
+    /// </summary>
+    /// <param name="context">The context.</param>
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            // Invoke the event
+            OnInteractPressed?.Invoke();
         }
     }
 

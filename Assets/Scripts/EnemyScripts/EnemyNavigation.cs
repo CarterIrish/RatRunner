@@ -59,7 +59,7 @@ public class EnemyNavigation : MonoBehaviour
         //    agent.destination = target.position;
         //}
 
-        // if enemy reaches a point in a room and isn't tracking player, go to the next point in the list
+        // if enemy reaches a point in a room and isn't tracking _currentPlayer, go to the next point in the list
         if (targetList != null && !trackingPlayer)
         {
             if (distance < 4.0f)
@@ -77,7 +77,7 @@ public class EnemyNavigation : MonoBehaviour
             }
         }
 
-        // only tracks player in playing game state
+        // only tracks _currentPlayer in playing game state
         if (GameManager.Instance != null && GameManager.Instance.GameState == GameStates.PLAYING)
         {
             agent.destination = target.position;
@@ -103,11 +103,11 @@ public class EnemyNavigation : MonoBehaviour
     }
 
     /// <summary>
-    /// Starts hunting the player.
+    /// Starts hunting the _currentPlayer.
     /// </summary>
     public void StartHunting()
     {
-        // Gathers player object
+        // Gathers _currentPlayer object
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         // Checks if null
         if (player != null)
@@ -115,12 +115,12 @@ public class EnemyNavigation : MonoBehaviour
             // Assigns target
             target = player.transform;
             trackingPlayer = true;
-            Debug.Log("Start hunting player");
+            Debug.Log("Start hunting _currentPlayer");
         }
     }
 
     /// <summary>
-    /// Stops hunting the player
+    /// Stops hunting the _currentPlayer
     /// </summary>
     public void StopHunting()
     {
@@ -139,7 +139,7 @@ public class EnemyNavigation : MonoBehaviour
     {
         if (target == null || enemyNearAudio == null) return;
 
-        //checks distance between player and enemy
+        //checks distance between _currentPlayer and enemy
         bool isClose = distance <= triggerDistance;
 
         //if near and audio is not playing, play audio

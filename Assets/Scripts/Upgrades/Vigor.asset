@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a609d6ada0b0077439e247dc56ead94f, type: 3}
-  m_Name: Vision
+  m_Name: Vigor
   m_EditorClassIdentifier: 
-  _name: 0
-  _description: 'A key to vision aka get some contacts
-
-'
+  _name: 2
+  _description: A touch of gear
   _requiredItems:
-  - _itemType: 0
+  - _itemType: 6
     _quantity: 1
-  _upgradeGranted: 0
+  _upgradeGranted: 2

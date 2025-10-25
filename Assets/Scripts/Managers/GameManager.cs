@@ -98,13 +98,17 @@ public class GameManager : MonoBehaviour
     {
         // update day timer eventually
         // check any game over conditions
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void HandlePausedState()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
-    /// <summary>       Her
+    /// <summary>       
     /// Changes the state of the game.
     /// </summary>
     /// <param name="newState">The new state.</param>

@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 //enum to hold our items 
 [System.Serializable]
-public enum ItemsEnum { key, suspiciousPowder, thread, cloth, spring, cheese };
+public enum ItemsEnum { key, suspiciousPowder, thread, cloth, spring, cheese, needle };
 
 public class Inventory : MonoBehaviour
 {
@@ -67,5 +67,13 @@ public class Inventory : MonoBehaviour
                 inventory[kvp.Key] = kvp.Value;
             }
         }
+    }
+
+    public int GetItemCount(ItemsEnum type)
+    {
+        int count = 0;
+        inventory.TryGetValue(type, out count);
+
+        return count;
     }
 }

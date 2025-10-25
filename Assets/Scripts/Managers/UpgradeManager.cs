@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public enum UpgradesEnum
@@ -41,7 +39,7 @@ public class UpgradeManager : MonoBehaviour
 
         activeUpgrades.Add(upgrade);
 
-        // We will need to reference a player manager/controller script here to actually apply upgrades
+        // We will need to reference a _currentPlayer manager/controller script here to actually apply upgrades
         switch(upgrade)
         {
             case UpgradesEnum.Mobility:

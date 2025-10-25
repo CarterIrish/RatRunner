@@ -68,10 +68,10 @@ public class DayManager : MonoBehaviour
             }
         }
 
-        // make sure player isn't null
+        // make sure _currentPlayer isn't null
         if (player == null)
         {
-            Debug.Log("Missing reference to player");
+            Debug.Log("Missing reference to _currentPlayer");
         }
 
         // make sure enemy references aren't null
@@ -170,7 +170,7 @@ public class DayManager : MonoBehaviour
         currentDay--;
         ChangeDayText();
 
-        // Reset player position
+        // Reset _currentPlayer position
         player.transform.position = startPos;
         player.transform.rotation = Quaternion.identity;
 
@@ -220,7 +220,7 @@ public class DayManager : MonoBehaviour
     }
 
     /// <summary>
-    /// progresses to the next day if player has some left, ends game if player out of days
+    /// progresses to the next day if _currentPlayer has some left, ends game if _currentPlayer out of days
     /// </summary>
     public void NextDay()
     {
@@ -234,7 +234,7 @@ public class DayManager : MonoBehaviour
             SaveSystem.DeleteGameData();
         }
 
-        // bring player back to start
+        // bring _currentPlayer back to start
         player.transform.position = startPos;
         player.transform.rotation = Quaternion.identity;
 
@@ -244,7 +244,7 @@ public class DayManager : MonoBehaviour
             enemies[i].transform.position = enemyPositions[i];
         }
 
-        //saves the players playerInventory and the current day if the player is on a valid day
+        //saves the players playerInventory and the current day if the _currentPlayer is on a valid day
         if (currentDay <= maxDays)
         {
             SaveSystem.SaveGameData(playerInventory, currentDay);

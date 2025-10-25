@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a609d6ada0b0077439e247dc56ead94f, type: 3}
-  m_Name: Vision
+  m_Name: Mobility
   m_EditorClassIdentifier: 
-  _name: 0
-  _description: 'A key to vision aka get some contacts
-
-'
+  _name: 1
+  _description: A bit of booger sugar
   _requiredItems:
-  - _itemType: 0
+  - _itemType: 4
     _quantity: 1
-  _upgradeGranted: 0
+  _upgradeGranted: 1
