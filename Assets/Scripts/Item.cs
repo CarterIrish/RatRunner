@@ -4,6 +4,7 @@ public class Item : MonoBehaviour
 {
     //choose what item this is in the inspector
     public ItemsEnum item;
+    public AudioSource audioSource;
 
     /// <summary>
     /// Called when [trigger enter].
@@ -14,7 +15,9 @@ public class Item : MonoBehaviour
         // If collided with player
         if (collider.tag == "Player")
         {
-            // Get the playerInventory of player who collided
+            audioSource.Play();
+
+            // Get the inventory of player who collided
             Inventory inventory = collider.gameObject.GetComponentInChildren<Inventory>();
             if(inventory == null)
             {

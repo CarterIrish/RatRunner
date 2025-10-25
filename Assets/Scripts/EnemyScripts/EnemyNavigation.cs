@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Audio;
 
 public class EnemyNavigation : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class EnemyNavigation : MonoBehaviour
     private NavMeshAgent agent;
     public List<Transform> targetList;
     public bool trackingPlayer = false;
+    public AudioSource enemyNearAudio;
+    public float triggerDistance;
 
 
 
@@ -83,6 +86,8 @@ public class EnemyNavigation : MonoBehaviour
         {
             agent.destination = transform.position;
         }
+
+        //EnemyNearby();
     }
 
     /// <summary>
@@ -129,4 +134,25 @@ public class EnemyNavigation : MonoBehaviour
             target = transform;
         }
     }
+
+    public void EnemyNearby()
+    {
+        if (target == null || enemyNearAudio == null) return;
+
+        //checks distance between player and enemy
+        bool isClose = distance <= triggerDistance;
+
+        //if near and audio is not playing, play audio
+        if (isClose && !enemyNearAudio.isPlaying)
+        {
+            enemyNearAudio.loop = true;
+            enemyNearAudio.Play();
+        }
+        //if not near anymore and enemy audio is playing, stop audio
+        else if (!isClose && enemyNearAudio.isPlaying)
+        {
+            enemyNearAudio.Stop();
+        }
+    }
+
 }
