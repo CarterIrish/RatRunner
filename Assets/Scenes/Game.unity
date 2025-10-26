@@ -1840,6 +1840,7 @@ MonoBehaviour:
   UIText: {fileID: 815983131}
   daysScreen: {fileID: 1200535964}
   caughtAudio: {fileID: 1200535965}
+  playerScript: {fileID: 838813794}
 --- !u!4 &233775289
 Transform:
   m_ObjectHideFlags: 0
