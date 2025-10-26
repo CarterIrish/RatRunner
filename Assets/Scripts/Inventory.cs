@@ -18,7 +18,7 @@ public class Inventory : MonoBehaviour
     //public List<ItemsEnum> playerInventory;
 
     public Dictionary<ItemsEnum, int> inventoryData { get => inventory; }
-    private Dictionary<ItemsEnum, int> inventory = new Dictionary<ItemsEnum, int>();
+    public Dictionary<ItemsEnum, int> inventory = new Dictionary<ItemsEnum, int>();
 
 
     /// <summary>

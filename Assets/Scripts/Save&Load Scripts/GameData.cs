@@ -42,15 +42,18 @@ public class GameData
     public int day;
     public SerializableInventory inventoryData = new SerializableInventory();
     public Dictionary<string, List<float[]>> itemDictionary;
+    public Dictionary<UpgradesEnum, int> playerUpgrades;
 
     /// <summary>
     /// constructor that sets all the data we want to save to the actual data in game
     /// </summary>
     /// <param name="inventory"></param>
     /// <param name="day"></param>
-    public GameData(Inventory inventory, int day)
+    public GameData(Inventory inventory, int day, Player player)
     {
         itemDictionary = new Dictionary<string, List<float[]>>();
+        playerUpgrades = player.Upgrades;
+
 
         //fill the dictionary with all the games current items
         CollectAllItems();

@@ -41,6 +41,9 @@ public class DayManager : MonoBehaviour
     [SerializeField]
     private AudioSource caughtAudio;
 
+    [SerializeField]
+    private Player playerScript;
+
     private void Awake()
     {
         // make sure there is only one DayManager at a time
@@ -103,6 +106,7 @@ public class DayManager : MonoBehaviour
             currentDay = loadedData.day;
             playerInventory.LoadData(loadedData.GetInventoryDictionary());
             LoadItems(loadedData);
+            playerScript.LoadUpgradeData(loadedData.playerUpgrades);
         }
         else
         {
@@ -185,7 +189,7 @@ public class DayManager : MonoBehaviour
 
         // Save progress if applicable
         if (currentDay <= maxDays && currentDay > 0)
-            SaveSystem.SaveGameData(playerInventory, currentDay);
+            SaveSystem.SaveGameData(playerInventory, currentDay, playerScript);
 
         // Fade back to gameplay
         yield return StartCoroutine(Fade(1f, 0f, fadeDuration));
@@ -200,7 +204,7 @@ public class DayManager : MonoBehaviour
     }
 
     /// <summary>
-    /// handles fading theh screen in and out
+    /// handles fading the screen in and out
     /// </summary>
     /// <param name="startAlpha"></param>
     /// <param name="endAlpha"></param>
@@ -247,7 +251,7 @@ public class DayManager : MonoBehaviour
         //saves the players playerInventory and the current day if the _currentPlayer is on a valid day
         if (currentDay <= maxDays)
         {
-            SaveSystem.SaveGameData(playerInventory, currentDay);
+            SaveSystem.SaveGameData(playerInventory, currentDay, playerScript);
         }
     }
 

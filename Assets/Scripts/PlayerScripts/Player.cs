@@ -64,4 +64,16 @@ public class Player : MonoBehaviour
             return false;
         }
     }
+
+    public void LoadUpgradeData(Dictionary<UpgradesEnum, int> playerUpgrades)
+    {
+        _upgrades.Clear();
+        if (playerUpgrades != null)
+        {
+            foreach (KeyValuePair<UpgradesEnum, int> kvp in playerUpgrades)
+            {
+                _upgrades[kvp.Key] = kvp.Value;
+            }
+        }
+    }
 }
