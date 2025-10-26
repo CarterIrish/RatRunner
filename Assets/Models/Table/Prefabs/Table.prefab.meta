@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0c13b9c31fd059b468b2f1759c412e61
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 160161
+  packageName: Crafting Table
+  packageVersion: 1.0
+  assetPath: Assets/Table/Prefabs/Table.prefab
+  uploadId: 347044

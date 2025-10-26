@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a1916aacb9af66e42b9cf1be13c0080d
+timeCreated: 1514813365
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 62597
+  packageName: Abandoned Factory (Lite)
+  packageVersion: 1.6
+  assetPath: Assets/TirgamesAssets/Factory/Models/Materials/CommonMetalDiamond01.mat
+  uploadId: 746142

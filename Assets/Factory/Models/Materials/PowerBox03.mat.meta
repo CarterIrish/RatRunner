@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e9d29afabb1275c468deb31d376e5d09
+timeCreated: 1475929752
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 62597
+  packageName: Abandoned Factory (Lite)
+  packageVersion: 1.6
+  assetPath: Assets/TirgamesAssets/Factory/Models/Materials/PowerBox03.mat
+  uploadId: 746142

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class DayManager : MonoBehaviour
@@ -9,7 +8,7 @@ public class DayManager : MonoBehaviour
     public static DayManager Instance { get; private set; }
 
     [SerializeField]
-    private int currentDay = 1;
+    private int currentDay = 3;
 
     [SerializeField]
     private int maxDays = 3;
@@ -25,11 +24,22 @@ public class DayManager : MonoBehaviour
     public List<GameObject> enemies;
 
     [SerializeField]
-    private Inventory inventory;
+    private Inventory playerInventory;
 
+    [SerializeField]
     private TextMeshProUGUI text;
 
+    [SerializeField]
+    private TextMeshProUGUI UIText;
+
     private float timer = 0;
+
+    [SerializeField]
+    private CanvasGroup daysScreen;
+    private float fadeDuration = 1.0f;
+
+    [SerializeField]
+    private AudioSource caughtAudio;
 
     private void Awake()
     {
@@ -46,7 +56,7 @@ public class DayManager : MonoBehaviour
         // make sure starting position is set
         if (startPos == Vector3.zero)
         {
-            Debug.Log("Insert Starting Position");
+            startPos = gameObject.transform.position;
         }
 
         // make sure enemy positions are set
@@ -58,10 +68,10 @@ public class DayManager : MonoBehaviour
             }
         }
 
-        // make sure player isn't null
+        // make sure _currentPlayer isn't null
         if (player == null)
         {
-            Debug.Log("Missing reference to player");
+            Debug.Log("Missing reference to _currentPlayer");
         }
 
         // make sure enemy references aren't null
@@ -73,16 +83,13 @@ public class DayManager : MonoBehaviour
             }
         }
 
-        // find the text object attached to the player
-        Transform textObject = player.transform.Find("Canvas").Find("DayText");
-        text = textObject.GetComponent<TextMeshProUGUI>();
+        //load in the correct loadedData into the game
+        GameData loadedData = SaveSystem.LoadGameData();
 
-        //load in the correct data into the game
-        GameData data = SaveSystem.LoadGameData();
-
-        //if there is a current save load the data
-        if (data != null && data.day >= 1)
+        //if there is a current save load the loadedData
+        if (loadedData != null && loadedData.day >= 1)
         {
+            Debug.Log("LoadingData");
             //list containing all items
             GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
 
@@ -93,9 +100,9 @@ public class DayManager : MonoBehaviour
             }
 
             //load correct items based on save
-            currentDay = data.day;
-            inventory.inventory = new List<ItemsEnum>(data.inventoryData);
-            LoadItems(data);
+            currentDay = loadedData.day;
+            playerInventory.LoadData(loadedData.GetInventoryDictionary());
+            LoadItems(loadedData);
         }
         else
         {
@@ -105,6 +112,12 @@ public class DayManager : MonoBehaviour
         ChangeDayText();
     }
 
+    private void Start()
+    {
+        if (daysScreen != null)
+            daysScreen.alpha = 0f;
+    }
+
     private void Update()
     {
         // increment timer
@@ -112,39 +125,116 @@ public class DayManager : MonoBehaviour
 
         // change the position and size of the day text for the first 1.5 seconds 
         // after spawning in or changing days
-        if (timer < 2.0f)
+        //if (timer < 2.0f)
+        //{
+        //    StartCoroutine(MoveToTarget(1.5f, new Vector3(0, 0, 0)));
+        //    StartCoroutine(Scale(1.5f, new Vector3(2, 2, 2)));
+        //}
+        //else // return to original position and scale
+        //{
+        //    // get tranform of text object
+        //    RectTransform textTransform = text.GetComponent<RectTransform>();
+        //
+        //    // change text position
+        //    textTransform.localPosition = new Vector3(-843, 491, 0);
+        //
+        //    // change text size
+        //    textTransform.localScale = new Vector3(1, 1, 1);
+        //}
+    }
+
+    public void OnPlayerCaught()
+    {
+        if (currentDay <= 1) // final day
         {
-            StartCoroutine(MoveToTarget(1.5f, new Vector3(0, 0, 0)));
-            StartCoroutine(Scale(1.5f, new Vector3(2, 2, 2)));
+            GameManager.Instance.SetPlayerEscaped(false);
+            UIManager.Instance.LoadScene("GameOver");
+            SaveSystem.DeleteGameData();
         }
-        else // return to original position and scale
+        else
         {
-            // get tranform of text object
-            RectTransform textTransform = text.GetComponent<RectTransform>();
+            StartCoroutine(HandleDayTransition());
+        }
+    }
 
-            // change text position
-            textTransform.localPosition = new Vector3(-843, 491, 0);
+    private IEnumerator HandleDayTransition()
+    {
+        // Fade to black
+        yield return StartCoroutine(Fade(0f, 1f, fadeDuration));
 
-            // change text size
-            textTransform.localScale = new Vector3(1, 1, 1);
+        // Play audio
+        if (caughtAudio != null)
+            caughtAudio.Play();
+
+        // Update day count
+        currentDay--;
+        ChangeDayText();
+
+        // Reset _currentPlayer position
+        player.transform.position = startPos;
+        player.transform.rotation = Quaternion.identity;
+
+        // Reset enemy positions
+        for (int i = 0; i < enemyPositions.Count; i++)
+        {
+            enemies[i].transform.position = enemyPositions[i];
+        }
+
+        // Wait for audio to finish or a short delay
+        yield return new WaitForSeconds(caughtAudio != null ? caughtAudio.clip.length : 1f);
+
+        // Save progress if applicable
+        if (currentDay <= maxDays && currentDay > 0)
+            SaveSystem.SaveGameData(playerInventory, currentDay);
+
+        // Fade back to gameplay
+        yield return StartCoroutine(Fade(1f, 0f, fadeDuration));
+
+        // Check for game over
+        if (currentDay <= 0)
+        {
+            GameManager.Instance.SetPlayerEscaped(false);
+            UIManager.Instance.LoadScene("GameOver");
+            SaveSystem.DeleteGameData();
         }
     }
 
     /// <summary>
-    /// progresses to the next day if player has some left, ends game if player out of days
+    /// handles fading theh screen in and out
+    /// </summary>
+    /// <param name="startAlpha"></param>
+    /// <param name="endAlpha"></param>
+    /// <param name="duration"></param>
+    /// <returns></returns>
+    private IEnumerator Fade(float startAlpha, float endAlpha, float duration)
+    {
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            daysScreen.alpha = Mathf.Lerp(startAlpha, endAlpha, t);
+            yield return null;
+        }
+        daysScreen.alpha = endAlpha;
+    }
+
+    /// <summary>
+    /// progresses to the next day if _currentPlayer has some left, ends game if _currentPlayer out of days
     /// </summary>
     public void NextDay()
     {
         timer = 0;
-        currentDay++;
+        currentDay--;
 
-        if (currentDay > maxDays)
+        if (currentDay == 0)
         {
+            GameManager.Instance.SetPlayerEscaped(false);
             UIManager.Instance.LoadScene("GameOver");
             SaveSystem.DeleteGameData();
         }
 
-        // bring player back to start
+        // bring _currentPlayer back to start
         player.transform.position = startPos;
         player.transform.rotation = Quaternion.identity;
 
@@ -154,10 +244,10 @@ public class DayManager : MonoBehaviour
             enemies[i].transform.position = enemyPositions[i];
         }
 
-        //saves the players inventory and the current day if the player is on a valid day
+        //saves the players playerInventory and the current day if the _currentPlayer is on a valid day
         if (currentDay <= maxDays)
         {
-            SaveSystem.SaveGameData(inventory, currentDay);
+            SaveSystem.SaveGameData(playerInventory, currentDay);
         }
     }
 
@@ -172,7 +262,17 @@ public class DayManager : MonoBehaviour
             return;
         }
 
-        text.text = "Day: " + currentDay;
+        if (currentDay > 1)
+        {
+            text.text = currentDay + " Days Left.";
+            UIText.text = currentDay + " Days Left.";
+        }
+        else
+        {
+            text.text = "Final Day.";
+            UIText.text = "Final Day.";
+        }
+        
     }
 
     /// <summary>
@@ -240,7 +340,7 @@ public class DayManager : MonoBehaviour
         //loop through every key value pair in the saved dictionary
         foreach (KeyValuePair<string, List<float[]>> entry in data.itemDictionary)
         {
-            //create containers to hold the saved data
+            //create containers to hold the saved loadedData
             string itemName = entry.Key;
             List<float[]> transformations = entry.Value;
 

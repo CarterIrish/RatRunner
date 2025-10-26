@@ -1,11 +1,10 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class TempGameOver : MonoBehaviour
 {
     // Game over condition
     private bool gameOverCond = false;
-    private bool escaped = false;
 
     [SerializeField]
     private ItemsEnum requiredItem = ItemsEnum.key;
@@ -50,6 +49,7 @@ public class TempGameOver : MonoBehaviour
         if(gameOverCond)
         {        
             Debug.Log($"Game Over hit {other.gameObject.name}");
+            GameManager.Instance.SetPlayerEscaped(true);
             UIManager.Instance.LoadScene("GameOver");
         }
     }

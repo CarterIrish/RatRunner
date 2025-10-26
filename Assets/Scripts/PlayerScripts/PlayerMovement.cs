@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -34,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // grab rigidbody from player
+        // grab rigidbody from _currentPlayer
         playerBody = GetComponent<Rigidbody>();
     }
 

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class TakeHit : MonoBehaviour
@@ -11,11 +10,10 @@ public class TakeHit : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        Debug.Log($"TakeHit >> Generic: {other.name}");
-        // end the game when enemy collides with player
+        // end the game when enemy collides with _currentPlayer
         if (other.CompareTag("Enemy"))
         {
-            DayManager.Instance.NextDay();
+            DayManager.Instance.OnPlayerCaught();
         }
     }
 }

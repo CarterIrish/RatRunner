@@ -16,6 +16,9 @@ public class UIManager : MonoBehaviour
 
     // Reference to the pauseUI
     public GameObject pauseUI;
+    public GameObject settingsUI;
+
+    public GameObject dayUI;
 
     private void Awake()
     {
@@ -46,6 +49,8 @@ public class UIManager : MonoBehaviour
 
     private void OnDisable()
     {
+        GameManager.OnGamePaused.RemoveAllListeners();
+        GameManager.OnGameResumed.RemoveAllListeners();
         // Only unsubscribe if this is the singleton instance
         if (Instance == this)
         {
@@ -61,6 +66,24 @@ public class UIManager : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        if(sceneName == "Game" && GameManager.Instance != null)
+        {
+            GameManager.Instance.ChangeGameState(GameStates.PLAYING);
+        }
+    }
+
+    /// <summary>
+    /// Loads a new game.
+    /// </summary>
+    /// <param name="sceneName">Name of the scene.</param>
+    public void LoadSceneNewGame(string sceneName)
+    {
+        SaveSystem.DeleteGameData();
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        if (sceneName == "Game" && GameManager.Instance != null)
+        {
+            GameManager.Instance.ChangeGameState(GameStates.PLAYING);
+        }
     }
 
     /// <summary>
@@ -71,6 +94,7 @@ public class UIManager : MonoBehaviour
         if (pauseUI != null)
         {
             pauseUI.SetActive(true);
+            dayUI.SetActive(false);
         }
     }
 
@@ -82,6 +106,25 @@ public class UIManager : MonoBehaviour
         if (pauseUI != null)
         {
             pauseUI.SetActive(false);
+            dayUI.SetActive(true);
         }
+    }
+
+    public void ShowSettingsUI()
+    {
+        if (settingsUI != null)
+            settingsUI.SetActive(true);
+
+        if (pauseUI != null)
+            pauseUI.SetActive(false);
+    }
+
+    public void HideSettingsUI()
+    {
+        if (settingsUI != null)
+            settingsUI.SetActive(false);
+
+        if (pauseUI != null)
+            pauseUI.SetActive(true);
     }
 }

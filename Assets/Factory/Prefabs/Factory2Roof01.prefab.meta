@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6d346e0a4b2504f4ca59a85f4065a3e5
+timeCreated: 1526722135
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 62597
+  packageName: Abandoned Factory (Lite)
+  packageVersion: 1.6
+  assetPath: Assets/TirgamesAssets/Factory/Prefabs/Factory2Roof01.prefab
+  uploadId: 746142

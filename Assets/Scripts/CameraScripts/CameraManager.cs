@@ -1,8 +1,6 @@
-using System;
-using UnityEditor.Callbacks;
+
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
+
 
 public class CameraManager : MonoBehaviour
 {
@@ -40,7 +38,7 @@ public class CameraManager : MonoBehaviour
 
         if(followCam == null) followCam = GetComponent<CameraFollow>();
 
-        // Auto-find player if not assigned
+        // Auto-find _currentPlayer if not assigned
         if (playerTransform == null)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -72,12 +70,12 @@ public class CameraManager : MonoBehaviour
         // Handle hierarchy changes based on camera mode
         if (newMode == CameraMode.Follow)
         {
-            // Follow mode: camera needs to be unparented (sibling to player in scene)
+            // Follow mode: camera needs to be unparented (sibling to _currentPlayer in scene)
             transform.SetParent(null);
         }
         else
         {
-            // Other modes: camera needs to be child of player
+            // Other modes: camera needs to be child of _currentPlayer
             if (playerTransform != null && transform.parent != playerTransform)
             {
                 transform.SetParent(playerTransform);
