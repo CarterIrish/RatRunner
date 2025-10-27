@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 ///  Singleton UI manager instance
@@ -20,6 +21,9 @@ public class UIManager : MonoBehaviour
 
     public GameObject dayUI;
 
+    // Button references for dynamic callback assignment
+    public Button resumeButton;
+
     private void Awake()
     {
         // Check if an instance of the UI manager exists
@@ -34,6 +38,19 @@ public class UIManager : MonoBehaviour
             // else destroy the gameObject
             Destroy(gameObject);
             return; // Exit early to prevent further initialization
+        }
+    }
+
+    private void Start()
+    {
+        // Dynamically assign button callbacks to persistent GameManager
+        // This prevents "Missing" references when scenes reload
+        if (resumeButton != null && GameManager.Instance != null)
+        {
+            // Clear any existing listeners to prevent duplicates
+            resumeButton.onClick.RemoveAllListeners();
+            // Add the callback to the persistent GameManager
+            resumeButton.onClick.AddListener(() => GameManager.Instance.ResumeFromUI());
         }
     }
 
