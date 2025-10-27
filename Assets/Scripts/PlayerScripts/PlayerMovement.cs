@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float gravityForce = 10.0f;
 
-    private Rigidbody playerBody;
+    public Rigidbody playerBody;
 
     // Start is called before the first frame update
     void Start()
