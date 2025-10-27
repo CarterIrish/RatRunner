@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Audio;
 
 public class EnemyNavigation : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class EnemyNavigation : MonoBehaviour
     private NavMeshAgent agent;
     public List<Transform> targetList;
     public bool trackingPlayer = false;
+    public AudioSource enemyNearAudio;
+    public float triggerDistance;
 
 
 
@@ -56,7 +59,7 @@ public class EnemyNavigation : MonoBehaviour
         //    agent.destination = target.position;
         //}
 
-        // if enemy reaches a point in a room and isn't tracking player, go to the next point in the list
+        // if enemy reaches a point in a room and isn't tracking _currentPlayer, go to the next point in the list
         if (targetList != null && !trackingPlayer)
         {
             if (distance < 4.0f)
@@ -74,7 +77,7 @@ public class EnemyNavigation : MonoBehaviour
             }
         }
 
-        // only tracks player in playing game state
+        // only tracks _currentPlayer in playing game state
         if (GameManager.Instance != null && GameManager.Instance.GameState == GameStates.PLAYING)
         {
             agent.destination = target.position;
@@ -83,6 +86,8 @@ public class EnemyNavigation : MonoBehaviour
         {
             agent.destination = transform.position;
         }
+
+        //EnemyNearby();
     }
 
     /// <summary>
@@ -98,11 +103,11 @@ public class EnemyNavigation : MonoBehaviour
     }
 
     /// <summary>
-    /// Starts hunting the player.
+    /// Starts hunting the _currentPlayer.
     /// </summary>
     public void StartHunting()
     {
-        // Gathers player object
+        // Gathers _currentPlayer object
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         // Checks if null
         if (player != null)
@@ -110,12 +115,12 @@ public class EnemyNavigation : MonoBehaviour
             // Assigns target
             target = player.transform;
             trackingPlayer = true;
-            Debug.Log("Start hunting player");
+            Debug.Log("Start hunting _currentPlayer");
         }
     }
 
     /// <summary>
-    /// Stops hunting the player
+    /// Stops hunting the _currentPlayer
     /// </summary>
     public void StopHunting()
     {
@@ -129,4 +134,25 @@ public class EnemyNavigation : MonoBehaviour
             target = transform;
         }
     }
+
+    public void EnemyNearby()
+    {
+        if (target == null || enemyNearAudio == null) return;
+
+        //checks distance between _currentPlayer and enemy
+        bool isClose = distance <= triggerDistance;
+
+        //if near and audio is not playing, play audio
+        if (isClose && !enemyNearAudio.isPlaying)
+        {
+            enemyNearAudio.loop = true;
+            enemyNearAudio.Play();
+        }
+        //if not near anymore and enemy audio is playing, stop audio
+        else if (!isClose && enemyNearAudio.isPlaying)
+        {
+            enemyNearAudio.Stop();
+        }
+    }
+
 }

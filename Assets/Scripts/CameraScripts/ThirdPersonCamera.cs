@@ -75,7 +75,7 @@ public class ThirdPersonCamera : MonoBehaviour
         Vector3 desiredPos = pivotTransform.position + offset;
         RaycastHit hit;
 
-        // Ignore Player layer to prevent raycast from hitting the player's own colliders
+        // Ignore Player layer to prevent raycast from hitting the _currentPlayer's own colliders
         int layerMask = ~LayerMask.GetMask("Player");
 
         if(Physics.Raycast(pivotTransform.position, offset.normalized, out hit, offset.magnitude, layerMask))

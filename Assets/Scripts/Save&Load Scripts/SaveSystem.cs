@@ -10,13 +10,13 @@ public static class SaveSystem
     /// </summary>
     /// <param name="inventory"></param>
     /// <param name="day"></param>
-    public static void SaveGameData(Inventory inventory, int day)
+    public static void SaveGameData(Inventory inventory, int day, Player player)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/game-data.data";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        GameData data = new GameData(inventory, day);
+        GameData data = new GameData(inventory, day, player);
 
         formatter.Serialize(stream, data);
         stream.Close();

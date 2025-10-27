@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 ///  Singleton UI manager instance
@@ -16,8 +17,12 @@ public class UIManager : MonoBehaviour
 
     // Reference to the pauseUI
     public GameObject pauseUI;
+    public GameObject settingsUI;
 
     public GameObject dayUI;
+
+    // Button references for dynamic callback assignment
+    public Button resumeButton;
 
     private void Awake()
     {
@@ -36,6 +41,19 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        // Dynamically assign button callbacks to persistent GameManager
+        // This prevents "Missing" references when scenes reload
+        if (resumeButton != null && GameManager.Instance != null)
+        {
+            // Clear any existing listeners to prevent duplicates
+            resumeButton.onClick.RemoveAllListeners();
+            // Add the callback to the persistent GameManager
+            resumeButton.onClick.AddListener(() => GameManager.Instance.ResumeFromUI());
+        }
+    }
+
     private void OnEnable()
     {
         // Only subscribe if this is the singleton instance
@@ -48,6 +66,8 @@ public class UIManager : MonoBehaviour
 
     private void OnDisable()
     {
+        GameManager.OnGamePaused.RemoveAllListeners();
+        GameManager.OnGameResumed.RemoveAllListeners();
         // Only unsubscribe if this is the singleton instance
         if (Instance == this)
         {
@@ -105,5 +125,23 @@ public class UIManager : MonoBehaviour
             pauseUI.SetActive(false);
             dayUI.SetActive(true);
         }
+    }
+
+    public void ShowSettingsUI()
+    {
+        if (settingsUI != null)
+            settingsUI.SetActive(true);
+
+        if (pauseUI != null)
+            pauseUI.SetActive(false);
+    }
+
+    public void HideSettingsUI()
+    {
+        if (settingsUI != null)
+            settingsUI.SetActive(false);
+
+        if (pauseUI != null)
+            pauseUI.SetActive(true);
     }
 }
