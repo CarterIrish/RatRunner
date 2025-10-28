@@ -15,17 +15,24 @@ public class AttackTrigger : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// gets enemy to target player when they enter a room
+    /// </summary>
+    /// <param name="other">collider that triggered this</param>
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (enemyScript.target == other.transform)
+            if (!other.isTrigger)
             {
-                enemyScript.StopHunting();
-            }
-            else
-            {
-                enemyScript.StartHunting();
+                if (enemyScript.target == other.transform)
+                {
+                    enemyScript.StopHunting();
+                }
+                else
+                {
+                    enemyScript.StartHunting();
+                }
             }
         }
     }
