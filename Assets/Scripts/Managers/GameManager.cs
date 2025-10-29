@@ -224,6 +224,24 @@ public class GameManager : MonoBehaviour
         PlayerEscaped = false;  
     }
 
+    public void EndGame()
+    {
+        SetPlayerEscaped(true);
+        UIManager.Instance.LoadScene("GameOver");
+        SaveSystem.DeleteGameData();
+    }
+
+    /// <summary>
+    /// Ends the game with a specified outcome (win or loss).
+    /// </summary>
+    /// <param name="playerWon">True if player won, false if player lost.</param>
+    public void EndGame(bool playerWon)
+    {
+        SetPlayerEscaped(playerWon);
+        UIManager.Instance.LoadScene("GameOver");
+        SaveSystem.DeleteGameData();
+    }
+
 }
 
 
