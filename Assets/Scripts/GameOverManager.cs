@@ -23,9 +23,6 @@ public class GameOverManager : MonoBehaviour
 
     public void WinOrLose()
     {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-
         if (GameManager.Instance.PlayerEscaped == true)
         {
             escapedScreen.SetActive(true);
@@ -36,5 +33,7 @@ public class GameOverManager : MonoBehaviour
             escapedScreen.SetActive(false);
             loseScreen.SetActive(true);
         }
+
+        GameManager.Instance.GameOver = true;
     }
 }

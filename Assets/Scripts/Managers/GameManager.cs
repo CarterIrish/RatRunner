@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour
     /// </value>
     public static GameManager Instance { get; private set; }
 
+    private bool gameOver;
+    public bool GameOver { get { return gameOver; } set { gameOver = value; } }
+
     // Pause menu events
     public static UnityEvent OnGamePaused = new UnityEvent();
     public static UnityEvent OnGameResumed = new UnityEvent();
@@ -75,6 +78,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameOver = false;
         if(_gameState != GameStates.PLAYING)
         {
             _gameState = GameStates.PLAYING;
@@ -111,10 +115,18 @@ public class GameManager : MonoBehaviour
 
     private void HandlePlayingState()
     {
-        // update day timer eventually
-        // check any game over conditions
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        if (gameOver)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            // update day timer eventually
+            // check any game over conditions
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 
     private void HandlePausedState()
