@@ -105,6 +105,7 @@ public class DevConsole : MonoBehaviour
         // Register debug commands here
         RegisterCommand("noclip", ToggleCollisions);
         RegisterCommand("nogravity", ToggleGravity);
+        RegisterCommand("endgame", EndGame);
 
     }
 
@@ -135,6 +136,36 @@ public class DevConsole : MonoBehaviour
         Debug.Log($"Collisions: {player.BoxCollider.enabled}");
     }
 
+    private void EndGame(string[] args)
+    {
+        // Validate that an argument was provided
+        if (args.Length == 0)
+        {
+            Debug.LogWarning("Usage: endgame <win|loss>");
+            return;
+        }
+
+        // Parse the win/loss argument (case-insensitive)
+        string outcome = args[0].ToLower();
+
+        switch (outcome)
+        {
+            case "win":
+                GameManager.Instance.EndGame(true);
+                Debug.Log("Ending game as WIN");
+                return;
+
+            case "loss":
+                GameManager.Instance.EndGame(false);
+                Debug.Log("Ending game as LOSS");
+                return;
+
+            default:
+                Debug.LogWarning($"Invalid argument '{args[0]}'. Usage: endgame <win|loss>");
+                return;
+        }
+    }
+
     private void ShowConsole()
     {
         consoleUI.SetActive(true);
@@ -150,4 +181,6 @@ public class DevConsole : MonoBehaviour
     {
         consoleUI.SetActive(false);
     }
+
+
 }
