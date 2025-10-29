@@ -54,7 +54,6 @@ public class PlayerMovement : MonoBehaviour
         // apply artificial gravity
         if(EnableGravity)
         {
-            Debug.Log("Gravity");
             Vector3 gravity = -transform.up * gravityForce;
             playerBody.AddForce(gravity, ForceMode.Force);
         }
