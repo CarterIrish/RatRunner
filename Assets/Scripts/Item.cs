@@ -4,11 +4,10 @@ public class Item : MonoBehaviour
 {
     //choose what item this is in the inspector
     public ItemsEnum item;
-    public AudioSource audioSource;
 
     private void Awake()
     {
-        if (audioSource == null) audioSource = gameObject.GetComponent<AudioSource>();
+
     }
 
 
@@ -21,8 +20,6 @@ public class Item : MonoBehaviour
         // If collided with _currentPlayer
         if (collider.tag == "Player")
         {
-            audioSource.Play();
-
             // Get the inventory of _currentPlayer who collided
             Inventory inventory = collider.gameObject.GetComponentInChildren<Inventory>();
             if(inventory == null)
