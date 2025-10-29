@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField]private AudioSource buttonHover;
     [SerializeField]private AudioSource buttonPress;
     [SerializeField]private AudioSource enemyNearby;
+    [SerializeField] private AudioSource workbench;
 
     private void Awake()
     {
