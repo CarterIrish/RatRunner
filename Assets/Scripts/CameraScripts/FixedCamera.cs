@@ -18,7 +18,7 @@ public class FixedCamera : MonoBehaviour
 
     private void Start()
     {
-        InputActionMap playerMap = inputActions.FindActionMap("Player");
+        InputActionMap playerMap = inputActions.FindActionMap("Gameplay");
         zoomAction = playerMap.FindAction("Zoom");
         currentZoom = baseOffset.z;
 

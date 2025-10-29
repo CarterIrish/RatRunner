@@ -1,0 +1,153 @@
+
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using TMPro;
+
+public class DevConsole : MonoBehaviour
+{
+    [Header("UI References")]
+    [SerializeField] private GameObject consoleUI;
+    [SerializeField] private TMP_InputField commandInputField;
+    [SerializeField] private Player player;
+
+    private bool isOpen = false;
+
+    // Command registry - maps command names to their execution functions
+    private Dictionary<string, Action<string[]>> commands = new Dictionary<string, Action<string[]>>();
+
+    private void Start()
+    {
+        // Register all available commands
+        RegisterCommands();
+    }
+
+    private void OnEnable()
+    {
+        GameManager.OnConsoleClosed.AddListener(HideConsole);
+        GameManager.OnConsoleOpened.AddListener(ShowConsole);
+        consoleUI.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnConsoleClosed.RemoveListener(HideConsole);
+        GameManager.OnConsoleOpened.RemoveListener(ShowConsole);
+    }
+
+    public void OnOpenConsole(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            ToggleConsole();
+        }
+    }
+
+    private void ToggleConsole()
+    {
+        isOpen = !isOpen;
+        if (isOpen)
+        {
+            GameManager.Instance.ChangeGameState(GameStates.CONSOLE);
+        }
+        else
+        {
+            GameManager.Instance.ChangeGameState(GameStates.PLAYING);
+        }
+    }
+
+    // Called when user presses Enter in the input field
+    public void OnSubmitCommand(string input)
+    {
+        if (string.IsNullOrWhiteSpace(input)) return;
+
+        // Parse the command and arguments
+        string[] parts = input.Trim().Split(' ');
+        string commandName = parts[0].ToLower();
+
+        // Get arguments (everything after the command name)
+        string[] args = new string[parts.Length - 1];
+        Array.Copy(parts, 1, args, 0, args.Length);
+
+        // Execute the command if it exists
+        if (commands.ContainsKey(commandName))
+        {
+            try
+            {
+                commands[commandName].Invoke(args);
+                Debug.Log($"Executed command: {commandName}");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Error executing command '{commandName}': {e.Message}");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Unknown command: '{commandName}'");
+        }
+
+        // Clear the input field
+        commandInputField.text = "";
+        commandInputField.ActivateInputField();
+    }
+
+    // Register a new command
+    private void RegisterCommand(string commandName, Action<string[]> callback)
+    {
+        commands[commandName.ToLower()] = callback;
+    }
+
+    // TODO(human)
+    private void RegisterCommands()                             
+    {
+        // Register debug commands here
+        RegisterCommand("noclip", ToggleCollisions);
+        RegisterCommand("nogravity", ToggleGravity);
+
+    }
+
+    /// <summary>
+    /// Toggles the gravity.
+    /// </summary>
+    /// <param name="obj">The object.</param>
+    private void ToggleGravity(string[] obj)
+    {
+        if(player == null) { Debug.LogWarning("Player not found"); return; }
+        player.Movement.EnableGravity = !player.Movement.EnableGravity;
+        if(!player.Movement.EnableGravity)
+        {
+            player.Rigidbody.velocity = Vector3.zero;
+        }
+        Debug.Log($"Gravity: {player.Movement.EnableGravity}");
+    }
+
+    /// <summary>
+    /// Disables the collisons.
+    /// </summary>
+    /// <param name="obj">The object.</param>
+    private void ToggleCollisions(string[] args)
+    {
+        if (player == null) { Debug.LogWarning("Player not found"); return; }
+
+        player.BoxCollider.enabled = !player.BoxCollider.enabled;
+        Debug.Log($"Collisions: {player.BoxCollider.enabled}");
+    }
+
+    private void ShowConsole()
+    {
+        consoleUI.SetActive(true);
+        // Focus input field when console opens
+        if (commandInputField != null)
+        {
+            commandInputField.ActivateInputField();
+            commandInputField.Select();
+        }
+    }
+
+    private void HideConsole()
+    {
+        consoleUI.SetActive(false);
+    }
+}

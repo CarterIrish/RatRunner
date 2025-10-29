@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isTurningRight;
     [HideInInspector]
     public bool isTurningLeft;
+    
 
     // Move Settings
     [Header("Move Settings")]
@@ -27,14 +28,18 @@ public class PlayerMovement : MonoBehaviour
     // Physics Settings
     [SerializeField]
     private float gravityForce = 10.0f;
+    public bool EnableGravity = true;
 
     public Rigidbody playerBody;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         // grab rigidbody from _currentPlayer
         playerBody = GetComponent<Rigidbody>();
+        EnableGravity = true;
     }
 
     // Update is called once per frame
@@ -45,10 +50,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
         // apply artificial gravity
-        Vector3 gravity = -transform.up * gravityForce;
-        playerBody.AddForce(gravity, ForceMode.Force);
-
+        if(EnableGravity)
+        {
+            Debug.Log("Gravity");
+            Vector3 gravity = -transform.up * gravityForce;
+            playerBody.AddForce(gravity, ForceMode.Force);
+        }
         // turn right if input is received
         if (isTurningRight)
         {
@@ -70,4 +79,5 @@ public class PlayerMovement : MonoBehaviour
             transform.position += velocity;
         }
     }
+
 }

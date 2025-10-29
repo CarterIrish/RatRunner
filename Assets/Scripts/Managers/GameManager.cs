@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using System;
+using Unity.VisualScripting;
 
 
 /// <summary>
@@ -11,7 +12,8 @@ public enum GameStates
 {
     PLAYING,
     PAUSED,
-    CRAFTING
+    CRAFTING,
+    CONSOLE 
 }
 
 /// <summary>
@@ -35,6 +37,9 @@ public class GameManager : MonoBehaviour
     // Crafting menu events
     public static UnityEvent OnWorkbenchOpened = new UnityEvent();
     public static UnityEvent OnWorkbenchClosed = new UnityEvent();
+
+    public static UnityEvent OnConsoleOpened = new UnityEvent();
+    public static UnityEvent OnConsoleClosed = new UnityEvent();
 
 
     [SerializeField]
@@ -97,9 +102,18 @@ public class GameManager : MonoBehaviour
                 case GameStates.CRAFTING:
                     HandleCraftingState();
                     break;
+                case GameStates.CONSOLE:
+                HandleConsoleState();
+                break;
 
             }
 
+    }
+
+    private void HandleConsoleState()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private void HandleCraftingState()
@@ -135,9 +149,14 @@ public class GameManager : MonoBehaviour
         {
             OnWorkbenchClosed.Invoke();
         }
+        else if(_gameState == GameStates.CONSOLE)
+        {
+            OnConsoleClosed.Invoke();
+            Time.timeScale = 1.0f;
+        }
 
-        // Change the state
-        _gameState = newState;
+            // Change the state
+            _gameState = newState;
 
         // Fire entry events for the state we're entering
         switch (newState)
@@ -150,6 +169,10 @@ public class GameManager : MonoBehaviour
                 break;
             case GameStates.CRAFTING:
                 OnWorkbenchOpened.Invoke();
+                break;
+            case GameStates.CONSOLE:
+                OnConsoleOpened.Invoke();
+                Time.timeScale = 0.0f;
                 break;
         }
     }

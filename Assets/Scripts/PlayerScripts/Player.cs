@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _cameraPivot;
     [SerializeField] private InputActionAsset _inputAction;
     [SerializeField] private InputActionMap _playerInputMap;
+    [SerializeField] private BoxCollider _boxCollider;
 
     // Upgrade tracking: Key = upgrade type, Value = upgrade level
     private Dictionary<UpgradesEnum, int> _upgrades = new Dictionary<UpgradesEnum, int>();
@@ -30,6 +31,7 @@ public class Player : MonoBehaviour
     public InputActionAsset InputAction { get => _inputAction; private set => _inputAction = value; }
     public InputActionMap PlayerInputMap { get => _playerInputMap; private set => _playerInputMap = value; }
     public Dictionary<UpgradesEnum, int> Upgrades { get => _upgrades; private set => _upgrades = value; }
+    public BoxCollider BoxCollider { get => _boxCollider; private set => _boxCollider = value; }
 
 
     private void Awake()
@@ -48,6 +50,7 @@ public class Player : MonoBehaviour
         {
             PlayerInputMap = InputAction.FindActionMap("Player");
         }
+        if (!BoxCollider) BoxCollider = gameObject.GetComponent<BoxCollider>();
         
     }
 

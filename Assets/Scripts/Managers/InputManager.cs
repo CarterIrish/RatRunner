@@ -26,7 +26,7 @@ public class InputManager : MonoBehaviour
             Debug.Log("Missing _currentPlayer script.");
         }
 
-        playerMap = inputActions.FindActionMap("Player");
+        playerMap = inputActions.FindActionMap("Gameplay");
         uiMap = inputActions.FindActionMap("UI");
 
         uiMap.Enable(); // Should always be enabled.
@@ -175,6 +175,10 @@ public class InputManager : MonoBehaviour
                     GameManager.Instance.ChangeGameState(GameStates.PLAYING);
                     break;
                 }
+                case (GameStates.CONSOLE):
+                    GameManager.Instance.ChangeGameState(GameStates.PLAYING);
+                    
+                    break;
             }
         }
     }

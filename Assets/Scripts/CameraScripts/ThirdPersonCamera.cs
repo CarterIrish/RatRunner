@@ -23,9 +23,9 @@ public class ThirdPersonCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InputActionMap playerMap = inputActions.FindActionMap("Player");
-        lookAction = playerMap.FindAction("Look");
-        zoomAction = playerMap.FindAction("Zoom");
+        InputActionMap gameplay = inputActions.FindActionMap("Gameplay");
+        lookAction = gameplay.FindAction("Look");
+        zoomAction = gameplay.FindAction("Zoom");
 
         if (pivotTransform==null) pivotTransform = GameObject.FindGameObjectWithTag("pivotTransform").transform;
         if (playerTransform == null) playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
