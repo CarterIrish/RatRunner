@@ -8,6 +8,9 @@ public class LockedDoor : MonoBehaviour
     [SerializeField]
     private ItemsEnum requiredKey = ItemsEnum.key;
 
+    [SerializeField]
+    private Feedback feedbackScript;
+
     /// <summary>
     /// Called when [enable].
     /// </summary>
@@ -35,6 +38,9 @@ public class LockedDoor : MonoBehaviour
         // If its the required item
         if(item == requiredKey)
         {
+            // let player know door has opened
+            feedbackScript.OnKeyPickup();
+
             // Unlock the door
             UnlockDoor();
         }
