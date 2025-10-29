@@ -73,12 +73,13 @@ public class GameManager : MonoBehaviour
             // else destroy the gameObject
             Destroy(gameObject);
         }
+
+        gameOver = false;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        gameOver = false;
         if(_gameState != GameStates.PLAYING)
         {
             _gameState = GameStates.PLAYING;
