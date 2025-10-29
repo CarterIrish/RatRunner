@@ -15,6 +15,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField]private AudioSource enemyNearby;
     [SerializeField] private AudioSource workbench;
 
+    public AudioSource ItemPickUp
+    {
+        get { return itemPickUp; }
+    }
+
     private void Awake()
     {
         // Singleton pattern — ensures only one AudioManager exists
@@ -80,5 +85,15 @@ public class AudioManager : MonoBehaviour
     {
         if (buttonPress != null)
             buttonPress.Play();
+    }
+
+    public void PlayAudio(AudioSource audio)
+    {
+        audio.Play();
+    }
+
+    public void StopAudio(AudioSource audio)
+    {
+        audio.Stop();
     }
 }

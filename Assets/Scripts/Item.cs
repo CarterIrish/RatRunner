@@ -20,6 +20,7 @@ public class Item : MonoBehaviour
         // If collided with _currentPlayer
         if (collider.tag == "Player")
         {
+            AudioManager.Instance.ItemPickUp.Play();
             // Get the inventory of _currentPlayer who collided
             Inventory inventory = collider.gameObject.GetComponentInChildren<Inventory>();
             if(inventory == null)
