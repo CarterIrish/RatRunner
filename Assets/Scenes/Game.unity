@@ -2037,7 +2037,6 @@ MonoBehaviour:
   text: {fileID: 1789614207}
   UIText: {fileID: 815983131}
   daysScreen: {fileID: 1200535964}
-  caughtAudio: {fileID: 1021755365}
 --- !u!4 &233775289
 Transform:
   m_ObjectHideFlags: 0
@@ -26733,6 +26732,7 @@ MonoBehaviour:
   buttonPress: {fileID: 984966480}
   enemyNearby: {fileID: 767383205}
   workbench: {fileID: 544156176}
+  dayTransition: {fileID: 1021755365}
 --- !u!4 &2122645883
 Transform:
   m_ObjectHideFlags: 0

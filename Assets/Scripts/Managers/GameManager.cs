@@ -168,13 +168,6 @@ public class GameManager : MonoBehaviour
         OnGamePaused.Invoke();
     }
 
-    // Quits to menu
-    public void QuitToMenu()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("Menu");
-    }
-
     /// <summary>
     /// Public method for UI buttons to resume the game
     /// </summary>

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -14,11 +15,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField]private AudioSource buttonPress;
     [SerializeField]private AudioSource enemyNearby;
     [SerializeField] private AudioSource workbench;
+    [SerializeField] private AudioSource dayTransition;
 
-    public AudioSource ItemPickUp
-    {
-        get { return itemPickUp; }
-    }
+    //Getters/Setters
+    public AudioSource ItemPickUp{ get { return itemPickUp; } }
+    public AudioSource DayTransition{ get { return dayTransition; } }
 
     private void Awake()
     {
@@ -44,6 +45,16 @@ public class AudioManager : MonoBehaviour
     void Update()
     {
 
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void RegisterAllButtons()
@@ -96,4 +107,24 @@ public class AudioManager : MonoBehaviour
     {
         audio.Stop();
     }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Stop atmosphere audio if we're not in the Game scene
+        if (scene.name != "Game") // Change "Game" to your actual gameplay scene name
+        {
+            if (atmosphere.isPlaying)
+                atmosphere.Stop();
+        }
+        else
+        {
+            // If we re-enter the Game scene, restart the atmosphere
+            if (!atmosphere.isPlaying)
+                atmosphere.Play();
+        }
+
+        // Optionally re-register UI buttons in the new scene
+        RegisterAllButtons();
+    }
+
 }

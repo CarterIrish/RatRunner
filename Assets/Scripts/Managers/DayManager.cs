@@ -38,9 +38,6 @@ public class DayManager : MonoBehaviour
     private CanvasGroup daysScreen;
     private float fadeDuration = 1.0f;
 
-    [SerializeField]
-    private AudioSource caughtAudio;
-
     private void Awake()
     {
         // make sure there is only one DayManager at a time
@@ -163,8 +160,8 @@ public class DayManager : MonoBehaviour
         yield return StartCoroutine(Fade(0f, 1f, fadeDuration));
 
         // Play audio
-        if (caughtAudio != null)
-            caughtAudio.Play();
+        if (AudioManager.Instance.DayTransition != null)
+            AudioManager.Instance.DayTransition.Play();
 
         // Update day count
         currentDay--;
@@ -181,7 +178,7 @@ public class DayManager : MonoBehaviour
         }
 
         // Wait for audio to finish or a short delay
-        yield return new WaitForSeconds(caughtAudio != null ? caughtAudio.clip.length : 1f);
+        yield return new WaitForSeconds(AudioManager.Instance.DayTransition != null ? AudioManager.Instance.DayTransition.clip.length : 1f);
 
         // Save progress if applicable
         if (currentDay <= maxDays && currentDay > 0)
