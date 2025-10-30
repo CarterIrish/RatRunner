@@ -21,6 +21,8 @@ public class AudioManager : MonoBehaviour
     public AudioSource ItemPickUp { get { return itemPickUp; } }
     public AudioSource DayTransition { get { return dayTransition; } }
 
+    public AudioSource EnemyNearby { get { return enemyNearby; } }
+
     private void Awake()
     {
         // Singleton pattern — ensures only one AudioManager exists
