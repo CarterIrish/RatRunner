@@ -39,9 +39,6 @@ public class DayManager : MonoBehaviour
     private float fadeDuration = 1.0f;
 
     [SerializeField]
-    private AudioSource caughtAudio;
-
-    [SerializeField]
     private Player playerScript;
 
     private void Awake()
@@ -167,8 +164,8 @@ public class DayManager : MonoBehaviour
         yield return StartCoroutine(Fade(0f, 1f, fadeDuration));
 
         // Play audio
-        if (caughtAudio != null)
-            caughtAudio.Play();
+        if (AudioManager.Instance.DayTransition != null)
+            AudioManager.Instance.DayTransition.Play();
 
         // Update day count
         currentDay--;
@@ -185,11 +182,11 @@ public class DayManager : MonoBehaviour
         }
 
         // Wait for audio to finish or a short delay
-        yield return new WaitForSeconds(caughtAudio != null ? caughtAudio.clip.length : 1f);
+        yield return new WaitForSeconds(AudioManager.Instance.DayTransition != null ? AudioManager.Instance.DayTransition.clip.length : 1f);
 
         // Save progress if applicable
         if (currentDay <= maxDays && currentDay > 0)
-            SaveSystem.SaveGameData(playerInventory, currentDay, playerScript);
+            SaveSystem.SaveGameData(playerInventory, currentDay,playerScript);
 
         // Fade back to gameplay
         yield return StartCoroutine(Fade(1f, 0f, fadeDuration));

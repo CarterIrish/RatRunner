@@ -1761,7 +1761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredKey: 0
-  feedbackScript: {fileID: 447668068}
+  feedbackScript: {fileID: 0}
 --- !u!4 &163082097 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 2f8267db9a554e24290063c16e64f8d1, type: 3}
@@ -3140,7 +3140,6 @@ MonoBehaviour:
   text: {fileID: 1789614207}
   UIText: {fileID: 815983131}
   daysScreen: {fileID: 1200535964}
-  caughtAudio: {fileID: 0}
   playerScript: {fileID: 838813794}
 --- !u!4 &233775289
 Transform:
@@ -8276,7 +8275,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: 1
-  audioSource: {fileID: 0}
 --- !u!136 &507001267
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -12887,7 +12885,7 @@ MonoBehaviour:
   speed: 15
   turningDirection: 120
   gravityForce: 10
-  EnableGravity: 0
+  EnableGravity: 1
   playerBody: {fileID: 0}
 --- !u!4 &838813789
 Transform:
@@ -29059,7 +29057,7 @@ MonoBehaviour:
   pauseUI: {fileID: 248813797}
   settingsUI: {fileID: 1726041608}
   dayUI: {fileID: 815983129}
-  resumeButton: {fileID: 2088330457}
+  resumeButton: {fileID: 0}
 --- !u!4 &1794247598
 Transform:
   m_ObjectHideFlags: 0
@@ -33702,7 +33700,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: 6
-  audioSource: {fileID: 0}
 --- !u!65 &2085695802
 BoxCollider:
   m_ObjectHideFlags: 0
