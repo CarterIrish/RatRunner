@@ -96,6 +96,23 @@ Rat Runner combines tense exploration with roguelike mechanics in an eerie sewer
   - Settings menu UI created
   - Navigation between pause and settings screens
 
+- **Upgrade System Implementation:** (Carter)
+  - UpgradeManager stat application system implemented
+  - Mobility upgrades now modify player speed and turning stats
+  - Upgrade bonuses apply on crafting and save/load
+  - PlayerMovement tracks base stats for additive upgrade bonuses
+
+- **Workbench Visual UI Integration:** (Carter)
+  - Connected console-based crafting to visual UI cards
+  - Button interactability based on available resources
+  - Level display (Lvl. 0, Lvl. 1, etc.) on upgrade tiles
+  - UI updates automatically after crafting
+
+- **Camera Settings Integration:** (Carter)
+  - Connected sensitivity slider in Settings UI to ThirdPersonCamera
+  - Active Ssensitivity adjustment (0-200 range)
+  - Slider initializes to current camera sensitivity value
+
 ### Changed
 
 - **Inventory System:** (Carter)
@@ -129,6 +146,16 @@ Rat Runner combines tense exploration with roguelike mechanics in an eerie sewer
 - **Collision Issues:** (Jake)
   - Fixed enemy bugs with player interaction
   - Fixed gate phasing with push-back system
+
+- **Save System:** (Carter)
+  - Fixed item loading bug where "(Clone)" suffix prevented prefab loading
+  - GameData now strips "(Clone)" from GameObject names before saving
+  - Thread, Needle, and Spring items now persist correctly across sessions
+
+- **Player Collision Handling:** (Carter)
+  - Removed duplicate TakeHit component causing double collision triggers
+  - Consolidated enemy collision handling into Player.cs
+  - Fixed audio playing twice and day counter decrementing by 2 on enemy hit
 
 ### Removed
 
