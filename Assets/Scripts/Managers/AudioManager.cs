@@ -17,6 +17,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource workbench;
     [SerializeField] private AudioSource dayTransition;
 
+    // Track atmosphere state for WebGL compatibility
+    private bool atmosphereIsPlaying = false;
+
     //Getters/Setters
     public AudioSource ItemPickUp { get { return itemPickUp; } }
     public AudioSource DayTransition { get { return dayTransition; } }
@@ -40,6 +43,7 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         atmosphere.Play();
+        atmosphereIsPlaying = true;
         RegisterAllButtons();
     }
 
@@ -127,14 +131,20 @@ public class AudioManager : MonoBehaviour
         // Stop atmosphere audio if we're not in the Game scene
         if (scene.name != "Game") // Change "Game" to your actual gameplay scene name
         {
-            if (atmosphere.isPlaying)
+            if (atmosphereIsPlaying)
+            {
                 atmosphere.Stop();
+                atmosphereIsPlaying = false;
+            }
         }
         else
         {
             // If we re-enter the Game scene, restart the atmosphere
-            if (!atmosphere.isPlaying)
+            if (!atmosphereIsPlaying)
+            {
                 atmosphere.Play();
+                atmosphereIsPlaying = true;
+            }
         }
 
         // Optionally re-register UI buttons in the new scene

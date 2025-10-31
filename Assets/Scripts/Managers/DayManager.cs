@@ -188,7 +188,12 @@ public class DayManager : MonoBehaviour
         }
 
         // Wait for audio to finish or a short delay
-        yield return new WaitForSeconds(AudioManager.Instance.DayTransition != null ? AudioManager.Instance.DayTransition.clip.length : 1f);
+        float waitTime = 1f;
+        if (AudioManager.Instance.DayTransition != null && AudioManager.Instance.DayTransition.clip != null)
+        {
+            waitTime = AudioManager.Instance.DayTransition.clip.length;
+        }
+        yield return new WaitForSeconds(waitTime);
 
         // Save progress if applicable
         if (currentDay <= maxDays && currentDay > 0)

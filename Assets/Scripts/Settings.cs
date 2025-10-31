@@ -1,16 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
 
-    public AudioMixer audioMixer;
     public Slider volumeSlider;
     public Slider sensitivitySlider;
-    public ThirdPersonCamera thirdPersonCamera;
+
+    [System.NonSerialized]
+    private ThirdPersonCamera thirdPersonCamera;
 
     // Start is called before the first frame update
     void Start()

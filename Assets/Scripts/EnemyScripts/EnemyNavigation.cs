@@ -15,6 +15,9 @@ public class EnemyNavigation : MonoBehaviour
     public AudioSource enemyNearAudio;
     public float triggerDistance;
 
+    // Track audio state for WebGL compatibility
+    private bool enemyAudioIsPlaying = false;
+
 
 
     // Start is called before the first frame update
@@ -145,15 +148,17 @@ public class EnemyNavigation : MonoBehaviour
         bool isClose = distance <= triggerDistance;
 
         //if near and audio is not playing, play audio
-        if (isClose && !enemyNearAudio.isPlaying)
+        if (isClose && !enemyAudioIsPlaying)
         {
             enemyNearAudio.loop = true;
             enemyNearAudio.Play();
+            enemyAudioIsPlaying = true;
         }
         //if not near anymore and enemy audio is playing, stop audio
-        else if (!isClose && enemyNearAudio.isPlaying)
+        else if (!isClose && enemyAudioIsPlaying)
         {
             enemyNearAudio.Stop();
+            enemyAudioIsPlaying = false;
         }
     }
 
