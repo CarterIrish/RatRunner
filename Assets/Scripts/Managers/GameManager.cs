@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
-using System;
-using Unity.VisualScripting;
 
 
 /// <summary>
@@ -158,6 +156,7 @@ public class GameManager : MonoBehaviour
         // Fire exit events for the state we're leaving
         if (_gameState == GameStates.CRAFTING)
         {
+            Debug.Log("Exiting crafting");
             OnWorkbenchClosed.Invoke();
         }
         else if(_gameState == GameStates.CONSOLE)
@@ -179,6 +178,7 @@ public class GameManager : MonoBehaviour
                 ResumeGame();
                 break;
             case GameStates.CRAFTING:
+                Debug.Log("Entering Crafting");
                 OnWorkbenchOpened.Invoke();
                 break;
             case GameStates.CONSOLE:

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using TMPro;
 
 public class Workbench : MonoBehaviour
 {
@@ -11,6 +13,13 @@ public class Workbench : MonoBehaviour
     [Header("Interaction")]
     public float _interactRange = 3.0f;
 
+    [Header("UI References")]
+    [SerializeField] private Button _mobilityButton;
+    [SerializeField] private Button _sightButton;
+    [SerializeField] private Button _vigorButton;
+    [SerializeField] private TextMeshProUGUI _mobilityLevelText;
+    [SerializeField] private TextMeshProUGUI _sightLevelText;
+    [SerializeField] private TextMeshProUGUI _vigorLevelText;
 
     [Header("Debug")]
     [SerializeField] private Player _currentPlayer;
@@ -29,6 +38,14 @@ public class Workbench : MonoBehaviour
         InputManager.OnInteractPressed.AddListener(HandleInteract);
         GameManager.OnWorkbenchOpened.AddListener(OpenCraftingMenu);
         GameManager.OnWorkbenchClosed.AddListener(CloseCraftingMenu);
+
+        // Subscribe button click events
+        if (_mobilityButton != null)
+            _mobilityButton.onClick.AddListener(() => TryCraftUpgradeByType(UpgradesEnum.Mobility));
+        if (_sightButton != null)
+            _sightButton.onClick.AddListener(() => TryCraftUpgradeByType(UpgradesEnum.Vision));
+        if (_vigorButton != null)
+            _vigorButton.onClick.AddListener(() => TryCraftUpgradeByType(UpgradesEnum.Vigor));
     }
 
     /// <summary>
@@ -40,6 +57,14 @@ public class Workbench : MonoBehaviour
         InputManager.OnInteractPressed.RemoveListener(HandleInteract);
         GameManager.OnWorkbenchOpened.RemoveListener(OpenCraftingMenu);
         GameManager.OnWorkbenchClosed.RemoveListener(CloseCraftingMenu);
+
+        // Unsubscribe button click events
+        if (_mobilityButton != null)
+            _mobilityButton.onClick.RemoveAllListeners();
+        if (_sightButton != null)
+            _sightButton.onClick.RemoveAllListeners();
+        if (_vigorButton != null)
+            _vigorButton.onClick.RemoveAllListeners();
     }
 
     /// <summary>
@@ -72,7 +97,7 @@ public class Workbench : MonoBehaviour
     /// <summary>
     /// Try to craft recipe at given index
     /// </summary>
-    private void TryCraftRecipe(int index)
+    public void TryCraftRecipe(int index)
     {
         if (index >= _displayedRecipes.Count)
         {
@@ -137,31 +162,8 @@ public class Workbench : MonoBehaviour
             return;
         }
 
-        // Clear and repopulate recipe list for this menu
-        _displayedRecipes.Clear();
-
-        Debug.Log("=== WORKBENCH CRAFTING MENU ===");
-
-        int index = 1;
-        foreach(CraftingRecipe recipe in _availableRecipies)
-        {
-            _displayedRecipes.Add(recipe);
-
-            bool canCraft = recipe.CanCraft(_currentPlayer.Inventory);
-            string status = canCraft ? "[AVAILABLE]" : "[LOCKED]";
-
-            Debug.Log($"[{index}] {status} {recipe.name}");
-
-            foreach(CraftingRecipe.ItemRequirement req in recipe._requiredItems)
-            {
-                int playerOwns = _currentPlayer.Inventory.GetItemCount(req._itemType);
-                Debug.Log($"    - {req._itemType}: {playerOwns}/{req._quantity}");
-            }
-
-            index++;
-        }
-
-        Debug.Log("\nPress 1-3 to craft, ESC to close");
+        // Update UI to reflect current upgrade levels and button states
+        UpdateUpgradeUI();
     }
 
     /// <summary>
@@ -169,8 +171,7 @@ public class Workbench : MonoBehaviour
     /// </summary>
     private void CloseCraftingMenu()
     {
-        Debug.Log("Crafting menu closed");
-        // Future: Hide UI canvas here
+        // UI hiding is now handled by UIManager via events
     }
 
     /// <summary>
@@ -212,7 +213,105 @@ public class Workbench : MonoBehaviour
         }
 
         // Refresh menu to show updated inventory
-        OpenCraftingMenu();
+        UpdateUpgradeUI();
+    }
+
+    /// <summary>
+    /// Crafts the Mobility upgrade (called by UI button).
+    /// </summary>
+    public void CraftMobility()
+    {
+        TryCraftUpgradeByType(UpgradesEnum.Mobility);
+    }
+
+    /// <summary>
+    /// Crafts the Vision/Sight upgrade (called by UI button).
+    /// </summary>
+    public void CraftSight()
+    {
+        TryCraftUpgradeByType(UpgradesEnum.Vision);
+    }
+
+    /// <summary>
+    /// Crafts the Vigor upgrade (called by UI button).
+    /// </summary>
+    public void CraftVigor()
+    {
+        TryCraftUpgradeByType(UpgradesEnum.Vigor);
+    }
+
+    /// <summary>
+    /// Try to craft an upgrade by its type (called by UI buttons).
+    /// </summary>
+    /// <param name="upgradeType">The type of upgrade to craft.</param>
+    public void TryCraftUpgradeByType(UpgradesEnum upgradeType)
+    {
+        if (_currentPlayer == null)
+        {
+            Debug.LogError("No player reference!");
+            return;
+        }
+
+        // Find the recipe that grants this upgrade
+        CraftingRecipe targetRecipe = _availableRecipies.Find(r => r._upgradeGranted == upgradeType);
+
+        if (targetRecipe == null)
+        {
+            Debug.LogWarning($"No recipe found for upgrade: {upgradeType}");
+            return;
+        }
+
+        // Try to craft it
+        CraftRecipe(targetRecipe);
+    }
+
+    /// <summary>
+    /// Updates the upgrade UI to reflect current player upgrade levels and button interactability.
+    /// </summary>
+    private void UpdateUpgradeUI()
+    {
+        if (_currentPlayer == null) return;
+
+        // Update Mobility
+        UpdateUpgradeTile(UpgradesEnum.Mobility, _mobilityButton, _mobilityLevelText);
+
+        // Update Sight/Vision
+        UpdateUpgradeTile(UpgradesEnum.Vision, _sightButton, _sightLevelText);
+
+        // Update Vigor
+        UpdateUpgradeTile(UpgradesEnum.Vigor, _vigorButton, _vigorLevelText);
+    }
+
+    /// <summary>
+    /// Updates a single upgrade tile's level text and button interactability.
+    /// </summary>
+    /// <param name="upgradeType">The upgrade type.</param>
+    /// <param name="button">The button for this upgrade.</param>
+    /// <param name="levelText">The TextMeshPro component displaying level.</param>
+    private void UpdateUpgradeTile(UpgradesEnum upgradeType, Button button, TextMeshProUGUI levelText)
+    {
+        // Get current upgrade level
+        int currentLevel = 0;
+        if (_currentPlayer.Upgrades.ContainsKey(upgradeType))
+        {
+            currentLevel = _currentPlayer.Upgrades[upgradeType];
+        }
+
+        // Update level text
+        if (levelText != null)
+        {
+            levelText.text = $"Lvl. {currentLevel}";
+        }
+
+        // Find the recipe for this upgrade
+        CraftingRecipe recipe = _availableRecipies.Find(r => r._upgradeGranted == upgradeType);
+
+        if (recipe != null && button != null)
+        {
+            // Check if player can craft (has required items)
+            bool canCraft = recipe.CanCraft(_currentPlayer.Inventory);
+            button.interactable = canCraft;
+        }
     }
 
 }

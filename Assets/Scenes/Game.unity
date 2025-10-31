@@ -6994,8 +6994,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 100.9, y: -52.7}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 17.9, y: -39.1}
+  m_SizeDelta: {x: 36.8, y: 18.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &382793323
 MonoBehaviour:
@@ -13337,8 +13337,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 100.9, y: -52.7}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 19.8, y: -37.8}
+  m_SizeDelta: {x: 42.4, y: 16.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &736291612
 MonoBehaviour:
@@ -14269,8 +14269,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 73.1, y: 30.8}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 2.5, y: 42.6}
+  m_SizeDelta: {x: 39.6, y: 22.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &768414306
 MonoBehaviour:
@@ -16349,7 +16349,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 895539217}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1223754716}
+        m_TargetAssemblyTypeName: Workbench, Assembly-CSharp
+        m_MethodName: CraftSight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &895539217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19531,7 +19543,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1082996342
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22714,7 +22726,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 32.49994, y: -19.429993}
+  m_AnchoredPosition: {x: 32.5, y: -19.430054}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1222630373
@@ -22799,6 +22811,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 74de233eaac03ad4ab236813324be96d, type: 2}
   - {fileID: 11400000, guid: 0402b8c08cb406447b414a2492fc6252, type: 2}
   _interactRange: 3
+  _mobilityButton: {fileID: 895539216}
+  _sightButton: {fileID: 895539216}
+  _vigorButton: {fileID: 1503005912}
+  _mobilityLevelText: {fileID: 1541070170}
+  _sightLevelText: {fileID: 382793323}
+  _vigorLevelText: {fileID: 736291612}
   _currentPlayer: {fileID: 0}
   _playerInRange: 0
 --- !u!135 &1223754717
@@ -27873,7 +27891,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1503005913}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1223754716}
+        m_TargetAssemblyTypeName: Workbench, Assembly-CSharp
+        m_MethodName: CraftVigor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1503005913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28787,8 +28817,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 100.9, y: -52.7}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 19.5, y: -38.5}
+  m_SizeDelta: {x: 37, y: 17.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1541070170
 MonoBehaviour:
@@ -32968,8 +32998,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 70.9, y: 30.8}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 1.4, y: 41.3}
+  m_SizeDelta: {x: 41.5, y: 24.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1772204050
 MonoBehaviour:
@@ -33722,8 +33752,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseUI: {fileID: 248813797}
   settingsUI: {fileID: 1726041608}
+  workbenchUI: {fileID: 1082996341}
   dayUI: {fileID: 815983129}
-  resumeButton: {fileID: 0}
+  resumeButton: {fileID: 2088330457}
 --- !u!4 &1794247598
 Transform:
   m_ObjectHideFlags: 0
@@ -35291,7 +35322,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1888148244}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1223754716}
+        m_TargetAssemblyTypeName: Workbench, Assembly-CSharp
+        m_MethodName: CraftMobility
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1888148244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38272,8 +38315,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 61.1, y: 30.8}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -0.1, y: 42.9}
+  m_SizeDelta: {x: 59.7, y: 22.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2052340634
 MonoBehaviour:
@@ -39393,13 +39436,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8aa359fbbff7994b89126dbef6ced4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atmosphere: {fileID: 898941536}
-  itemPickUp: {fileID: 1298589906}
-  buttonHover: {fileID: 372061234}
-  buttonPress: {fileID: 578562070}
-  enemyNearby: {fileID: 566229142}
-  workbench: {fileID: 556077071}
-  dayTransition: {fileID: 343332471}
+  atmosphere: {fileID: 0}
+  itemPickUp: {fileID: 0}
+  buttonHover: {fileID: 0}
+  buttonPress: {fileID: 0}
+  enemyNearby: {fileID: 0}
+  workbench: {fileID: 0}
+  dayTransition: {fileID: 0}
 --- !u!4 &2122645883
 Transform:
   m_ObjectHideFlags: 0

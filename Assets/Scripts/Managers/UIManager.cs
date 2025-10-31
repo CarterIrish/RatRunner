@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     // Reference to the pauseUI
     public GameObject pauseUI;
     public GameObject settingsUI;
+    public GameObject workbenchUI;
 
     public GameObject dayUI;
 
@@ -61,6 +62,8 @@ public class UIManager : MonoBehaviour
         {
             GameManager.OnGamePaused.AddListener(ShowPauseUI);
             GameManager.OnGameResumed.AddListener(HidePauseUI);
+            GameManager.OnWorkbenchOpened.AddListener(ShowWorkbenchUI);
+            GameManager.OnWorkbenchClosed.AddListener(HideWorkbenchUI);
         }
     }
 
@@ -68,11 +71,15 @@ public class UIManager : MonoBehaviour
     {
         GameManager.OnGamePaused.RemoveAllListeners();
         GameManager.OnGameResumed.RemoveAllListeners();
+        GameManager.OnWorkbenchOpened.RemoveAllListeners();
+        GameManager.OnWorkbenchClosed.RemoveAllListeners();
         // Only unsubscribe if this is the singleton instance
         if (Instance == this)
         {
             GameManager.OnGamePaused.RemoveListener(ShowPauseUI);
             GameManager.OnGameResumed.RemoveListener(HidePauseUI);
+            GameManager.OnWorkbenchOpened.RemoveListener(ShowWorkbenchUI);
+            GameManager.OnWorkbenchClosed.RemoveListener(HideWorkbenchUI);
         }
     }
 
@@ -143,5 +150,29 @@ public class UIManager : MonoBehaviour
 
         if (pauseUI != null)
             pauseUI.SetActive(true);
+    }
+
+    /// <summary>
+    /// Shows the workbench UI.
+    /// </summary>
+    public void ShowWorkbenchUI()
+    {
+        if (workbenchUI != null)
+        {
+            workbenchUI.SetActive(true);
+            dayUI.SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// Hides the workbench UI.
+    /// </summary>
+    public void HideWorkbenchUI()
+    {
+        if (workbenchUI != null)
+        {
+            workbenchUI.SetActive(false);
+            dayUI.SetActive(true);
+        }
     }
 }
