@@ -37,15 +37,7 @@ public class Workbench : MonoBehaviour
         // Subscribe to input and game state events
         InputManager.OnInteractPressed.AddListener(HandleInteract);
         GameManager.OnWorkbenchOpened.AddListener(OpenCraftingMenu);
-        GameManager.OnWorkbenchClosed.AddListener(CloseCraftingMenu);
 
-        // Subscribe button click events
-        if (_mobilityButton != null)
-            _mobilityButton.onClick.AddListener(() => TryCraftUpgradeByType(UpgradesEnum.Mobility));
-        if (_sightButton != null)
-            _sightButton.onClick.AddListener(() => TryCraftUpgradeByType(UpgradesEnum.Vision));
-        if (_vigorButton != null)
-            _vigorButton.onClick.AddListener(() => TryCraftUpgradeByType(UpgradesEnum.Vigor));
     }
 
     /// <summary>
@@ -56,20 +48,10 @@ public class Workbench : MonoBehaviour
         // Unsubscribe to prevent memory leaks
         InputManager.OnInteractPressed.RemoveListener(HandleInteract);
         GameManager.OnWorkbenchOpened.RemoveListener(OpenCraftingMenu);
-        GameManager.OnWorkbenchClosed.RemoveListener(CloseCraftingMenu);
 
-        // Unsubscribe button click events
-        if (_mobilityButton != null)
-            _mobilityButton.onClick.RemoveAllListeners();
-        if (_sightButton != null)
-            _sightButton.onClick.RemoveAllListeners();
-        if (_vigorButton != null)
-            _vigorButton.onClick.RemoveAllListeners();
     }
 
-    /// <summary>
-    /// Handles the interact - changes game state to crafting.
-    /// </summary>
+
     private void HandleInteract()
     {
         // Only respond if player is in range
@@ -79,9 +61,7 @@ public class Workbench : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Update - Listen for number key presses while in crafting menu
-    /// </summary>
+
     private void Update()
     {
         // Only listen for number keys when crafting menu is open
@@ -167,14 +147,6 @@ public class Workbench : MonoBehaviour
     }
 
     /// <summary>
-    /// Closes the crafting menu.
-    /// </summary>
-    private void CloseCraftingMenu()
-    {
-        // UI hiding is now handled by UIManager via events
-    }
-
-    /// <summary>
     /// Crafts the recipe.
     /// </summary>
     /// <param name="recipe">The recipe.</param>
@@ -189,6 +161,8 @@ public class Workbench : MonoBehaviour
         if (recipe.CanCraft(_currentPlayer.Inventory) == false)
         {
             Debug.LogWarning($"Cannot craft {recipe.name} - missing required items!");
+            // Still update UI to ensure button states are correct
+            UpdateUpgradeUI();
             return;
         }
 
@@ -210,6 +184,12 @@ public class Workbench : MonoBehaviour
             // Add new upgrade at level 1
             _currentPlayer.Upgrades.Add(recipe._upgradeGranted, 1);
             Debug.Log($"Crafted {recipe.name}! New upgrade unlocked at level 1");
+        }
+
+        // Apply all upgrades to player (re-applies all to account for new level)
+        if (UpgradeManager.Instance != null)
+        {
+            UpgradeManager.Instance.ApplyAllUpgrades(_currentPlayer);
         }
 
         // Refresh menu to show updated inventory

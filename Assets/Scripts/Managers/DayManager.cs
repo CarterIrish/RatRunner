@@ -104,6 +104,12 @@ public class DayManager : MonoBehaviour
             playerInventory.LoadData(loadedData.GetInventoryDictionary());
             LoadItems(loadedData);
             playerScript.LoadUpgradeData(loadedData.playerUpgrades);
+
+            // Apply upgrades to player stats
+            if (UpgradeManager.Instance != null)
+            {
+                UpgradeManager.Instance.ApplyAllUpgrades(playerScript);
+            }
         }
         else
         {

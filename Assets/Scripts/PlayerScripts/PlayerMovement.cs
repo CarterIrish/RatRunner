@@ -17,9 +17,11 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private float speed = 10.0f;
+    private float baseSpeed = 10.0f; // Store original speed
 
     [SerializeField]
     private float turningDirection = 90.0f;
+    private float baseTurningDirection = 90.0f; // Store original turning speed
 
     private Vector3 velocity;
     private Quaternion turning;
@@ -40,6 +42,26 @@ public class PlayerMovement : MonoBehaviour
         // grab rigidbody from _currentPlayer
         playerBody = GetComponent<Rigidbody>();
         EnableGravity = true;
+
+        // Store base values
+        baseSpeed = speed;
+        baseTurningDirection = turningDirection;
+    }
+
+    /// <summary>
+    /// Adds a speed bonus to the player's movement.
+    /// </summary>
+    public void AddSpeedBonus(float bonus)
+    {
+        speed = baseSpeed + bonus;
+    }
+
+    /// <summary>
+    /// Adds a turning speed bonus to the player.
+    /// </summary>
+    public void AddTurningBonus(float bonus)
+    {
+        turningDirection = baseTurningDirection + bonus;
     }
 
     // Update is called once per frame

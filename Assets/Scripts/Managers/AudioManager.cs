@@ -20,12 +20,12 @@ public class AudioManager : MonoBehaviour
     //Getters/Setters
     public AudioSource ItemPickUp { get { return itemPickUp; } }
     public AudioSource DayTransition { get { return dayTransition; } }
-
     public AudioSource EnemyNearby { get { return enemyNearby; } }
+    public AudioSource Workbench { get { return workbench; } }
 
     private void Awake()
     {
-        // Singleton pattern — ensures only one AudioManager exists
+        // Singleton pattern ï¿½ ensures only one AudioManager exists
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -52,15 +52,27 @@ public class AudioManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        GameManager.OnWorkbenchOpened.AddListener(PlayWorkbenchSound);
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        GameManager.OnWorkbenchOpened.RemoveListener(PlayWorkbenchSound);
+    }
+
+    /// <summary>
+    /// Plays the workbench opening sound.
+    /// </summary>
+    private void PlayWorkbenchSound()
+    {
+        if (workbench != null)
+            workbench.Play();
     }
 
     private void RegisterAllButtons()
     {
+        // TODO: Fix this deprecated code warning by using new option
         Button[] buttons = FindObjectsOfType<Button>(true);
 
         foreach (Button button in buttons)

@@ -79,4 +79,28 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// Called when [trigger enter] - handles enemy collision.
+    /// </summary>
+    /// <param name="other">The other collider.</param>
+    private void OnTriggerEnter(Collider other)
+    {
+        // Handle enemy collision
+        if (other.CompareTag("Enemy"))
+        {
+            // Stop enemy from hunting player
+            EnemyNavigation enemyNav = other.GetComponent<EnemyNavigation>();
+            if (enemyNav != null)
+            {
+                enemyNav.StopHunting();
+            }
+
+            // Trigger player caught event
+            if (DayManager.Instance != null)
+            {
+                DayManager.Instance.OnPlayerCaught();
+            }
+        }
+    }
 }

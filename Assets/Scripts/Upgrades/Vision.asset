@@ -17,6 +17,6 @@ MonoBehaviour:
 
 '
   _requiredItems:
-  - _itemType: 0
+  - _itemType: 2
     _quantity: 1
   _upgradeGranted: 0

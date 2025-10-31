@@ -93,14 +93,17 @@ public class GameData
                 item.transform.localScale.x, item.transform.localScale.y, item.transform.localScale.z
             };
 
+            // Strip "(Clone)" from the name to match the prefab name
+            string cleanName = item.name.Replace("(Clone)", "");
+
             // If this item name hasn't been added yet, initialize its list
-            if (!itemDictionary.ContainsKey(item.name))
+            if (!itemDictionary.ContainsKey(cleanName))
             {
-                itemDictionary[item.name] = new List<float[]>();
+                itemDictionary[cleanName] = new List<float[]>();
             }
 
             // Add this item's transformations to the list
-            itemDictionary[item.name].Add(transformArray);
+            itemDictionary[cleanName].Add(transformArray);
         }
     }
 }
