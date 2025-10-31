@@ -20,6 +20,9 @@ public class ThirdPersonCamera : MonoBehaviour
     private float yaw;
     private float pitch;
 
+    // Public property for settings access
+    public float MouseSens { get => mouseSens; set => mouseSens = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +36,7 @@ public class ThirdPersonCamera : MonoBehaviour
         yaw = playerTransform.eulerAngles.y;
         distance = 5f;
         height = 2f;
-        mouseSens = 100f;
+        mouseSens = 50f;
         zoomSpeed = 100f;
         minDistance = 2f;
         maxDistance = 15f;

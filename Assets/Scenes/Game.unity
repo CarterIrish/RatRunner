@@ -32505,6 +32505,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 4f18cf52b78e8254e889c7cf6740eac5, type: 2}
   volumeSlider: {fileID: 1601215780}
+  sensitivitySlider: {fileID: 2071120333}
+  thirdPersonCamera: {fileID: 0}
 --- !u!4 &1735073948 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: dafe7a5d21cb06844b750626fe42ed8e, type: 3}
