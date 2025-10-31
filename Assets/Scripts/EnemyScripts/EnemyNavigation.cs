@@ -116,6 +116,7 @@ public class EnemyNavigation : MonoBehaviour
             target = player.transform;
             trackingPlayer = true;
             Debug.Log("Start hunting _currentPlayer");
+            AudioManager.Instance.EnemyNearby.Play();
         }
     }
 
@@ -124,6 +125,7 @@ public class EnemyNavigation : MonoBehaviour
     /// </summary>
     public void StopHunting()
     {
+        AudioManager.Instance.EnemyNearby.Stop();
         trackingPlayer = false;
         if (targetList != null)
         {
