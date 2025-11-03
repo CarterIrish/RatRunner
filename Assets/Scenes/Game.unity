@@ -19836,7 +19836,7 @@ MonoBehaviour:
   firstPersonCam: {fileID: 963194231}
   fixedCam: {fileID: 963194232}
   followCam: {fileID: 963194233}
-  startingMode: 0
+  startingMode: 3
   playerTransform: {fileID: 838813789}
   currentMode: 0
 --- !u!114 &963194231
