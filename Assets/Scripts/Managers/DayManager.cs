@@ -10,6 +10,8 @@ public class DayManager : MonoBehaviour
     [SerializeField]
     private int currentDay = 3;
 
+    public int CurrentDay { get { return currentDay; } }
+
     [SerializeField]
     private int maxDays = 3;
 

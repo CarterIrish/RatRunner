@@ -25,7 +25,7 @@ public class AttackTrigger : MonoBehaviour
         {
             if (!other.isTrigger)
             {
-                if (enemyScript.target == other.transform)
+                if (enemyScript.target == other.transform && DayManager.Instance.CurrentDay == 1)
                 {
                     enemyScript.StopHunting();
                 }
