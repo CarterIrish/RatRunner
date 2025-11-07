@@ -4260,7 +4260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a1265cc247f5b74c96fbf1f15593afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDay: 1
+  currentDay: 3
   maxDays: 3
   startPos: {x: -86, y: 56, z: -397}
   enemyPositions:

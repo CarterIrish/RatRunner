@@ -162,6 +162,7 @@ public class DayManager : MonoBehaviour
         }
         else
         {
+            NextDay();
             StartCoroutine(HandleDayTransition());
         }
     }
@@ -176,18 +177,7 @@ public class DayManager : MonoBehaviour
             AudioManager.Instance.DayTransition.Play();
 
         // Update day count
-        currentDay--;
         ChangeDayText();
-
-        // Reset _currentPlayer position
-        player.transform.position = startPos;
-        player.transform.rotation = Quaternion.identity;
-
-        // Reset enemy positions
-        for (int i = 0; i < enemyPositions.Count; i++)
-        {
-            enemies[i].transform.position = enemyPositions[i];
-        }
 
         // Wait for audio to finish or a short delay
         float waitTime = 1f;
@@ -197,21 +187,8 @@ public class DayManager : MonoBehaviour
         }
         yield return new WaitForSeconds(waitTime);
 
-        // Save progress if applicable
-        if (currentDay <= maxDays && currentDay > 0)
-        {
-            SaveSystem.SaveGameData(playerInventory, currentDay, playerScript);
-        }
         // Fade back to gameplay
         yield return StartCoroutine(Fade(1f, 0f, fadeDuration));
-
-        // Check for game over
-        if (currentDay <= 0)
-        {
-            GameManager.Instance.SetPlayerEscaped(false);
-            UIManager.Instance.LoadScene("GameOver");
-            SaveSystem.DeleteGameData();
-        }
     }
 
     /// <summary>
