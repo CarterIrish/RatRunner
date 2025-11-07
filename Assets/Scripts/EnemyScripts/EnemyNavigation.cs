@@ -80,6 +80,24 @@ public class EnemyNavigation : MonoBehaviour
             }
         }
 
+        // increase enemy speed and acceleration on final day
+        if (DayManager.Instance.CurrentDay == 3)
+        {
+            agent.speed = 10.0f;
+            agent.acceleration = 9.0f;
+        }
+        else
+        {
+            agent.speed = 7.5f;
+            agent.acceleration = 8.0f;
+        }
+
+        // stop hunting player when they are too far away
+        if (trackingPlayer && distance > 80.0f)
+        {
+            StopHunting();
+        }
+
         // only tracks _currentPlayer in playing game state
         if (GameManager.Instance != null && GameManager.Instance.GameState == GameStates.PLAYING)
         {
