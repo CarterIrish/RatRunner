@@ -14,6 +14,7 @@ public class Workbench : MonoBehaviour
     public float _interactRange = 3.0f;
 
     [Header("UI References")]
+    [SerializeField] private TextMeshProUGUI eToCraft;
     [SerializeField] private Button _mobilityButton;
     [SerializeField] private Button _sightButton;
     [SerializeField] private Button _vigorButton;
@@ -120,6 +121,7 @@ public class Workbench : MonoBehaviour
             _playerInRange = false;
 
             ShowInteractPrompt(false);
+            HideInteractPrompt(true);
         }
     }
 
@@ -130,6 +132,16 @@ public class Workbench : MonoBehaviour
     private void ShowInteractPrompt(bool show)
     {
         Debug.Log(show ? "Press [E] to Craft" : "");
+        eToCraft.text = "E to craft";
+    }
+
+    /// <summary>
+    /// Hides the interact prompt.
+    /// </summary>
+    /// <param name="show">if set to <c>true</c> [show].</param>
+    private void HideInteractPrompt(bool show)
+    {
+        eToCraft.text = "";
     }
 
     /// <summary>
