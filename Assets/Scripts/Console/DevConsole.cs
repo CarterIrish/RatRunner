@@ -106,14 +106,37 @@ public class DevConsole : MonoBehaviour
         RegisterCommand("noclip", ToggleCollisions);
         RegisterCommand("nogravity", ToggleGravity);
         RegisterCommand("endgame", EndGame);
+        RegisterCommand("giveupgrade", GiveUpgrade);
 
     }
+
+    private void GiveUpgrade(string[] args) 
+    {
+        if (args.Length == 0)
+        {
+            Debug.LogWarning("Usage: mobility | vigor | vision");
+            return;
+        }
+
+        string upgrade = args[0].ToLower();
+        switch (upgrade)
+        {
+            case "mobility":
+
+                return;
+            case "vigor":
+                return;
+            case "vision":
+                return;
+        }
+    }
+
 
     /// <summary>
     /// Toggles the gravity.
     /// </summary>
-    /// <param name="obj">The object.</param>
-    private void ToggleGravity(string[] obj)
+    /// <param name="args">The object.</param>
+    private void ToggleGravity(string[] args)
     {
         if(player == null) { Debug.LogWarning("Player not found"); return; }
         player.Movement.EnableGravity = !player.Movement.EnableGravity;
