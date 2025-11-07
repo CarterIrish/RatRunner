@@ -199,8 +199,9 @@ public class DayManager : MonoBehaviour
 
         // Save progress if applicable
         if (currentDay <= maxDays && currentDay > 0)
-            SaveSystem.SaveGameData(playerInventory, currentDay,playerScript);
-
+        {
+            SaveSystem.SaveGameData(playerInventory, currentDay, playerScript);
+        }
         // Fade back to gameplay
         yield return StartCoroutine(Fade(1f, 0f, fadeDuration));
 
