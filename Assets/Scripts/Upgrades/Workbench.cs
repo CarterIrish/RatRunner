@@ -121,6 +121,7 @@ public class Workbench : MonoBehaviour
             _playerInRange = false;
 
             ShowInteractPrompt(false);
+            HideInteractPrompt(true);
         }
     }
 
