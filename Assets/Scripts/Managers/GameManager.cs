@@ -39,9 +39,6 @@ public class GameManager : MonoBehaviour
     public static UnityEvent OnConsoleOpened = new UnityEvent();
     public static UnityEvent OnConsoleClosed = new UnityEvent();
 
-    private bool gameOver;
-    public bool GameOver { get { return gameOver; } set { gameOver = value; } }
-
     [SerializeField]
     private GameStates _gameState = GameStates.PLAYING; 
     /// <summary>
@@ -72,6 +69,9 @@ public class GameManager : MonoBehaviour
             // If empty assign this
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            // Subscribe to scene change events to reset debug state
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
@@ -80,10 +80,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        // Unsubscribe from scene events when destroyed
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Reset debug mode and unlock cursor when transitioning to non-gameplay scenes
+        if (scene.name == "GameOver" || scene.name == "Menu")
+        {
+            DebugModeActive = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        gameOver = false;
         if (_gameState != GameStates.PLAYING)
         {
             _gameState = GameStates.PLAYING;
@@ -129,16 +145,8 @@ public class GameManager : MonoBehaviour
             case GameStates.PLAYING:
                 if (!DebugModeActive)
                 {
-                    if (gameOver == true)
-                    {
-                        Cursor.lockState = CursorLockMode.None;
-                        Cursor.visible = true;
-                    }
-                    else
-                    {
-                        Cursor.lockState = CursorLockMode.Locked;
-                        Cursor.visible = false;
-                    }
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
                 }
                 ResumeGame();
                 break;

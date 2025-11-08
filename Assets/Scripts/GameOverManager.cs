@@ -33,7 +33,5 @@ public class GameOverManager : MonoBehaviour
             escapedScreen.SetActive(false);
             loseScreen.SetActive(true);
         }
-
-        GameManager.Instance.GameOver = true;
     }
 }
