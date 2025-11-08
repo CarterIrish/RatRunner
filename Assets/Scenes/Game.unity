@@ -17311,7 +17311,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 74de233eaac03ad4ab236813324be96d, type: 2}
   - {fileID: 11400000, guid: 0402b8c08cb406447b414a2492fc6252, type: 2}
   _interactRange: 3
-  _craftPrompt: {fileID: 0}
+  _craftPrompt: {fileID: 908315499}
   _mobilityButton: {fileID: 1888148243}
   _sightButton: {fileID: 895539216}
   _vigorButton: {fileID: 1503005912}
@@ -21351,7 +21351,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 74de233eaac03ad4ab236813324be96d, type: 2}
   - {fileID: 11400000, guid: 0402b8c08cb406447b414a2492fc6252, type: 2}
   _interactRange: 3
-  _craftPrompt: {fileID: 0}
+  _craftPrompt: {fileID: 908315499}
   _mobilityButton: {fileID: 1888148243}
   _sightButton: {fileID: 895539216}
   _vigorButton: {fileID: 1503005912}
