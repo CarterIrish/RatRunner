@@ -60,6 +60,9 @@ public class GameManager : MonoBehaviour
     // Player win/lose condition
     public bool PlayerEscaped { get ; private set; } = false;
 
+    // Debug flag to prevent state machine from overriding cursor settings
+    public static bool DebugModeActive { get; set; } = false;
+
 
     private void Awake()
     {
@@ -90,60 +93,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        // Gamestate machine
-        switch (_gameState)
-            {
-                case GameStates.PLAYING:
-                    HandlePlayingState();
-                    break;
-                case GameStates.PAUSED:
-                    HandlePausedState();
-                    break;
-                case GameStates.CRAFTING:
-                    HandleCraftingState();
-                    break;
-                case GameStates.CONSOLE:
-                HandleConsoleState();
-                break;
-
-            }
-
-    }
-
-    private void HandleConsoleState()
-    {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-    }
-
-    private void HandleCraftingState()
-    {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-
-    }
-
-    private void HandlePlayingState()
-    {
-        if (gameOver)
-        {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
-        else
-        {
-            // update day timer eventually
-            // check any game over conditions
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-    }
-
-    private void HandlePausedState()
-    {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+            
     }
 
 
@@ -173,15 +123,34 @@ public class GameManager : MonoBehaviour
         {
             case GameStates.PAUSED:
                 PauseGame();
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 break;
             case GameStates.PLAYING:
+                if (!DebugModeActive)
+                {
+                    if (gameOver == true)
+                    {
+                        Cursor.lockState = CursorLockMode.None;
+                        Cursor.visible = true;
+                    }
+                    else
+                    {
+                        Cursor.lockState = CursorLockMode.Locked;
+                        Cursor.visible = false;
+                    }
+                }
                 ResumeGame();
                 break;
             case GameStates.CRAFTING:
                 Debug.Log("Entering Crafting");
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 OnWorkbenchOpened.Invoke();
                 break;
             case GameStates.CONSOLE:
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 OnConsoleOpened.Invoke();
                 Time.timeScale = 0.0f;
                 break;

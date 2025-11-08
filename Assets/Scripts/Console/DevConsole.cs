@@ -107,7 +107,37 @@ public class DevConsole : MonoBehaviour
         RegisterCommand("nogravity", ToggleGravity);
         RegisterCommand("endgame", EndGame);
         RegisterCommand("giveupgrade", GiveUpgrade);
+        RegisterCommand("mouselock", MouseLock);
 
+    }
+
+    private void MouseLock(string[] args)
+    {
+        if(args.Length == 0)
+        {
+            Debug.LogWarning("Usage: mouselock <true|false>");
+            return;
+        }
+
+        string input = args[0].ToLower();
+        switch(input)
+        {
+            case "true":
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                GameManager.DebugModeActive = false; // Disable debug mode (normal gameplay)
+                Debug.Log("Mouse locked. Debug mode disabled.");
+                return;
+            case "false":
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                GameManager.DebugModeActive = true; // Enable debug mode (prevent state overrides)
+                Debug.Log("Mouse unlocked. Debug mode enabled.");
+                return;
+            default:
+                Debug.LogWarning("No valid args. Usage: mouselock <true|false>");
+                return;
+        }
     }
 
     private void GiveUpgrade(string[] args) 

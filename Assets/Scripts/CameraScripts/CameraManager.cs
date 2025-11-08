@@ -55,7 +55,7 @@ public class CameraManager : MonoBehaviour
     private void Update()
     {
         // Temporary camera cycle; this will move to setting menu eventually
-        if(Input.GetKeyDown(KeyCode.C))
+        if(Input.GetKeyDown(KeyCode.C) && GameManager.Instance.GameState == GameStates.PLAYING)
         {
             CycleCameraMode();
         }
