@@ -2413,6 +2413,7 @@ GameObject:
   - component: {fileID: 166090772}
   - component: {fileID: 166090774}
   - component: {fileID: 166090773}
+  - component: {fileID: 166090775}
   m_Layer: 5
   m_Name: Vigor Card
   m_TagString: Untagged
@@ -2483,6 +2484,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 166090771}
   m_CullTransparentMesh: 1
+--- !u!114 &166090775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166090771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f94b17aa64cb6784b91911678cfca58b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleUpAmount: 1.1
+  scaleSpeed: 10
 --- !u!1001 &170360740
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4312,7 +4327,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Item(s) needed:'
+  m_text: 'Item(s) needed: spring'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 467bedec29933cd42995082c0c615d7e, type: 2}
   m_sharedMaterial: {fileID: 1969869833534988452, guid: 467bedec29933cd42995082c0c615d7e, type: 2}
@@ -12476,7 +12491,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 19.8, y: -37.8}
+  m_AnchoredPosition: {x: 19.8, y: -41.6}
   m_SizeDelta: {x: 42.4, y: 16.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &736291612
@@ -13127,6 +13142,7 @@ GameObject:
   - component: {fileID: 759970255}
   - component: {fileID: 759970257}
   - component: {fileID: 759970256}
+  - component: {fileID: 759970258}
   m_Layer: 5
   m_Name: Mobility Card
   m_TagString: Untagged
@@ -13197,6 +13213,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759970254}
   m_CullTransparentMesh: 1
+--- !u!114 &759970258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759970254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f94b17aa64cb6784b91911678cfca58b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleUpAmount: 1.1
+  scaleSpeed: 10
 --- !u!4 &761767595 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: b9fe99ddae0a1a54f9c8d45771329ed4, type: 3}
@@ -16319,7 +16349,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.2, y: -31.8}
+  m_AnchoredPosition: {x: 1.2, y: -30.6}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &938056422
@@ -16342,7 +16372,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Item(s) needed:'
+  m_text: 'Item(s) needed: syringe with mysterious goop'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 467bedec29933cd42995082c0c615d7e, type: 2}
   m_sharedMaterial: {fileID: 1969869833534988452, guid: 467bedec29933cd42995082c0c615d7e, type: 2}
@@ -18618,7 +18648,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1082996342
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24420,7 +24450,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Item(s) needed:'
+  m_text: 'Item(s) needed: thread & needle'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 467bedec29933cd42995082c0c615d7e, type: 2}
   m_sharedMaterial: {fileID: 1969869833534988452, guid: 467bedec29933cd42995082c0c615d7e, type: 2}
@@ -27330,6 +27360,7 @@ GameObject:
   - component: {fileID: 1554805050}
   - component: {fileID: 1554805052}
   - component: {fileID: 1554805051}
+  - component: {fileID: 1554805053}
   m_Layer: 5
   m_Name: Items Had Text
   m_TagString: Untagged
@@ -27455,6 +27486,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554805049}
   m_CullTransparentMesh: 1
+--- !u!114 &1554805053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554805049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c8576436919144a839114006a55562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInventory: {fileID: 2069917218}
+  inventoryText: {fileID: 1554805051}
 --- !u!1001 &1555067278
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28991,6 +29036,7 @@ GameObject:
   - component: {fileID: 1635261162}
   - component: {fileID: 1635261164}
   - component: {fileID: 1635261163}
+  - component: {fileID: 1635261165}
   m_Layer: 5
   m_Name: Sight Card
   m_TagString: Untagged
@@ -29061,6 +29107,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635261161}
   m_CullTransparentMesh: 1
+--- !u!114 &1635261165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635261161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f94b17aa64cb6784b91911678cfca58b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleUpAmount: 1.1
+  scaleSpeed: 10
 --- !u!4 &1643429530 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
