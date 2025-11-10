@@ -14,6 +14,7 @@ public class EnemyNavigation : MonoBehaviour
     public bool trackingPlayer = false;
     public AudioSource enemyNearAudio;
     public float triggerDistance;
+    public bool specialEnemy = false;
 
     // Track audio state for WebGL compatibility
     private bool enemyAudioIsPlaying = false;
@@ -81,15 +82,15 @@ public class EnemyNavigation : MonoBehaviour
         }
 
         // increase enemy speed and acceleration on final day
-        if (DayManager.Instance.CurrentDay == 3)
+        if (DayManager.Instance.CurrentDay == 1 && !specialEnemy)
+        {
+            agent.speed = 12.5f;
+            agent.acceleration = 10.0f;
+        }
+        else if (DayManager.Instance.CurrentDay != 1 && !specialEnemy)
         {
             agent.speed = 10.0f;
             agent.acceleration = 9.0f;
-        }
-        else
-        {
-            agent.speed = 7.5f;
-            agent.acceleration = 8.0f;
         }
 
         // stop hunting player when they are too far away
