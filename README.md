@@ -41,6 +41,194 @@ Rat Runner combines tense exploration with roguelike mechanics in an eerie sewer
 
 # Changelog
 
+## [Sprint 4 - Week 2] - 2025-10-27 to 2025-11-02
+
+### Added
+
+- **Dev Console System:** (Carter)
+  - Full debug console implementation with command processing
+  - Console game state with dedicated input handling
+  - Endgame command with win/loss arguments for testing
+
+- **Workbench/Crafting UI:** (Chess)
+  - Workbench UI screen implementation
+  - Visual card designs for upgrades (Mobility, Sight, Vigor)
+
+- **Audio System:** (Chess)
+  - Complete audio implementation for game events
+  - Button hover and press sound effects
+  - Workbench opening sound effect
+  - Winning and losing ending sounds
+  - Item pickup audio feedback
+  - Enemy nearby audio
+
+- **End Area System:** (Jake)
+  - End game area with escape objective
+  - Key-unlockable gate mechanic
+  - Feedback text system for player prompts
+  - Final room with victory trigger
+  - Gate push-back mechanic to prevent phasing through
+
+- **Lighting System:** (Chris)
+  - Night skybox implementation
+  - Lighting settings and profiles
+  - Point light system
+  - Reflection probes for improved visuals
+  - Improved room lighting positions
+
+- **Game Art:** (Chris)
+  - Updated enemy rat model with detailed textures
+  - Enemy idle animations (wiggle and breathe)
+  - New room model with updated geometry
+  - Updated tunnel models (T-junction, center, straight, turn variations)
+  - Concrete siding material and textures
+  - Metal siding material and textures
+  - Wood plank material and textures
+  - Updated brick tunnel textures
+
+- **Level Design:** (Brice, Jake, Chris)
+  - Room decoration and asset population
+  - Additional enemy placement in rooms
+  - Organized map layout improvements
+  - Finished room 3 design
+
+- **Settings Menu:** (Chess)
+  - Settings menu UI created
+  - Navigation between pause and settings screens
+
+- **Upgrade System Implementation:** (Carter)
+  - UpgradeManager stat application system implemented
+  - Mobility upgrades now modify player speed and turning stats
+  - Upgrade bonuses apply on crafting and save/load
+  - PlayerMovement tracks base stats for additive upgrade bonuses
+
+- **Workbench Visual UI Integration:** (Carter)
+  - Connected console-based crafting to visual UI cards
+  - Button interactability based on available resources
+  - Level display (Lvl. 0, Lvl. 1, etc.) on upgrade tiles
+  - UI updates automatically after crafting
+
+- **Camera Settings Integration:** (Carter)
+  - Connected sensitivity slider in Settings UI to ThirdPersonCamera
+  - Active Ssensitivity adjustment (0-200 range)
+  - Slider initializes to current camera sensitivity value
+
+### Changed
+
+- **Inventory System:** (Carter)
+  - Refactored to use `Dictionary<ItemsEnum, int>` instead of lists
+  - Updated save system to handle dictionary-based inventory
+  - Updated item collection to work with new inventory structure
+
+- **Save System:** (Brice)
+  - Extended to save player upgrades
+  - Updated GameData structure for upgrade persistence
+
+- **Enemy AI:** (Jake)
+  - Updated enemy models with new assets
+  - Fixed enemy pathing issues
+  - Improved collision detection on attack trigger
+
+- **Scene Updates:**
+  - Repositioned rooms for better flow
+  - Updated game scene with all new assets and systems
+
+### Fixed
+
+- **UI Bugs:** (Carter)
+  - Fixed pause menu continue button error when reloading scene
+  - UIManager now dynamically assigns onClick events to prevent missing references
+
+- **Player Physics:** (Chris, Carter)
+  - Fixed player falling through floor
+  - Removed debug statement for gravity
+
+- **Collision Issues:** (Jake)
+  - Fixed enemy bugs with player interaction
+  - Fixed gate phasing with push-back system
+
+- **Save System:** (Carter)
+  - Fixed item loading bug where "(Clone)" suffix prevented prefab loading
+  - GameData now strips "(Clone)" from GameObject names before saving
+  - Thread, Needle, and Spring items now persist correctly across sessions
+
+- **Player Collision Handling:** (Carter)
+  - Removed duplicate TakeHit component causing double collision triggers
+  - Consolidated enemy collision handling into Player.cs
+  - Fixed audio playing twice and day counter decrementing by 2 on enemy hit
+
+### Removed
+
+- Useless/redundant rooms from scene
+- Old tunnel straight prefab references
+- Deprecated factory assets
+
+## [Sprint 4 - Week 1] - 2025-10-20 to 2025-10-26
+
+### Added
+
+- **Crafting/Upgrade System Foundation:** (Carter)
+  - UpgradeManager singleton implementation
+  - CraftingRecipe ScriptableObject system
+  - Workbench interaction script
+  - Recipe assets: Vision, Mobility, Vigor upgrades
+  - Crafting console UI for displaying available recipes
+  - Console-based crafting functionality with number key inputs
+
+- **Player System:** (Carter)
+  - Player class as component reference hub
+  - Centralized access to Movement, Inventory, Camera, Upgrades
+  - Player upgrade tracking with `Dictionary<UpgradesEnum, int>`
+
+- **Workbench Asset:** (Carter)
+  - Table 3D model with materials and textures
+  - Workbench prefab with collision detection
+  - Proximity-based crafting UI trigger
+
+- **Enemy AI Enhancements:** (Jake)
+  - Enemy patrol system implementation
+  - AttackTrigger script for player collision detection
+  - Patrolling enemies placed in multiple rooms
+
+- **Map Development:** (Jake)
+  - Phase 1 of new map layout completed
+  - Organized map structure with labeled sections
+  - Base room framework established
+
+- **Level Population:** (Brice)
+  - Decorative assets added to starting room
+  - Multiple rooms filled with environment details
+  - Item placement for gameplay testing
+
+- **Audio Assets:** (Chess)
+  - Imported menu background music
+  - Imported atmosphere/ambient game audio
+  - Audio integration into Menu and Game scenes
+  - Updated AudioManager for new audio sources
+
+### Changed
+
+- **Inventory Architecture:** (Carter)
+  - Converted from list-based to dictionary-based system
+  - ItemsEnum now serves as dictionary key
+  - Item quantities tracked as integer values
+
+- **Save System:** (Carter)
+  - Updated GameData to serialize dictionary inventory
+  - Adapted save/load logic for new data structure
+
+- **Input System:** (Carter)
+  - Added CRAFTING game state to state machine
+  - Console input integration for crafting interactions
+
+- **Game State Management:** (Carter)
+  - Added CONSOLE state for debug console
+  - Input map swapping for crafting state
+
+### Fixed
+
+- Merge conflicts from feature branch integrations
+
 ## [Sprint 3 - Week 2] - 2025-10-13 to 2025-10-19
 
 ### Added

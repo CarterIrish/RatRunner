@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 93b7d0ada2e6c2849be407103254d1fe
+timeCreated: 1475917721
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 62597
+  packageName: Abandoned Factory (Lite)
+  packageVersion: 1.6
+  assetPath: Assets/TirgamesAssets/Factory/Prefabs/PowerBox01_1.prefab
+  uploadId: 746142

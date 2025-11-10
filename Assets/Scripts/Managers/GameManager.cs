@@ -3,10 +3,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
 
-
-
-
-
 /// <summary>
 /// This enum serves to hold all core game loop states
 /// </summary>
@@ -14,6 +10,8 @@ public enum GameStates
 {
     PLAYING,
     PAUSED,
+    CRAFTING,
+    CONSOLE 
 }
 
 /// <summary>
@@ -34,6 +32,12 @@ public class GameManager : MonoBehaviour
     public static UnityEvent OnGamePaused = new UnityEvent();
     public static UnityEvent OnGameResumed = new UnityEvent();
 
+    // Crafting menu events
+    public static UnityEvent OnWorkbenchOpened = new UnityEvent();
+    public static UnityEvent OnWorkbenchClosed = new UnityEvent();
+
+    public static UnityEvent OnConsoleOpened = new UnityEvent();
+    public static UnityEvent OnConsoleClosed = new UnityEvent();
 
     [SerializeField]
     private GameStates _gameState = GameStates.PLAYING; 
@@ -53,6 +57,9 @@ public class GameManager : MonoBehaviour
     // Player win/lose condition
     public bool PlayerEscaped { get ; private set; } = false;
 
+    // Debug flag to prevent state machine from overriding cursor settings
+    public static bool DebugModeActive { get; set; } = false;
+
 
     private void Awake()
     {
@@ -62,6 +69,9 @@ public class GameManager : MonoBehaviour
             // If empty assign this
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            // Subscribe to scene change events to reset debug state
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
@@ -70,10 +80,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        // Unsubscribe from scene events when destroyed
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Reset debug mode and unlock cursor when transitioning to non-gameplay scenes
+        if (scene.name == "GameOver" || scene.name == "Menu")
+        {
+            DebugModeActive = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        if(_gameState != GameStates.PLAYING)
+        if (_gameState != GameStates.PLAYING)
         {
             _gameState = GameStates.PLAYING;
         }
@@ -82,49 +109,58 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-
-
-        // Gamestate machine
-        switch (_gameState)
-            {
-                case GameStates.PLAYING:
-                    HandlePlayingState();
-                    break;
-                case GameStates.PAUSED:
-                    HandlePausedState();
-                    break;
-            }
-
+            
     }
 
-    private void HandlePlayingState()
-    {
-        // update day timer eventually
-        // check any game over conditions
-    }
 
-    private void HandlePausedState()
-    {
-    }
-
-    /// <summary>       Her
+    /// <summary>
     /// Changes the state of the game.
     /// </summary>
     /// <param name="newState">The new state.</param>
     public void  ChangeGameState(GameStates newState)
     {
-        // Change the state
-        _gameState = newState;
+        // Fire exit events for the state we're leaving
+        if (_gameState == GameStates.CRAFTING)
+        {
+            Debug.Log("Exiting crafting");
+            OnWorkbenchClosed.Invoke();
+        }
+        else if(_gameState == GameStates.CONSOLE)
+        {
+            OnConsoleClosed.Invoke();
+            Time.timeScale = 1.0f;
+        }
 
-        // Call appropriate method based on new state
+            // Change the state
+            _gameState = newState;
+
+        // Fire entry events for the state we're entering
         switch (newState)
         {
             case GameStates.PAUSED:
                 PauseGame();
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 break;
             case GameStates.PLAYING:
+                if (!DebugModeActive)
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
                 ResumeGame();
+                break;
+            case GameStates.CRAFTING:
+                Debug.Log("Entering Crafting");
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                OnWorkbenchOpened.Invoke();
+                break;
+            case GameStates.CONSOLE:
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                OnConsoleOpened.Invoke();
+                Time.timeScale = 0.0f;
                 break;
         }
     }
@@ -174,6 +210,24 @@ public class GameManager : MonoBehaviour
     public void ResetGameOverState()
     {
         PlayerEscaped = false;  
+    }
+
+    public void EndGame()
+    {
+        SetPlayerEscaped(true);
+        UIManager.Instance.LoadScene("GameOver");
+        SaveSystem.DeleteGameData();
+    }
+
+    /// <summary>
+    /// Ends the game with a specified outcome (win or loss).
+    /// </summary>
+    /// <param name="playerWon">True if player won, false if player lost.</param>
+    public void EndGame(bool playerWon)
+    {
+        SetPlayerEscaped(playerWon);
+        UIManager.Instance.LoadScene("GameOver");
+        SaveSystem.DeleteGameData();
     }
 
 }

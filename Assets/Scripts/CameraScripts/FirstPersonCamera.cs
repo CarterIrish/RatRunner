@@ -28,8 +28,8 @@ public class FirstPersonCamera : MonoBehaviour
             throw new UnityException("Missing: InputActionAsset. Assign via inspector");
         }
 
-        InputActionMap player = inputActions.FindActionMap("Player");
-        lookAction = player.FindAction("look");
+        InputActionMap gameplay = inputActions.FindActionMap("Gameplay");
+        lookAction = gameplay.FindAction("look");
 
         eyeOffset = Vector3.up * 0.6f;
         yaw = playerTransform.eulerAngles.y;

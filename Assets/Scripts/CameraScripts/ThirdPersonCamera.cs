@@ -20,12 +20,15 @@ public class ThirdPersonCamera : MonoBehaviour
     private float yaw;
     private float pitch;
 
+    // Public property for settings access
+    public float MouseSens { get => mouseSens; set => mouseSens = value; }
+
     // Start is called before the first frame update
     void Start()
     {
-        InputActionMap playerMap = inputActions.FindActionMap("Player");
-        lookAction = playerMap.FindAction("Look");
-        zoomAction = playerMap.FindAction("Zoom");
+        InputActionMap gameplay = inputActions.FindActionMap("Gameplay");
+        lookAction = gameplay.FindAction("Look");
+        zoomAction = gameplay.FindAction("Zoom");
 
         if (pivotTransform==null) pivotTransform = GameObject.FindGameObjectWithTag("pivotTransform").transform;
         if (playerTransform == null) playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -33,7 +36,7 @@ public class ThirdPersonCamera : MonoBehaviour
         yaw = playerTransform.eulerAngles.y;
         distance = 5f;
         height = 2f;
-        mouseSens = 100f;
+        mouseSens = 50f;
         zoomSpeed = 100f;
         minDistance = 2f;
         maxDistance = 15f;
@@ -75,7 +78,7 @@ public class ThirdPersonCamera : MonoBehaviour
         Vector3 desiredPos = pivotTransform.position + offset;
         RaycastHit hit;
 
-        // Ignore Player layer to prevent raycast from hitting the player's own colliders
+        // Ignore Player layer to prevent raycast from hitting the _currentPlayer's own colliders
         int layerMask = ~LayerMask.GetMask("Player");
 
         if(Physics.Raycast(pivotTransform.position, offset.normalized, out hit, offset.magnitude, layerMask))

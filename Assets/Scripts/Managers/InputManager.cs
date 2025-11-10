@@ -1,9 +1,13 @@
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class InputManager : MonoBehaviour
 {
+    // Event for interact key press
+    public static UnityEvent OnInteractPressed = new UnityEvent();
+
     [SerializeField]
     private PlayerMovement playerScript;
 
@@ -19,10 +23,10 @@ public class InputManager : MonoBehaviour
     {
         if (playerScript == null)
         {
-            Debug.Log("Missing player script.");
+            Debug.Log("Missing _currentPlayer script.");
         }
 
-        playerMap = inputActions.FindActionMap("Player");
+        playerMap = inputActions.FindActionMap("Gameplay");
         uiMap = inputActions.FindActionMap("UI");
 
         uiMap.Enable(); // Should always be enabled.
@@ -62,7 +66,7 @@ public class InputManager : MonoBehaviour
     }
 
     /// <summary>
-    /// tell player to move when "w" is pressed
+    /// tell _currentPlayer to move when "w" is pressed
     /// </summary>
     /// <param name="context"></param>
     public void OnMove(InputAction.CallbackContext context)
@@ -75,13 +79,13 @@ public class InputManager : MonoBehaviour
 
         if (context.started)
         {
-            Debug.Log("Player Moving");
+
             playerScript.isMoving = true;
         }
     }
 
     /// <summary>
-    /// tell player to turn right when "d" is pressed
+    /// tell _currentPlayer to turn right when "d" is pressed
     /// </summary>
     /// <param name="context"></param>
     public void OnTurnRight(InputAction.CallbackContext context)
@@ -94,13 +98,13 @@ public class InputManager : MonoBehaviour
 
         if (context.started)
         {
-            Debug.Log("Turn Right");
+
             playerScript.isTurningRight = true;
         }
     }
 
     /// <summary>
-    /// tell player to turn left when "a" is pressed
+    /// tell _currentPlayer to turn left when "a" is pressed
     /// </summary>
     /// <param name="context"></param>
     public void OnTurnLeft(InputAction.CallbackContext context)
@@ -113,7 +117,7 @@ public class InputManager : MonoBehaviour
 
         if (context.started)
         {
-            Debug.Log("Turn Left");
+
             playerScript.isTurningLeft = true;
         }
     }
@@ -126,7 +130,7 @@ public class InputManager : MonoBehaviour
     {
         if(context.started)
         {
-            Debug.Log("Enter Pressed");
+
             if (GameManager.Instance == null) return;
             //switch (GameManager.Instance.GameState)
             //{
@@ -156,6 +160,11 @@ public class InputManager : MonoBehaviour
             if (GameManager.Instance == null) return;
             switch (GameManager.Instance.GameState)
             {
+                case (GameStates.CRAFTING):
+                {
+                    GameManager.Instance.ChangeGameState(GameStates.PLAYING);
+                    break;
+                }
                 case (GameStates.PLAYING):
                 {
                     GameManager.Instance.ChangeGameState(GameStates.PAUSED);
@@ -166,7 +175,25 @@ public class InputManager : MonoBehaviour
                     GameManager.Instance.ChangeGameState(GameStates.PLAYING);
                     break;
                 }
+                case (GameStates.CONSOLE):
+                    GameManager.Instance.ChangeGameState(GameStates.PLAYING);
+                    
+                    break;
             }
+        }
+    }
+
+    /// <summary>
+    /// Called when [interact pressed] (E key).
+    /// Broadcasts to any listening objects (Workbench, NPCs, etc.)
+    /// </summary>
+    /// <param name="context">The context.</param>
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            // Invoke the event
+            OnInteractPressed.Invoke();
         }
     }
 

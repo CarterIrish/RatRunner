@@ -2,36 +2,74 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[System.Serializable]
+public class SerializableInventory
+{
+    public List<ItemsEnum> keys = new List<ItemsEnum>();
+    public List<int> values = new List<int>();
+
+    public void FromDictionary(Dictionary<ItemsEnum, int> dict)
+    {
+        keys.Clear();
+        values.Clear();
+        foreach(KeyValuePair<ItemsEnum, int> kvp in dict)
+        {
+            keys.Add(kvp.Key);
+            values.Add(kvp.Value);
+        }
+    }
+
+    public Dictionary<ItemsEnum, int> ToDictionary()
+    {
+        Dictionary<ItemsEnum, int> dict = new Dictionary<ItemsEnum, int>();
+        for(int i = 0; i<keys.Count;i++)
+        {
+            dict[keys[i]] = values[i];
+        }
+        return dict;
+    }
+
+}
+
+
+
+
 [System.Serializable]
 public class GameData
 {
     //data we want to save
     public int day;
-    public List<ItemsEnum> inventoryData;
+    public SerializableInventory inventoryData = new SerializableInventory();
     public Dictionary<string, List<float[]>> itemDictionary;
+    public Dictionary<UpgradesEnum, int> playerUpgrades;
 
     /// <summary>
     /// constructor that sets all the data we want to save to the actual data in game
     /// </summary>
     /// <param name="inventory"></param>
     /// <param name="day"></param>
-    public GameData(Inventory inventory, int day)
+    public GameData(Inventory inventory, int day, Player player)
     {
         itemDictionary = new Dictionary<string, List<float[]>>();
-        inventoryData = new List<ItemsEnum>();
+        playerUpgrades = player.Upgrades;
+
 
         //fill the dictionary with all the games current items
         CollectAllItems();
 
         this.day = day;
 
+        
         if (inventory != null)
         {
-            for (int i = 0; i < inventory.inventory.Count; i++)
-            {
-                inventoryData.Add(inventory.inventory[i]);
-            }
+            inventoryData.FromDictionary(inventory.inventoryData);
         }
+    }
+
+    public Dictionary<ItemsEnum, int> GetInventoryDictionary()
+    {
+        return inventoryData.ToDictionary();
     }
 
 
@@ -55,14 +93,17 @@ public class GameData
                 item.transform.localScale.x, item.transform.localScale.y, item.transform.localScale.z
             };
 
+            // Strip "(Clone)" from the name to match the prefab name
+            string cleanName = item.name.Replace("(Clone)", "");
+
             // If this item name hasn't been added yet, initialize its list
-            if (!itemDictionary.ContainsKey(item.name))
+            if (!itemDictionary.ContainsKey(cleanName))
             {
-                itemDictionary[item.name] = new List<float[]>();
+                itemDictionary[cleanName] = new List<float[]>();
             }
 
             // Add this item's transformations to the list
-            itemDictionary[item.name].Add(transformArray);
+            itemDictionary[cleanName].Add(transformArray);
         }
     }
 }
