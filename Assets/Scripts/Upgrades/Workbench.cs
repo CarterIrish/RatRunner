@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
 
 public class Workbench : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class Workbench : MonoBehaviour
 
     // Track which number corresponds to which recipe
     private List<CraftingRecipe> _displayedRecipes = new List<CraftingRecipe>();
+
+    public static UnityEvent OnUpgradeCrafted = new UnityEvent();
 
 
     /// <summary>
@@ -206,6 +209,7 @@ public class Workbench : MonoBehaviour
 
         // Refresh menu to show updated inventory
         UpdateUpgradeUI();
+        OnUpgradeCrafted.Invoke();
     }
 
     /// <summary>

@@ -11,12 +11,14 @@ public class InventoryDisplay : MonoBehaviour
     {
         // Subscribe to event so UI updates when an item is added
         Inventory.OnItemAdded.AddListener(UpdateDisplay);
+        Workbench.OnUpgradeCrafted.AddListener(UpdateFullInventoryText);
         UpdateFullInventoryText();
     }
 
     private void OnDisable()
     {
         Inventory.OnItemAdded.RemoveListener(UpdateDisplay);
+        Workbench.OnUpgradeCrafted.RemoveListener(UpdateFullInventoryText);
     }
 
     private void UpdateDisplay(ItemsEnum item)
