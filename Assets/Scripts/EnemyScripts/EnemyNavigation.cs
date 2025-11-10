@@ -4,6 +4,7 @@ using UnityEngine.AI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Audio;
+using Unity.VisualScripting;
 
 public class EnemyNavigation : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class EnemyNavigation : MonoBehaviour
     public AudioSource enemyNearAudio;
     public float triggerDistance;
     public bool specialEnemy = false;
+    public bool finalEnemy = false;
+    private GameObject player;
 
     // Track audio state for WebGL compatibility
     private bool enemyAudioIsPlaying = false;
@@ -25,6 +28,9 @@ public class EnemyNavigation : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+
+        // Gathers _currentPlayer object
+        player = GameObject.FindGameObjectWithTag("Player");
 
         // StartHunting();
     }
@@ -63,6 +69,17 @@ public class EnemyNavigation : MonoBehaviour
         //    agent.destination = target.position;
         //}
 
+        // if player close to final enemy, it starts hunting
+        // otherwise it stops hunting and sits at current position
+        if (finalEnemy && Vector3.Distance(transform.position, player.transform.position) <= 50.0f)
+        {
+            StartHunting();
+        }
+        else if (finalEnemy && Vector3.Distance(transform.position, player.transform.position) > 50.0f) 
+        {
+            StopHunting();
+        }
+
         // if enemy reaches a point in a room and isn't tracking _currentPlayer, go to the next point in the list
         if (targetList != null && !trackingPlayer)
         {
@@ -84,13 +101,15 @@ public class EnemyNavigation : MonoBehaviour
         // increase enemy speed and acceleration on final day
         if (DayManager.Instance.CurrentDay == 1 && !specialEnemy)
         {
-            agent.speed = 12.5f;
-            agent.acceleration = 10.0f;
+            agent.speed = 15.0f;
+            agent.acceleration = 12.0f;
+            agent.angularSpeed = 200.0f;
         }
         else if (DayManager.Instance.CurrentDay != 1 && !specialEnemy)
         {
-            agent.speed = 10.0f;
-            agent.acceleration = 9.0f;
+            agent.speed = 12.5f;
+            agent.acceleration = 10.0f;
+            agent.angularSpeed = 160.0f;
         }
 
         // stop hunting player when they are too far away
@@ -130,7 +149,7 @@ public class EnemyNavigation : MonoBehaviour
     public void StartHunting()
     {
         // Gathers _currentPlayer object
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        // GameObject player = GameObject.FindGameObjectWithTag("Player");
         // Checks if null
         if (player != null)
         {
@@ -149,7 +168,7 @@ public class EnemyNavigation : MonoBehaviour
     {
         AudioManager.Instance.EnemyNearby.Stop();
         trackingPlayer = false;
-        if (targetList != null)
+        if (targetList.Count > 0)
         {
             target = targetList[0];
         }

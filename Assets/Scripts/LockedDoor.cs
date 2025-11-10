@@ -11,6 +11,9 @@ public class LockedDoor : MonoBehaviour
     [SerializeField]
     private Feedback feedbackScript;
 
+    [SerializeField]
+    private GameObject enemy;
+
     /// <summary>
     /// Called when [enable].
     /// </summary>
@@ -40,6 +43,9 @@ public class LockedDoor : MonoBehaviour
         {
             // let player know door has opened
             feedbackScript.OnKeyPickup();
+
+            // activate final enemy
+            enemy.SetActive(true);
 
             // Unlock the door
             UnlockDoor();
