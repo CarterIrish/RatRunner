@@ -158,6 +158,12 @@ public class EnemyNavigation : MonoBehaviour
             trackingPlayer = true;
             Debug.Log("Start hunting _currentPlayer");
             AudioManager.Instance.EnemyNearby.Play();
+
+            // Activate visual feedback
+            if (ScreenEffectManager.Instance != null)
+            {
+                ScreenEffectManager.Instance.EnableEffects(true);
+            }
         }
     }
 
@@ -168,6 +174,12 @@ public class EnemyNavigation : MonoBehaviour
     {
         AudioManager.Instance.EnemyNearby.Stop();
         trackingPlayer = false;
+
+        if (ScreenEffectManager.Instance != null)
+        {
+            ScreenEffectManager.Instance.EnableEffects(false);
+        }
+
         if (targetList.Count > 0)
         {
             target = targetList[0];
