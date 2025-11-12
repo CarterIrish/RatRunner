@@ -1940,7 +1940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1920448473640756895, guid: d4449309de7d33b43b569467a0807034, type: 3}
       propertyPath: m_Name
-      value: Needle (3)
+      value: Needle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12176,7 +12176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1794740397255444842, guid: 0461e01b862db0049a684a052c554c4d, type: 3}
       propertyPath: m_Name
-      value: Thread (1)
+      value: Thread
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13172,7 +13172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1920448473640756895, guid: d4449309de7d33b43b569467a0807034, type: 3}
       propertyPath: m_Name
-      value: Needle (1)
+      value: Needle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16468,6 +16468,7 @@ MonoBehaviour:
     m_Bindings: []
   _boxCollider: {fileID: 0}
   _playerLight: {fileID: 263867431}
+  _playerHealth: 10
 --- !u!1001 &846314550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16599,7 +16600,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1794740397255444842, guid: 0461e01b862db0049a684a052c554c4d, type: 3}
       propertyPath: m_Name
-      value: Thread (2)
+      value: Thread
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19770,7 +19771,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1794740397255444842, guid: 0461e01b862db0049a684a052c554c4d, type: 3}
       propertyPath: m_Name
-      value: Thread (3)
+      value: Thread
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22584,7 +22585,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2770128541789492114, guid: 91bbc5cdd52f4c946a2bdd6d7e033743, type: 3}
       propertyPath: m_Name
-      value: Spring (1)
+      value: Spring
       objectReference: {fileID: 0}
     - target: {fileID: 7010732923546079223, guid: 91bbc5cdd52f4c946a2bdd6d7e033743, type: 3}
       propertyPath: m_LocalPosition.x
@@ -23085,7 +23086,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2770128541789492114, guid: 91bbc5cdd52f4c946a2bdd6d7e033743, type: 3}
       propertyPath: m_Name
-      value: Spring (3)
+      value: Spring
       objectReference: {fileID: 0}
     - target: {fileID: 7010732923546079223, guid: 91bbc5cdd52f4c946a2bdd6d7e033743, type: 3}
       propertyPath: m_LocalPosition.x
@@ -23152,7 +23153,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2770128541789492114, guid: 91bbc5cdd52f4c946a2bdd6d7e033743, type: 3}
       propertyPath: m_Name
-      value: Spring (2)
+      value: Spring
       objectReference: {fileID: 0}
     - target: {fileID: 7010732923546079223, guid: 91bbc5cdd52f4c946a2bdd6d7e033743, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28802,7 +28803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1920448473640756895, guid: d4449309de7d33b43b569467a0807034, type: 3}
       propertyPath: m_Name
-      value: Needle (2)
+      value: Needle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29730,6 +29731,7 @@ MonoBehaviour:
   mobilitySpeedBonus: 20
   mobilityTurningBonus: 40
   visionRangeBonus: 5
+  vigorHealthBonus: 10
 --- !u!4 &1498666792
 Transform:
   m_ObjectHideFlags: 0

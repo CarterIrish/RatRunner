@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     [SerializeField] private InputActionMap _playerInputMap;
     [SerializeField] private BoxCollider _boxCollider;
     [SerializeField] private Light _playerLight;
+    [SerializeField] private int _playerHealth = 10;
+    private int _baseHealth = 10; // Store base health for respawn
 
     // Upgrade tracking: Key = upgrade type, Value = upgrade level
     private Dictionary<UpgradesEnum, int> _upgrades = new Dictionary<UpgradesEnum, int>();
@@ -34,6 +36,7 @@ public class Player : MonoBehaviour
     public Dictionary<UpgradesEnum, int> Upgrades { get => _upgrades; private set => _upgrades = value; }
     public BoxCollider BoxCollider { get => _boxCollider; private set => _boxCollider = value; }
     public Light PlayerLight { get => _playerLight; private set => _playerLight = value; }
+    public int PlayerHealth { get => _playerHealth; private set => _playerHealth = value; }
 
     private void Awake()
     {
@@ -52,8 +55,11 @@ public class Player : MonoBehaviour
             PlayerInputMap = InputAction.FindActionMap("Player");
         }
         if (!BoxCollider) BoxCollider = gameObject.GetComponent<BoxCollider>();
-        
+
         if(!PlayerLight) PlayerLight = gameObject.GetComponentInChildren<Light>();
+
+        // Store base health value
+        _baseHealth = _playerHealth;
     }
 
     public bool GetInteractPressed()
@@ -83,6 +89,15 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
+    /// Resets health to base value. Call this before applying upgrades.
+    /// </summary>
+    public void ResetHealthToBase()
+    {
+        _playerHealth = _baseHealth;
+        Debug.Log($"Player health reset to base: {_playerHealth}");
+    }
+
+    /// <summary>
     /// Called when [trigger enter] - handles enemy collision.
     /// </summary>
     /// <param name="other">The other collider.</param>
@@ -98,11 +113,45 @@ public class Player : MonoBehaviour
                 enemyNav.StopHunting();
             }
 
+            // Deal damage to player
+            TakeDamage(10);
+
             // Trigger player caught event
-            if (DayManager.Instance != null)
+            if (DayManager.Instance != null && PlayerHealth == 0)
             {
+                // Reset health to base value
+                PlayerHealth = _baseHealth;
+
+                // Re-apply all upgrades (including Vigor) after respawn
+                if (UpgradeManager.Instance != null)
+                {
+                    UpgradeManager.Instance.ApplyAllUpgrades(this);
+                }
+
                 DayManager.Instance.OnPlayerCaught();
             }
         }
+    }
+
+    public int TakeDamage(int damage)
+    {
+        if (damage >= PlayerHealth)
+        {
+            PlayerHealth = 0;
+        }
+        else
+        {
+            PlayerHealth -= damage;
+        }
+        return PlayerHealth;
+    }
+
+    public int increaseHealth(int amount)
+    {
+        if(amount >= 0)
+        {
+            PlayerHealth += amount;
+        }
+        return PlayerHealth;
     }
 }

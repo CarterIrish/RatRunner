@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private float mobilityTurningBonus = 15f; // +15 turning speed per level
 
     [SerializeField] private float visionRangeBonus = 5f; // +5 vision range per level
-    // Vision and Vigor not implemented yet - add when those systems exist
+    [SerializeField] private int vigorHealthBonus = 10; // +20 health per level
 
     private void Awake()
     {
@@ -67,18 +68,24 @@ public class UpgradeManager : MonoBehaviour
                 ApplyMobilityUpgrade(level, player);
                 break;
             case UpgradesEnum.Vigor:
-                // TODO: Implement when health system exists
-                Debug.Log($"Vigor upgrade level {level} - Not yet implemented");
+                ApplyVigorUpgrade(level, player);
                 break;
             case UpgradesEnum.Vision:
-                // TODO: Implement when camera/vision system exists
-                Debug.Log($"Vision upgrade level {level} - Not yet implemented");
                 ApplyVisionUpgrade(level, player);
                 break;
             default:
                 Debug.LogError($"Unknown upgrade: {upgrade}");
                 return;
         }
+    }
+
+    private void ApplyVigorUpgrade(int level, Player player)
+    {
+        int healthBonus = vigorHealthBonus * level;
+        player.increaseHealth(healthBonus);
+
+        Debug.Log($"Vigor upgrade level {level} applied! Vigor +{healthBonus}");
+
     }
 
     /// <summary>
@@ -114,6 +121,8 @@ public class UpgradeManager : MonoBehaviour
         // Calculate vision range bonus
         float rangeBonus = visionRangeBonus * level;
         player.PlayerLight.range += rangeBonus;
+
+        Debug.Log($"Vision upgrade level {level} applied! Vision range +{rangeBonus}");
     }
 
 
