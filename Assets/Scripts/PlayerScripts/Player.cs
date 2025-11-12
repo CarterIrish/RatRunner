@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private InputActionAsset _inputAction;
     [SerializeField] private InputActionMap _playerInputMap;
     [SerializeField] private BoxCollider _boxCollider;
+    [SerializeField] private Light _playerLight;
 
     // Upgrade tracking: Key = upgrade type, Value = upgrade level
     private Dictionary<UpgradesEnum, int> _upgrades = new Dictionary<UpgradesEnum, int>();
@@ -32,7 +33,7 @@ public class Player : MonoBehaviour
     public InputActionMap PlayerInputMap { get => _playerInputMap; private set => _playerInputMap = value; }
     public Dictionary<UpgradesEnum, int> Upgrades { get => _upgrades; private set => _upgrades = value; }
     public BoxCollider BoxCollider { get => _boxCollider; private set => _boxCollider = value; }
-
+    public Light PlayerLight { get => _playerLight; private set => _playerLight = value; }
 
     private void Awake()
     {
@@ -52,6 +53,7 @@ public class Player : MonoBehaviour
         }
         if (!BoxCollider) BoxCollider = gameObject.GetComponent<BoxCollider>();
         
+        if(!PlayerLight) PlayerLight = gameObject.GetComponentInChildren<Light>();
     }
 
     public bool GetInteractPressed()

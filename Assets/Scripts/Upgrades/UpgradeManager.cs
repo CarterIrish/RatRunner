@@ -16,6 +16,8 @@ public class UpgradeManager : MonoBehaviour
     [Header("Upgrade Multipliers Per Level")]
     [SerializeField] private float mobilitySpeedBonus = 2f; // +2 speed per level
     [SerializeField] private float mobilityTurningBonus = 15f; // +15 turning speed per level
+
+    [SerializeField] private float visionRangeBonus = 5f; // +5 vision range per level
     // Vision and Vigor not implemented yet - add when those systems exist
 
     private void Awake()
@@ -71,6 +73,7 @@ public class UpgradeManager : MonoBehaviour
             case UpgradesEnum.Vision:
                 // TODO: Implement when camera/vision system exists
                 Debug.Log($"Vision upgrade level {level} - Not yet implemented");
+                ApplyVisionUpgrade(level, player);
                 break;
             default:
                 Debug.LogError($"Unknown upgrade: {upgrade}");
@@ -98,6 +101,19 @@ public class UpgradeManager : MonoBehaviour
         player.Movement.AddTurningBonus(turningBonus);
 
         Debug.Log($"Mobility upgrade level {level} applied! Speed +{speedBonus}, Turning +{turningBonus}");
+    }
+
+    private void ApplyVisionUpgrade(int level , Player player)
+    {
+        if(player.PlayerLight == null)
+        {
+            Debug.LogError("Player Light component is null!");
+            return;
+        }
+
+        // Calculate vision range bonus
+        float rangeBonus = visionRangeBonus * level;
+        player.PlayerLight.range += rangeBonus;
     }
 
 

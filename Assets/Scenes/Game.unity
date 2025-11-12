@@ -16467,6 +16467,7 @@ MonoBehaviour:
     m_Actions: []
     m_Bindings: []
   _boxCollider: {fileID: 0}
+  _playerLight: {fileID: 263867431}
 --- !u!1001 &846314550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29728,6 +29729,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mobilitySpeedBonus: 20
   mobilityTurningBonus: 40
+  visionRangeBonus: 5
 --- !u!4 &1498666792
 Transform:
   m_ObjectHideFlags: 0
