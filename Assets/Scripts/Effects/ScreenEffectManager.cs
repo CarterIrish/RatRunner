@@ -10,7 +10,7 @@ public class ScreenEffectManager : MonoBehaviour
     public Image noiseOverlay;
 
     [Header("Effect Settings")]
-    public float vignetteMaxAlpha = 0.6f;
+    public float vignetteMaxAlpha = 1.0f;
     public float vignetteFadeSpeed = 2f;
     public float noiseMaxAlpha = 0.25f;
     public float noisePulseSpeed = 5f;
