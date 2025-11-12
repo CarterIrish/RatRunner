@@ -29728,7 +29728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f114b721da47b6043bbad97d20cb826a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobilitySpeedBonus: 20
+  mobilitySpeedBonus: 8
   mobilityTurningBonus: 40
   visionRangeBonus: 5
   vigorHealthBonus: 10
