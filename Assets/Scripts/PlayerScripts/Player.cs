@@ -148,6 +148,7 @@ public class Player : MonoBehaviour
         }
         else
         {
+            AudioManager.Instance.DamageTaken.Play();
             PlayerHealth -= damage;
         }
 
