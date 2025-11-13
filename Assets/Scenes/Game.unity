@@ -16854,6 +16854,8 @@ MonoBehaviour:
   _boxCollider: {fileID: 0}
   _playerLight: {fileID: 263867431}
   _playerHealth: 10
+  _redVignette: {fileID: 0}
+  _vignetteFadeSpeed: 2
 --- !u!1001 &846314550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35948,6 +35950,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 477267786}
   - {fileID: 908315497}
   - {fileID: 815983130}
   - {fileID: 1214847610}
@@ -35956,7 +35959,6 @@ RectTransform:
   - {fileID: 1726041609}
   - {fileID: 50776394}
   - {fileID: 1082996342}
-  - {fileID: 477267786}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
