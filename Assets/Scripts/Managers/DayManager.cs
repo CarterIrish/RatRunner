@@ -43,6 +43,9 @@ public class DayManager : MonoBehaviour
     [SerializeField]
     private Player playerScript;
 
+    [SerializeField] private Jumpscare jumpscare;
+
+
     private void Awake()
     {
         // make sure there is only one DayManager at a time
@@ -154,7 +157,7 @@ public class DayManager : MonoBehaviour
 
     public void OnPlayerCaught()
     {
-        if (currentDay <= 1) // final day
+        if (currentDay <= 1) //final day
         {
             GameManager.Instance.SetPlayerEscaped(false);
             UIManager.Instance.LoadScene("GameOver");
@@ -163,8 +166,18 @@ public class DayManager : MonoBehaviour
         else
         {
             NextDay();
-            StartCoroutine(HandleDayTransition());
+            StartCoroutine(HandleDeathSequence());
         }
+    }
+
+    private IEnumerator HandleDeathSequence()
+    {
+        //Jumpscare cutscene
+        if (jumpscare != null)
+            yield return StartCoroutine(jumpscare.PlayJumpscareSequence(daysScreen, fadeDuration));
+
+        //Go to the normal day transition
+        yield return StartCoroutine(HandleDayTransition());
     }
 
     private IEnumerator HandleDayTransition()
