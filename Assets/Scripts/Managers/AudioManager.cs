@@ -16,6 +16,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource enemyNearby;
     [SerializeField] private AudioSource workbench;
     [SerializeField] private AudioSource dayTransition;
+    [SerializeField] private AudioSource damageTaken;
 
     // Track atmosphere state for WebGL compatibility
     private bool atmosphereIsPlaying = false;
@@ -25,6 +26,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource DayTransition { get { return dayTransition; } }
     public AudioSource EnemyNearby { get { return enemyNearby; } }
     public AudioSource Workbench { get { return workbench; } }
+    public AudioSource DamageTaken { get { return damageTaken; } }
 
     private void Awake()
     {

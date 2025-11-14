@@ -5,20 +5,26 @@ public class ScreenEffectManager : MonoBehaviour
 {
     public static ScreenEffectManager Instance;
 
-    [Header("Effect Layers")]
-    public Image vignetteOverlay;
-    public Image noiseOverlay;
+    [Header("UI Layers")]
+    public Image enemyNearbyOverlay;    
+    public Image healthOverlay;
 
-    [Header("Effect Settings")]
-    public float vignetteMaxAlpha = 1.0f;
-    public float vignetteFadeSpeed = 2f;
-    public float noiseMaxAlpha = 0.25f;
-    public float noisePulseSpeed = 5f;
+    [Header("Enemy Nearby Settings")]
+    public float enemyMaxAlpha;
+    public float enemyPulseSpeed;
 
-    private bool vignetteActive = false;
-    private bool noiseActive = false;
-    private float vignetteAlpha = 0f;
+    [Header("Low Health Settings")]
+    public float lowHealthMaxAlpha;
+    public float lowHealthPulseSpeed;
+
+    [Header("Shared Fade Settings")]
+    public float fadeSpeed = 2f;
+
     private float noiseAlpha = 0f;
+    private float vignetteAlpha = 0f;
+
+    private bool noiseActive = false;
+    private bool lowHealthActive = false;
 
     void Awake()
     {
@@ -27,32 +33,51 @@ public class ScreenEffectManager : MonoBehaviour
 
     void Update()
     {
-        // Smoothly fade vignette
-        float targetVignetteAlpha = vignetteActive ? vignetteMaxAlpha : 0f;
-        vignetteAlpha = Mathf.MoveTowards(vignetteAlpha, targetVignetteAlpha, Time.deltaTime * vignetteFadeSpeed);
-        if (vignetteOverlay != null)
-        {
-            vignetteOverlay.color = new Color(0, 0, 0, vignetteAlpha);
-        }
-
-        // Pulse noise when active
-        if (noiseOverlay != null)
-        {
-            if (noiseActive)
-            {
-                noiseAlpha = noiseMaxAlpha * (0.5f + 0.5f * Mathf.Sin(Time.time * noisePulseSpeed));
-            }
-            else
-            {
-                noiseAlpha = Mathf.MoveTowards(noiseAlpha, 0f, Time.deltaTime * vignetteFadeSpeed);
-            }
-            noiseOverlay.color = new Color(1, 1, 1, noiseAlpha);
-        }
+        HandleNoisePulse();
+        HandleLowHealthPulse();
     }
 
-    public void EnableEffects(bool enable)
+    // Enemy Nearby (Noise Pulse)
+    private void HandleNoisePulse()
     {
-        vignetteActive = enable;
+        if (enemyNearbyOverlay == null) return;
+
+        if (noiseActive)
+        {
+            noiseAlpha = enemyMaxAlpha * (0.5f + 0.5f * Mathf.Sin(Time.time * enemyPulseSpeed));
+        }
+        else
+        {
+            noiseAlpha = Mathf.MoveTowards(noiseAlpha, 0f, Time.deltaTime * fadeSpeed);
+        }
+
+        enemyNearbyOverlay.color = new Color(1, 1, 1, noiseAlpha);
+    }
+
+    public void EnableEnemyNearbyEffect(bool enable)
+    {
         noiseActive = enable;
+    }
+
+    // Low Health (Red Vignette)
+    private void HandleLowHealthPulse()
+    {
+        if (healthOverlay == null) return;
+
+        if (lowHealthActive)
+        {
+            vignetteAlpha = lowHealthMaxAlpha * (0.5f + 0.5f * Mathf.Sin(Time.time * lowHealthPulseSpeed));
+        }
+        else
+        {
+            vignetteAlpha = Mathf.MoveTowards(vignetteAlpha, 0f, Time.deltaTime * fadeSpeed);
+        }
+
+        healthOverlay.color = new Color(1, 1, 1, vignetteAlpha);
+    }
+
+    public void SetLowHealth(bool enable)
+    {
+        lowHealthActive = enable;
     }
 }

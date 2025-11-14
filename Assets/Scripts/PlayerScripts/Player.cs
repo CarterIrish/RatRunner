@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Security;
 using UnityEngine;
@@ -19,7 +20,7 @@ public class Player : MonoBehaviour
     [SerializeField] private InputActionMap _playerInputMap;
     [SerializeField] private BoxCollider _boxCollider;
     [SerializeField] private Light _playerLight;
-    [SerializeField] private int _playerHealth = 10;
+    [SerializeField] private int _playerHealth = 20;
     private int _baseHealth = 10; // Store base health for respawn
 
     [Header("Invincibility Settings")]
@@ -181,14 +182,19 @@ public class Player : MonoBehaviour
         }
         else
         {
+            AudioManager.Instance.DamageTaken.Play();
             PlayerHealth -= damage;
         }
+
+        // Trigger low health UI at 10 HP
+        ScreenEffectManager.Instance.SetLowHealth(PlayerHealth <= 10);
+
         return PlayerHealth;
     }
 
     public int increaseHealth(int amount)
     {
-        if(amount >= 0)
+        if (amount >= 0)
         {
             PlayerHealth += amount;
         }
