@@ -99,7 +99,7 @@ public class DevConsole : MonoBehaviour
         commands[commandName.ToLower()] = callback;
     }
 
-    private void RegisterCommands()                             
+    private void RegisterCommands()
     {
         // Register debug commands here
         RegisterCommand("noclip", ToggleCollisions);
@@ -107,6 +107,7 @@ public class DevConsole : MonoBehaviour
         RegisterCommand("endgame", EndGame);
         RegisterCommand("giveupgrade", GiveUpgrade);
         RegisterCommand("mouselock", MouseLock);
+        RegisterCommand("godmode", ToggleGodMode);
 
     }
 
@@ -252,5 +253,66 @@ public class DevConsole : MonoBehaviour
         consoleUI.SetActive(false);
     }
 
+    /// <summary>
+    /// Toggles godmode with configurable invincibility, no gravity, and no clip features.
+    /// </summary>
+    /// <param name="args">The arguments.</param>
+    private void ToggleGodMode(string[] args)
+    {
+        if (player == null)
+        {
+            Debug.LogWarning("Player not found");
+            return;
+        }
+
+        // Toggle godmode state
+        player.GodModeActive = !player.GodModeActive;
+
+        if (player.GodModeActive)
+        {
+            Debug.Log("Godmode ENABLED");
+
+            // Apply configured godmode features
+            if (player.GodModeInvincibility)
+            {
+                Debug.Log("  - Invincibility: ON");
+            }
+
+            if (player.GodModeNoGravity)
+            {
+                player.Movement.EnableGravity = false;
+                player.Rigidbody.velocity = Vector3.zero;
+                Debug.Log("  - No Gravity: ON");
+            }
+
+            if (player.GodModeNoClip)
+            {
+                player.BoxCollider.enabled = false;
+                Debug.Log("  - No Clip: ON");
+            }
+        }
+        else
+        {
+            Debug.Log("Godmode DISABLED");
+
+            // Restore normal state
+            if (player.GodModeInvincibility)
+            {
+                Debug.Log("  - Invincibility: OFF");
+            }
+
+            if (player.GodModeNoGravity)
+            {
+                player.Movement.EnableGravity = true;
+                Debug.Log("  - No Gravity: OFF");
+            }
+
+            if (player.GodModeNoClip)
+            {
+                player.BoxCollider.enabled = true;
+                Debug.Log("  - No Clip: OFF");
+            }
+        }
+    }
 
 }
