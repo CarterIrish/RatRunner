@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d8d6d89495b98304e9b9ca95c3c46762
+guid: 64613576f6dbd3d4e80bfc7d5bf90fe1
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -31,38 +31,9 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Key|KeyAction (1)
-      takeName: Key|KeyAction
-      internalID: 7725492907468673839
-      firstFrame: 0
-      lastFrame: 200
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Key|CircleAction
-      takeName: Key|CircleAction
-      internalID: 3356238657679864687
+      name: Spring|CircleAction (1)
+      takeName: Spring|CircleAction
+      internalID: 6440755942626860610
       firstFrame: 0
       lastFrame: 199
       wrapMode: 0
@@ -71,8 +42,8 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -89,11 +60,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Key|KeyAction
-      takeName: Key|KeyAction
-      internalID: -3857315208981412408
+      name: Spring|CircleAction
+      takeName: Spring|CircleAction
+      internalID: 7952288031903653641
       firstFrame: 0
-      lastFrame: 200
+      lastFrame: 199
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -118,9 +89,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Key|NeedleAction
-      takeName: Key|NeedleAction
-      internalID: -6128097570049654355
+      name: Spring|KeyAction
+      takeName: Spring|KeyAction
+      internalID: 6785928633252598590
       firstFrame: 0
       lastFrame: 200
       wrapMode: 0
@@ -147,9 +118,38 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Key|Thread.001Action
-      takeName: Key|Thread.001Action
-      internalID: 640582622150176803
+      name: Spring|NeedleAction
+      takeName: Spring|NeedleAction
+      internalID: -1718154448891591390
+      firstFrame: 0
+      lastFrame: 200
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Spring|Thread.001Action
+      takeName: Spring|Thread.001Action
+      internalID: -2904067372963742902
       firstFrame: 0
       lastFrame: 200
       wrapMode: 0

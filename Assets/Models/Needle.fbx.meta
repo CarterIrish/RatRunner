@@ -46,8 +46,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Needle|CheeseAction
-      takeName: Needle|CheeseAction
+      name: Needle|NeedleAction (1)
+      takeName: Needle|NeedleAction
       internalID: 6086203542567213307
       firstFrame: 0
       lastFrame: 200
@@ -135,7 +135,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.02
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -190,7 +190,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.02
+    globalScale: 0.01
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
