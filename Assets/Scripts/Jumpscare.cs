@@ -14,16 +14,12 @@ public class Jumpscare : MonoBehaviour
 
         //Start audio
         audioScream.Play();
+
+        //delay death sound
+        yield return new WaitForSeconds(2f);
         audioDeath.Play();
 
-        //Wait for the longer audio source to finish
-        float longestClip = 0f;
-        if (audioScream.clip != null)
-            longestClip = Mathf.Max(longestClip, audioScream.clip.length);
-        if (audioDeath.clip != null)
-            longestClip = Mathf.Max(longestClip, audioDeath.clip.length);
-
-        yield return new WaitForSeconds(longestClip);
+        yield return new WaitForSeconds(2f);
 
         //Fade to black
         float elapsed = 0f;

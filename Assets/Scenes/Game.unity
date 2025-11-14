@@ -475,6 +475,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 23.774643, y: 20.306425, z: 0}
   m_Center: {x: -0.6358452, y: 9.653213, z: -0.5}
+--- !u!4 &49067744 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
+  m_PrefabInstance: {fileID: 405044600}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &50776393
 GameObject:
   m_ObjectHideFlags: 0
@@ -4738,7 +4743,7 @@ MonoBehaviour:
   UIText: {fileID: 815983131}
   daysScreen: {fileID: 1200535964}
   playerScript: {fileID: 838813794}
-  jumpscare: {fileID: 0}
+  jumpscare: {fileID: 1440437040}
 --- !u!4 &233775289
 Transform:
   m_ObjectHideFlags: 0
@@ -8151,6 +8156,91 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 71aa25ba28caf02448d90b0be032fc0b, type: 3}
   m_PrefabInstance: {fileID: 1718778204}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &405044600
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1440437041}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.6633847
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.6633847
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.6633847
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.3639749
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -12.242513
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 39.12416
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2181680288713638572, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -628237400022674424, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
+      propertyPath: m_Name
+      value: Tunnel_Straight 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417580257495796079, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5050422055867433376, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
 --- !u!4 &417413366 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 5b52f1a2f95bc604e91d9ba7b7b90563, type: 3}
@@ -16977,7 +17067,6 @@ Transform:
   - {fileID: 2069917217}
   - {fileID: 1903149295}
   - {fileID: 263867430}
-  - {fileID: 1150466976}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 360, z: 0}
 --- !u!54 &838813790
@@ -19155,7 +19244,7 @@ GameObject:
   m_Component:
   - component: {fileID: 935614881}
   m_Layer: 0
-  m_Name: Jumpscare
+  m_Name: Jumpscare Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19169,14 +19258,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935614880}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: -957.2779, y: 467.0784, z: -668.7971}
+  m_LocalScale: {x: 1.6633847, y: 1.6633847, z: 1.6633847}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1127443210}
   - {fileID: 1883581967}
-  m_Father: {fileID: 2122645883}
+  m_Father: {fileID: 1440437041}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &938056420
 GameObject:
@@ -23261,7 +23350,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1150466976}
   - component: {fileID: 1150466978}
-  - component: {fileID: 1150466977}
   m_Layer: 6
   m_Name: JumpscareCamera
   m_TagString: Untagged
@@ -23277,22 +23365,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1150466975}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: -4.38}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1171543796}
-  m_Father: {fileID: 838813789}
+  m_Father: {fileID: 1440437041}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!81 &1150466977
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1150466975}
-  m_Enabled: 1
 --- !u!20 &1150466978
 Camera:
   m_ObjectHideFlags: 0
@@ -29555,6 +29635,56 @@ Transform:
   - {fileID: 156264635}
   - {fileID: 417413366}
   m_Father: {fileID: 1996091476}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1440437039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1440437041}
+  - component: {fileID: 1440437040}
+  m_Layer: 6
+  m_Name: Jumpscare
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1440437040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440437039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd7abb5e275c55147bf979f9ab07576e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioScream: {fileID: 1883581968}
+  audioDeath: {fileID: 1127443211}
+  jumpscareCam: {fileID: 1150466975}
+--- !u!4 &1440437041
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440437039}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: -86, y: 25.2, z: -402.07}
+  m_LocalScale: {x: 0.60118383, y: 0.60118383, z: 0.60118383}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1150466976}
+  - {fileID: 49067744}
+  - {fileID: 935614881}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1448640405 stripped
 Transform:
@@ -38812,7 +38942,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1794247598}
   - component: {fileID: 1794247597}
-  - component: {fileID: 1794247599}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -38852,21 +38981,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1794247599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1794247596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd7abb5e275c55147bf979f9ab07576e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioScream: {fileID: 1883581968}
-  audioDeath: {fileID: 1127443211}
-  jumpscareCam: {fileID: 1150466975}
 --- !u!4 &1795833813 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
@@ -46490,7 +46604,6 @@ Transform:
   - {fileID: 578562071}
   - {fileID: 556077072}
   - {fileID: 513822915}
-  - {fileID: 935614881}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2127792676
@@ -46974,6 +47087,7 @@ SceneRoots:
   - {fileID: 838813789}
   - {fileID: 616736388}
   - {fileID: 1710725307}
+  - {fileID: 1440437041}
   - {fileID: 2102763825}
   - {fileID: 1996091476}
   - {fileID: 1704961412}

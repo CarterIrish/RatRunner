@@ -183,7 +183,7 @@ public class DayManager : MonoBehaviour
     private IEnumerator HandleDayTransition()
     {
         // Fade to black
-        yield return StartCoroutine(Fade(0f, 1f, fadeDuration));
+        daysScreen.alpha = 1f;
 
         // Play audio
         if (AudioManager.Instance.DayTransition != null)
