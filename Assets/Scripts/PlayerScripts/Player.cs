@@ -122,6 +122,7 @@ public class Player : MonoBehaviour
     /// </summary>
     public void ResetHealthToBase()
     {
+        ScreenEffectManager.Instance.SetLowHealth(false);
         _playerHealth = _baseHealth;
         Debug.Log($"Player health reset to base: {_playerHealth}");
     }
@@ -161,6 +162,7 @@ public class Player : MonoBehaviour
             if (DayManager.Instance != null && PlayerHealth == 0)
             {
                 // Reset health to base value
+                ScreenEffectManager.Instance.SetLowHealth(false);
                 PlayerHealth = _baseHealth;
 
                 // Re-apply all upgrades (including Vigor) after respawn
@@ -188,7 +190,7 @@ public class Player : MonoBehaviour
 
         // Trigger low health UI at 10 HP
         ScreenEffectManager.Instance.SetLowHealth(PlayerHealth <= 10);
-
+        
         return PlayerHealth;
     }
 
@@ -197,6 +199,7 @@ public class Player : MonoBehaviour
         if (amount >= 0)
         {
             PlayerHealth += amount;
+            ScreenEffectManager.Instance.SetLowHealth(PlayerHealth <= 10);
         }
         return PlayerHealth;
     }
