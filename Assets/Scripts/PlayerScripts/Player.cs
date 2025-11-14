@@ -20,14 +20,8 @@ public class Player : MonoBehaviour
     [SerializeField] private InputActionMap _playerInputMap;
     [SerializeField] private BoxCollider _boxCollider;
     [SerializeField] private Light _playerLight;
-    [SerializeField] private int _playerHealth = 10;
+    [SerializeField] private int _playerHealth = 20;
     private int _baseHealth = 10; // Store base health for respawn
-
-    //UI health variables
-    [SerializeField] private UnityEngine.UI.Image _redVignette;
-    [SerializeField] private float _vignetteFadeSpeed = 2f;
-    private Coroutine _vignetteCoroutine;
-
 
     // Upgrade tracking: Key = upgrade type, Value = upgrade level
     private Dictionary<UpgradesEnum, int> _upgrades = new Dictionary<UpgradesEnum, int>();
@@ -152,47 +146,18 @@ public class Player : MonoBehaviour
             PlayerHealth -= damage;
         }
 
-        // If at last hit or very low health, fade in vignette
-        if (PlayerHealth <= 1)
-        {
-            if (_vignetteCoroutine != null) StopCoroutine(_vignetteCoroutine);
-            _vignetteCoroutine = StartCoroutine(FadeVignette(true));
-        }
-        else
-        {
-            // Otherwise fade it out
-            if (_vignetteCoroutine != null) StopCoroutine(_vignetteCoroutine);
-            _vignetteCoroutine = StartCoroutine(FadeVignette(false));
-        }
+        // Trigger low health UI at 10 HP
+        ScreenEffectManager.Instance.SetLowHealth(PlayerHealth <= 10);
 
         return PlayerHealth;
     }
 
     public int increaseHealth(int amount)
     {
-        if(amount >= 0)
+        if (amount >= 0)
         {
             PlayerHealth += amount;
         }
         return PlayerHealth;
-    }
-
-    private IEnumerator FadeVignette(bool fadeIn)
-    {
-        if (_redVignette == null)
-            yield break;
-
-        Color color = _redVignette.color;
-        float targetAlpha = fadeIn ? 0.5f : 0f; // how visible the vignette gets
-        float startAlpha = color.a;
-        float elapsed = 0f;
-
-        while (elapsed < 1f)
-        {
-            elapsed += Time.deltaTime * _vignetteFadeSpeed;
-            color.a = Mathf.Lerp(startAlpha, targetAlpha, elapsed);
-            _redVignette.color = color;
-            yield return null;
-        }
     }
 }

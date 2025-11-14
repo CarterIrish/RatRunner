@@ -9194,7 +9194,7 @@ GameObject:
   - component: {fileID: 477267786}
   - component: {fileID: 477267787}
   m_Layer: 5
-  m_Name: EnemyNearby
+  m_Name: VignetteHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9231,10 +9231,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 500979861811d46468fe4036c7d0307b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noiseOverlay: {fileID: 755781001}
-  vignetteFadeSpeed: 2
-  noiseMaxAlpha: 1.07
-  noisePulseSpeed: 5
+  enemyNearbyOverlay: {fileID: 755781001}
+  healthOverlay: {fileID: 626595387}
+  enemyMaxAlpha: 0.95
+  enemyPulseSpeed: 5
+  lowHealthMaxAlpha: 0.05
+  lowHealthPulseSpeed: 4
+  fadeSpeed: 2
 --- !u!4 &478913035 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6fddbf5fffbeee54b8e2b8ae8e09c74a, type: 3}
@@ -12272,7 +12275,6 @@ MonoBehaviour:
   targetList:
   - {fileID: 116226924}
   trackingPlayer: 0
-  enemyNearAudio: {fileID: 0}
   triggerDistance: 5
   specialEnemy: 1
   finalEnemy: 1
@@ -12388,6 +12390,81 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a277b8a6052ac48439bacb6723962e1d, type: 3}
+--- !u!1 &626595386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 626595389}
+  - component: {fileID: 626595388}
+  - component: {fileID: 626595387}
+  m_Layer: 5
+  m_Name: HealthUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &626595387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626595386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: c62911cf9df5d66499c20573faec8055, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &626595388
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626595386}
+  m_CullTransparentMesh: 1
+--- !u!224 &626595389
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626595386}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1710725307}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &628993642
 GameObject:
   m_ObjectHideFlags: 0
@@ -17144,9 +17221,7 @@ MonoBehaviour:
     m_Bindings: []
   _boxCollider: {fileID: 0}
   _playerLight: {fileID: 263867431}
-  _playerHealth: 10
-  _redVignette: {fileID: 0}
-  _vignetteFadeSpeed: 2
+  _playerHealth: 20
 --- !u!1001 &846314550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30242,7 +30317,6 @@ MonoBehaviour:
   - {fileID: 781302089}
   - {fileID: 2014835495}
   trackingPlayer: 0
-  enemyNearAudio: {fileID: 0}
   triggerDistance: 5
   specialEnemy: 1
   finalEnemy: 0
@@ -31293,7 +31367,6 @@ MonoBehaviour:
   - {fileID: 124377109}
   - {fileID: 1290434649}
   trackingPlayer: 0
-  enemyNearAudio: {fileID: 0}
   triggerDistance: 5
   specialEnemy: 0
   finalEnemy: 0
@@ -33610,7 +33683,6 @@ MonoBehaviour:
   - {fileID: 750512772}
   - {fileID: 2030306976}
   trackingPlayer: 0
-  enemyNearAudio: {fileID: 0}
   triggerDistance: 5
   specialEnemy: 0
   finalEnemy: 0
@@ -36570,6 +36642,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 626595389}
   - {fileID: 755781000}
   - {fileID: 477267786}
   - {fileID: 908315497}
@@ -37659,7 +37732,6 @@ MonoBehaviour:
   - {fileID: 1341294078}
   - {fileID: 245630384}
   trackingPlayer: 0
-  enemyNearAudio: {fileID: 0}
   triggerDistance: 5
   specialEnemy: 0
   finalEnemy: 0
