@@ -2,6 +2,11 @@
 
 A survival horror game about a rat exploring dangerous sewers, gathering resources, and upgrading its abilities to escape.
 
+[![Unity](https://img.shields.io/badge/Unity-2023.2.20f1-black)]()
+[![Platform: Windows](https://img.shields.io/badge/Platform-Windows-blue)]()
+[![Platform: WebGL](https://img.shields.io/badge/Platform-WebGL-blue)]()
+[![Status](https://img.shields.io/badge/Status-In%20Development-yellow)]()
+
 **Genre:** Survival Scavenger / Horror / Roguelike
 
 **Platform:** PC (Unity 2023.2.20f1)  
