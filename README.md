@@ -2,12 +2,12 @@
 
 A survival horror game about a rat exploring dangerous sewers, gathering resources, and upgrading its abilities to escape.
 
-**Genre:** Survival Scavenger / Horror / Rougelike
+**Genre:** Survival Scavenger / Horror / Roguelike
 
 **Platform:** PC (Unity 2023.2.20f1)  
 **Team:** Alt+F5  
-**Course:** [IGME.320 - Game Design & Devlopment II]  
-**Development Period:** September 2025 - Present
+**Course:** [IGME.320 - Game Design & Development II]  
+**Development Period:** September 2025 - December 2025
 
 ## About
 
@@ -512,7 +512,7 @@ Rat Runner combines tense exploration with roguelike mechanics in an eerie sewer
   - Code documentation for input manager callbacks (Carter)
 
 - **Game Art:** (Chris)
-   - Crated tunnel assets
+   - Created tunnel assets
       - T-connector, cross-junction, straight pipe, left & right bends
    - Created rat asset
    - Created cheese asset 
