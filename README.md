@@ -38,7 +38,7 @@ Rat Runner combines tense exploration with roguelike mechanics in an eerie sewer
 - **Carter** - GameManager, Map Creation
 - **Chris** - 3D Graphics & Assets
 
-### Documentation
+## Documentation
 - [Link to High Concept Document](https://docs.google.com/document/d/e/2PACX-1vRN4v44V8mjBcOPSkB2Yl0jgf-J6qtahjTJwznlAHGf2UYgckZKTMoXCYlzLRgnN6s2SkB-l_eS0BuG/pub)
 - [Link to Changelog Document](changelog.md)
 
