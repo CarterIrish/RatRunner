@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        animator.SetBool("isRunning", isMoving);
     }
 
     private void FixedUpdate()
@@ -101,13 +101,8 @@ public class PlayerMovement : MonoBehaviour
         // move if input is received
         if (isMoving)
         {
-            animator.enabled = true;
             velocity = -transform.forward * speed * Time.fixedDeltaTime;
             transform.position += velocity;
-        }
-        else
-        {
-            animator.enabled = false;
         }
     }
 
