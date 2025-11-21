@@ -40,7 +40,8 @@ Rat Runner began as a passion project, an opportunity for our team to challenge 
 | Layer | Technologies Used |
 |-------|--------------------|
 | Engine | Unity |
-| Software | Visual Studio, GitHub |
+| Technical Softwares | Visual Studio, GitHub |
+| Design Softwares | Blender, Adobe Substance Painter |
 | Programming Language | C# |
 | Project Management | Trello |
 
