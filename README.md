@@ -33,8 +33,7 @@ You are the final successful test subject of a disgraced geneticist obsessed wit
 
 ## Motivation
 
-Rat Runner began as a passion project, an opportunity for our team to challenge ourselves, learn new systems, and build a polished, fully playable game we could be proud of. With Halloween coming up, we aimed to create a horror experience that was atmospheric, tense, and fun. Many of us had never developed a horror game before, so we dove into research, experimentation, and plenty of iteration.  
-Our goal was to push ourselves as developers and designers to create a unique experience that shows our growth, creativity, and collaboration.
+Rat Runner began as a passion project, an opportunity for our team to challenge ourselves, learn new systems, and build a polished, fully playable game we could be proud of. With Halloween coming up, we aimed to create a horror experience that was atmospheric, tense, and fun. Many of us had never developed a horror game before, so we dove into research, experimentation, and plenty of iteration. Our goal was to push ourselves as developers and designers to create a unique experience that shows our growth, creativity, and collaboration.
 
 ## Tech Stack
 
