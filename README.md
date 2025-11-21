@@ -11,7 +11,7 @@ Survival Scavenger / Horror / Roguelike
 
 ## Gameplay
 
-Use WASD to navigate the sewers and E to craft items. Pick up resources by moving over them, manage limited time, and avoid enemy rats at all costs. With only three days to break free, every decision matters.
+Use WASD to navigate the sewers and E to craft items at a workbench. Pick up resources by moving over them, manage limited time, and avoid enemy rats at all costs. With only three days to break free, every decision matters.
 
 ## Features
 
@@ -48,7 +48,7 @@ Rat Runner began as a passion project, an opportunity for our team to challenge 
 ## Controls
 
 **Move:** WASD  
-**Craft:** E  
+**Craft/Interact:** E  
 **Change Camera:** C  
 **Options Menu:** Escape
 
