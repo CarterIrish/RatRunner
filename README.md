@@ -2,6 +2,11 @@
 
 Survive, evolve, and escape the sewers of madness.
 
+[![Unity](https://img.shields.io/badge/Unity-2023.2.20f1-black)]()
+[![C#](https://img.shields.io/badge/C%23-Programming-239120)]()
+[![Platform: Windows](https://img.shields.io/badge/Platform-Windows-blue)]()
+[![Platform: WebGL](https://img.shields.io/badge/Platform-WebGL-blue)]()
+
 ## Overview
 
 Rat Runner is a fast-paced survival horror game where you play as the lone sane survivor of a scientist’s failed experiments. Explore a maze-like sewer system, collect items, evolve new abilities, and outsmart the infected rats hunting you. Your goal is simple: survive and escape!
