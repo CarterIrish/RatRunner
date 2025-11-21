@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -34,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
 
     public Rigidbody playerBody;
 
+    private Animator animator;
+
 
 
     // Start is called before the first frame update
@@ -46,6 +49,8 @@ public class PlayerMovement : MonoBehaviour
         // Store base values
         baseSpeed = speed;
         baseTurningDirection = turningDirection;
+
+        animator = GetComponentInChildren<Animator>();
     }
 
     /// <summary>
@@ -96,8 +101,13 @@ public class PlayerMovement : MonoBehaviour
         // move if input is received
         if (isMoving)
         {
+            animator.enabled = true;
             velocity = -transform.forward * speed * Time.fixedDeltaTime;
             transform.position += velocity;
+        }
+        else
+        {
+            animator.enabled = false;
         }
     }
 
