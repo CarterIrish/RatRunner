@@ -56,7 +56,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AC_Rat Run
+  m_Name: AC_Player
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: isRunning
@@ -99,7 +99,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: -3156159373613675557, guid: 73a4c442f927d1e46bb2fe31989fd150, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -126,7 +126,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1971608937854888444, guid: 4b47c34680c958c4baec21f19db97b7b, type: 3}
+  m_Motion: {fileID: 6495507443118869549, guid: 73a4c442f927d1e46bb2fe31989fd150, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
