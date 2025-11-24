@@ -99,8 +99,7 @@ public class DevConsole : MonoBehaviour
         commands[commandName.ToLower()] = callback;
     }
 
-    // TODO(human)
-    private void RegisterCommands()                             
+    private void RegisterCommands()
     {
         // Register debug commands here
         RegisterCommand("noclip", ToggleCollisions);
@@ -108,6 +107,7 @@ public class DevConsole : MonoBehaviour
         RegisterCommand("endgame", EndGame);
         RegisterCommand("giveupgrade", GiveUpgrade);
         RegisterCommand("mouselock", MouseLock);
+        RegisterCommand("godmode", ToggleGodMode);
 
     }
 
@@ -140,7 +140,7 @@ public class DevConsole : MonoBehaviour
         }
     }
 
-    private void GiveUpgrade(string[] args) 
+    private void GiveUpgrade(string[] args)
     {
         if (args.Length == 0)
         {
@@ -148,16 +148,34 @@ public class DevConsole : MonoBehaviour
             return;
         }
 
-        string upgrade = args[0].ToLower();
-        switch (upgrade)
-        {
-            case "mobility":
 
-                return;
-            case "vigor":
-                return;
-            case "vision":
-                return;
+        string upgrade = args[0].ToLower();
+        try
+        {
+            switch (upgrade)
+            {
+                case "mobility":
+                    player.Upgrades[UpgradesEnum.Mobility] = player.Upgrades.ContainsKey(UpgradesEnum.Mobility) ? player.Upgrades[UpgradesEnum.Mobility] + 1 : 1;
+                    return;
+                case "vigor":
+                    player.Upgrades[UpgradesEnum.Vigor] = player.Upgrades.ContainsKey(UpgradesEnum.Vigor) ? player.Upgrades[UpgradesEnum.Vigor] + 1 : 1;
+                    return;
+                case "vision":
+                    player.Upgrades[UpgradesEnum.Vision] = player.Upgrades.ContainsKey(UpgradesEnum.Vision) ? player.Upgrades[UpgradesEnum.Vision] + 1 : 1;
+                    return;
+                default:
+                    Debug.LogWarning("No valid args. Usage: mobility | vigor | vision");
+                    return;
+
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Error giving upgrade '{upgrade}': {e.Message}");
+        }
+        finally
+        {
+            UpgradeManager.Instance.ApplyAllUpgrades(player);
         }
     }
 
@@ -235,5 +253,66 @@ public class DevConsole : MonoBehaviour
         consoleUI.SetActive(false);
     }
 
+    /// <summary>
+    /// Toggles godmode with configurable invincibility, no gravity, and no clip features.
+    /// </summary>
+    /// <param name="args">The arguments.</param>
+    private void ToggleGodMode(string[] args)
+    {
+        if (player == null)
+        {
+            Debug.LogWarning("Player not found");
+            return;
+        }
+
+        // Toggle godmode state
+        player.GodModeActive = !player.GodModeActive;
+
+        if (player.GodModeActive)
+        {
+            Debug.Log("Godmode ENABLED");
+
+            // Apply configured godmode features
+            if (player.GodModeInvincibility)
+            {
+                Debug.Log("  - Invincibility: ON");
+            }
+
+            if (player.GodModeNoGravity)
+            {
+                player.Movement.EnableGravity = false;
+                player.Rigidbody.velocity = Vector3.zero;
+                Debug.Log("  - No Gravity: ON");
+            }
+
+            if (player.GodModeNoClip)
+            {
+                player.BoxCollider.enabled = false;
+                Debug.Log("  - No Clip: ON");
+            }
+        }
+        else
+        {
+            Debug.Log("Godmode DISABLED");
+
+            // Restore normal state
+            if (player.GodModeInvincibility)
+            {
+                Debug.Log("  - Invincibility: OFF");
+            }
+
+            if (player.GodModeNoGravity)
+            {
+                player.Movement.EnableGravity = true;
+                Debug.Log("  - No Gravity: OFF");
+            }
+
+            if (player.GodModeNoClip)
+            {
+                player.BoxCollider.enabled = true;
+                Debug.Log("  - No Clip: OFF");
+            }
+        }
+    }
 
 }

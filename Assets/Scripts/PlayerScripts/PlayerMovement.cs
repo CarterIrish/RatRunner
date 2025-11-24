@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -34,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
 
     public Rigidbody playerBody;
 
+    private Animator animator;
+
 
 
     // Start is called before the first frame update
@@ -46,6 +49,8 @@ public class PlayerMovement : MonoBehaviour
         // Store base values
         baseSpeed = speed;
         baseTurningDirection = turningDirection;
+
+        animator = GetComponentInChildren<Animator>();
     }
 
     /// <summary>
@@ -67,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        animator.SetBool("isRunning", isMoving);
     }
 
     private void FixedUpdate()
