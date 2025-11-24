@@ -144,12 +144,12 @@ public class Player : MonoBehaviour
                 return;
             }
 
-            // Stop enemy from hunting player
-            EnemyNavigation enemyNav = other.GetComponent<EnemyNavigation>();
-            if (enemyNav != null)
-            {
-                enemyNav.StopHunting();
-            }
+            //// Stop enemy from hunting player
+            //EnemyNavigation enemyNav = other.GetComponent<EnemyNavigation>();
+            //if (enemyNav != null)
+            //{
+            //    enemyNav.StopHunting();
+            //}
 
             // Deal damage to player
             TakeDamage(10);
