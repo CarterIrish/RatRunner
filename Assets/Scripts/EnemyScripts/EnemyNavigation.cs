@@ -75,7 +75,7 @@ public class EnemyNavigation : MonoBehaviour
         {
             StartHunting();
         }
-        else if (finalEnemy && Vector3.Distance(transform.position, player.transform.position) > 50.0f)
+        else if (finalEnemy && Vector3.Distance(transform.position, player.transform.position) > 50.0f && trackingPlayer)
         {
             StopHunting();
         }
