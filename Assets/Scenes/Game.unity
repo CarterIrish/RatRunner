@@ -1274,7 +1274,7 @@ GameObject:
   m_Component:
   - component: {fileID: 116226924}
   m_Layer: 0
-  m_Name: EnemyTargetEnding
+  m_Name: EnemyTargetEnding1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1289,7 +1289,7 @@ Transform:
   m_GameObject: {fileID: 116226923}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 133.3934, y: -15.456772, z: -373.3869}
+  m_LocalPosition: {x: 152.3, y: -15.456772, z: -364.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7173,6 +7173,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 5381dc95503de70418c8395153a8b0a6, type: 3}
   m_PrefabInstance: {fileID: 2145188801}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &357748632
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 357748633}
+  m_Layer: 0
+  m_Name: EnemyTargetEnding2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &357748633
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357748632}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 108.2, y: -15.456772, z: -364.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1704961412}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &361264082
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12345,9 +12376,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59bbc1d6e98494d4a8dbda1573e68dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 622767745}
+  target: {fileID: 116226924}
   targetList:
   - {fileID: 116226924}
+  - {fileID: 357748633}
   trackingPlayer: 0
   enemyNearAudio: {fileID: 0}
   triggerDistance: 5
@@ -12363,10 +12395,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 12.5
+  m_Speed: 15
   m_Acceleration: 12
   avoidancePriority: 50
-  m_AngularSpeed: 200
+  m_AngularSpeed: 220
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -17019,6 +17051,31 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: a092c0f0b11001d408725f5da8d5b238, type: 3}
   m_PrefabInstance: {fileID: 370490293}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &824649304 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 71aa25ba28caf02448d90b0be032fc0b, type: 3}
+  m_PrefabInstance: {fileID: 1397174346}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &824649308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824649304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1001 &828865181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28466,7 +28523,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 71aa25ba28caf02448d90b0be032fc0b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 824649308}
   m_SourcePrefab: {fileID: 100100000, guid: 71aa25ba28caf02448d90b0be032fc0b, type: 3}
 --- !u!4 &1400434478 stripped
 Transform:
@@ -36520,6 +36580,7 @@ Transform:
   - {fileID: 750512772}
   - {fileID: 2030306976}
   - {fileID: 116226924}
+  - {fileID: 357748633}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1705137402
