@@ -332,11 +332,15 @@ public class DevConsole : MonoBehaviour
             case "spring":
                 player.Inventory.AddItem(ItemsEnum.spring, 1);
                 return;
-
             case "key":
                 player.Inventory.AddItem(ItemsEnum.key, 1);
                 return;
-
+            case "needle":
+                player.Inventory.AddItem(ItemsEnum.needle, 1);
+                return;
+            case "thread":
+                player.Inventory.AddItem(ItemsEnum.thread, 1);
+                return;
             default:
                 placeholderText.text = $"Invalid argument '{args[0]}'. Usage: giveitem <spring|needle|key|thread>";
                 return;
