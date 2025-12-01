@@ -16504,6 +16504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   consoleUI: {fileID: 50776393}
   commandInputField: {fileID: 265233988}
+  placeholderText: {fileID: 1826792264}
   player: {fileID: 838813794}
 --- !u!4 &800381251
 Transform:

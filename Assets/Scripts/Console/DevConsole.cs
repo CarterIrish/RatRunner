@@ -10,6 +10,7 @@ public class DevConsole : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private GameObject consoleUI;
     [SerializeField] private TMP_InputField commandInputField;
+    [SerializeField] private TextMeshProUGUI placeholderText;
     [SerializeField] private Player player;
 
     private bool isOpen = false;
@@ -108,6 +109,7 @@ public class DevConsole : MonoBehaviour
         RegisterCommand("giveupgrade", GiveUpgrade);
         RegisterCommand("mouselock", MouseLock);
         RegisterCommand("godmode", ToggleGodMode);
+        RegisterCommand("giveitem", GiveItem);
 
     }
 
@@ -312,6 +314,32 @@ public class DevConsole : MonoBehaviour
                 player.BoxCollider.enabled = true;
                 Debug.Log("  - No Clip: OFF");
             }
+        }
+    }
+
+    private void GiveItem(string[] args)
+    {
+        Debug.Log("GiveItem enter");
+        if(args.Length == 0)
+        {
+            placeholderText.text = "Usage: giveitem <spring|needle|key|thread>";
+            return;
+        }
+
+        string outcome = args[0].ToLower();
+        switch (outcome)
+        {
+            case "spring":
+                player.Inventory.AddItem(ItemsEnum.spring, 1);
+                return;
+
+            case "key":
+                player.Inventory.AddItem(ItemsEnum.key, 1);
+                return;
+
+            default:
+                placeholderText.text = $"Invalid argument '{args[0]}'. Usage: giveitem <spring|needle|key|thread>";
+                return;
         }
     }
 
