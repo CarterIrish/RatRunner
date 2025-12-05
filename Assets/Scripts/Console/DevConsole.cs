@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using System.Runtime.CompilerServices;
 
 public class DevConsole : MonoBehaviour
 {
@@ -12,6 +13,14 @@ public class DevConsole : MonoBehaviour
     [SerializeField] private TMP_InputField commandInputField;
     [SerializeField] private TextMeshProUGUI placeholderText;
     [SerializeField] private Player player;
+
+    [SerializeField] private TextMeshProUGUI outputText;
+    [SerializeField] private UnityEngine.UI.ScrollRect scrollRect;
+
+    [Header("Console Settings")]
+    [SerializeField] private int maxLines = 50;
+    [SerializeField] private bool autoScrollToBottom = true;
+    private List<string> logHistory = new List<string>();
 
     private bool isOpen = false;
 
@@ -22,7 +31,12 @@ public class DevConsole : MonoBehaviour
     {
         // Register all available commands
         RegisterCommands();
+        Application.logMessageReceived += HandleUnityLog;
+        LogToConsole("=== Dev Console Initialized ===");
+        LogToConsole("Type 'help' for a list of commands.");
+        LogToConsole("================================");
     }
+
 
     private void OnEnable()
     {
@@ -35,6 +49,11 @@ public class DevConsole : MonoBehaviour
     {
         GameManager.OnConsoleClosed.RemoveListener(HideConsole);
         GameManager.OnConsoleOpened.RemoveListener(ShowConsole);
+    }
+
+    private void OnDestroy()
+    {
+        Application.logMessageReceived -= HandleUnityLog;
     }
 
     public void OnOpenConsole(InputAction.CallbackContext context)
@@ -62,7 +81,7 @@ public class DevConsole : MonoBehaviour
     public void OnSubmitCommand(string input)
     {
         if (string.IsNullOrWhiteSpace(input)) return;
-
+        LogToConsole($"> {input}", includeTimeStamp: false);
         // Parse the command and arguments
         string[] parts = input.Trim().Split(' ');
         string commandName = parts[0].ToLower();
@@ -90,6 +109,7 @@ public class DevConsole : MonoBehaviour
         }
 
         // Clear the input field
+        
         commandInputField.text = "";
         commandInputField.ActivateInputField();
     }
@@ -103,6 +123,7 @@ public class DevConsole : MonoBehaviour
     private void RegisterCommands()
     {
         // Register debug commands here
+        RegisterCommand("help", ShowHelp);
         RegisterCommand("noclip", ToggleCollisions);
         RegisterCommand("nogravity", ToggleGravity);
         RegisterCommand("endgame", EndGame);
@@ -111,6 +132,20 @@ public class DevConsole : MonoBehaviour
         RegisterCommand("godmode", ToggleGodMode);
         RegisterCommand("giveitem", GiveItem);
 
+    }
+
+    private void ShowHelp(string[] args)
+    {
+        Debug.Log("=== Available Commands ===");
+        Debug.Log("help - Show this help message");
+        Debug.Log("godmode - Toggle god mode (invincibility, no gravity, no clip)");
+        Debug.Log("noclip - Toggle collision detection");
+        Debug.Log("nogravity - Toggle gravity");
+        Debug.Log("mouselock <true|false> - Lock/unlock mouse cursor");
+        Debug.Log("giveitem <spring|needle|key|thread> - Give an item to player");
+        Debug.Log("giveupgrade <mobility|vision|vigor> - Give an upgrade to player");
+        Debug.Log("endgame <win|loss> - End the game");
+        Debug.Log("==========================");
     }
 
     private void MouseLock(string[] args)
@@ -242,11 +277,25 @@ public class DevConsole : MonoBehaviour
     private void ShowConsole()
     {
         consoleUI.SetActive(true);
+
+        // Force layout rebuild when console becomes visible
+        if (scrollRect != null && scrollRect.content != null)
+        {
+            Canvas.ForceUpdateCanvases();
+            UnityEngine.UI.LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
+        }
+
         // Focus input field when console opens
         if (commandInputField != null)
         {
             commandInputField.ActivateInputField();
             commandInputField.Select();
+        }
+
+        // Scroll to bottom after showing
+        if (autoScrollToBottom && scrollRect != null)
+        {
+            StartCoroutine(ScrollToBottomNextFrame());
         }
     }
 
@@ -319,10 +368,9 @@ public class DevConsole : MonoBehaviour
 
     private void GiveItem(string[] args)
     {
-        Debug.Log("GiveItem enter");
         if(args.Length == 0)
         {
-            placeholderText.text = "Usage: giveitem <spring|needle|key|thread>";
+            Debug.LogWarning("Usage: giveitem <spring|needle|key|thread>");
             return;
         }
 
@@ -331,19 +379,77 @@ public class DevConsole : MonoBehaviour
         {
             case "spring":
                 player.Inventory.AddItem(ItemsEnum.spring, 1);
+                Debug.Log("Gave spring to player");
                 return;
             case "key":
                 player.Inventory.AddItem(ItemsEnum.key, 1);
+                Debug.Log("Gave key to player");
                 return;
             case "needle":
                 player.Inventory.AddItem(ItemsEnum.needle, 1);
+                Debug.Log("Gave needle to player");
                 return;
             case "thread":
                 player.Inventory.AddItem(ItemsEnum.thread, 1);
+                Debug.Log("Gave thread to player");
                 return;
             default:
-                placeholderText.text = $"Invalid argument '{args[0]}'. Usage: giveitem <spring|needle|key|thread>";
+                Debug.LogWarning($"Invalid argument '{args[0]}'. Usage: giveitem <spring|needle|key|thread>");
                 return;
+        }
+    }
+
+    private void HandleUnityLog(string logString, string stackTrace, LogType type)
+    {
+        string prefix = type switch
+        {
+            LogType.Error => "<color=red>[ERROR]</color> ",
+            LogType.Warning => "<color=yellow>[WARNING]</color> ",
+            LogType.Log => "<color=white>[INFO]</color> ",
+            LogType.Assert => "<color=blue>[ASSERT]</color> ",
+            LogType.Exception => "<color=orange>[EXCEPTION]</color> ",
+            _ => "<color=pink>[UNKOWN]</color>"
+        };
+        LogToConsole($"{prefix}{logString}");
+    }
+
+    private void LogToConsole(string message, bool includeTimeStamp = true)
+    {
+        if (outputText == null) return;
+
+        string timeStamp = includeTimeStamp ? $"<color=grey>[{DateTime.Now:HH:mm:ss}]</color> " : "";
+        string formattedMessage = $"{timeStamp}{message}";
+        logHistory.Add(formattedMessage);
+        if(logHistory.Count > maxLines)
+        {
+            logHistory.RemoveAt(0);
+        }
+
+        outputText.text = string.Join("\n", logHistory);
+
+        // Force layout rebuild and scroll to bottom
+        if(autoScrollToBottom && scrollRect != null)
+        {
+            // Schedule scroll for next frame after layout updates
+            StartCoroutine(ScrollToBottomNextFrame());
+        }
+    }
+
+    private System.Collections.IEnumerator ScrollToBottomNextFrame()
+    {
+        // Wait one frame for text to render
+        yield return null;
+
+        // Force layout rebuild on Content
+        if (scrollRect != null && scrollRect.content != null)
+        {
+            UnityEngine.UI.LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
+            Canvas.ForceUpdateCanvases();
+
+            // Wait one more frame for scroll rect to process layout changes
+            yield return null;
+
+            scrollRect.verticalNormalizedPosition = 0f;
         }
     }
 
