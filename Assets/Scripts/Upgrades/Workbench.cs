@@ -26,6 +26,7 @@ public class Workbench : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private Player _currentPlayer;
     [SerializeField] private bool _playerInRange;
+    private static Workbench _activeWorkbench;
 
     // Track which number corresponds to which recipe
     private List<CraftingRecipe> _displayedRecipes = new List<CraftingRecipe>();
@@ -83,6 +84,7 @@ public class Workbench : MonoBehaviour
     /// </summary>
     public void TryCraftRecipe(int index)
     {
+        if (_playerInRange == false) { return; }
         if (index >= _displayedRecipes.Count)
         {
             Debug.LogWarning($"No recipe at index {index + 1}");
@@ -106,6 +108,7 @@ public class Workbench : MonoBehaviour
         {
             _currentPlayer = other.gameObject.GetComponent<Player>();
             _playerInRange = true;
+            _activeWorkbench = this;
             ShowInteractPrompt(true);
         }
     }
@@ -122,7 +125,10 @@ public class Workbench : MonoBehaviour
         {
             _currentPlayer = null;
             _playerInRange = false;
-
+            if(_activeWorkbench == this)
+            {
+                _activeWorkbench = null;
+            }
             ShowInteractPrompt(false);
             HideInteractPrompt(true);
         }
@@ -134,7 +140,6 @@ public class Workbench : MonoBehaviour
     /// <param name="show">if set to <c>true</c> [show].</param>
     private void ShowInteractPrompt(bool show)
     {
-        Debug.Log(show ? "Press [E] to Craft" : "");
         _craftPrompt.text = "E to craft";
     }
 
@@ -152,13 +157,18 @@ public class Workbench : MonoBehaviour
     /// </summary>
     private void OpenCraftingMenu()
     {
-        if(_currentPlayer == null)
+        if(this != _activeWorkbench)
         {
             return;
         }
 
+        if(_activeWorkbench._currentPlayer == null)
+        {
+            Debug.LogError($"No player reference! || {_activeWorkbench.name}");
+            return;
+        }
         // Update UI to reflect current upgrade levels and button states
-        UpdateUpgradeUI();
+        _activeWorkbench.UpdateUpgradeUI();
     }
 
     /// <summary>
@@ -167,48 +177,46 @@ public class Workbench : MonoBehaviour
     /// <param name="recipe">The recipe.</param>
     private void CraftRecipe(CraftingRecipe recipe)
     {
-        if (_currentPlayer == null)
+        if (_activeWorkbench._currentPlayer == null)
         {
-            Debug.LogError("No player reference!");
+            Debug.LogError($"No player reference at {_activeWorkbench.name}!");
             return;
         }
 
-        if (recipe.CanCraft(_currentPlayer.Inventory) == false)
+        if (recipe.CanCraft(_activeWorkbench._currentPlayer.Inventory) == false)
         {
             Debug.LogWarning($"Cannot craft {recipe.name} - missing required items!");
             // Still update UI to ensure button states are correct
-            UpdateUpgradeUI();
+            _activeWorkbench.UpdateUpgradeUI();
             return;
         }
 
         // Remove required items from inventory
         foreach(CraftingRecipe.ItemRequirement req in recipe._requiredItems)
         {
-            _currentPlayer.Inventory.RemoveItem(req._itemType, req._quantity);
+            _activeWorkbench._currentPlayer.Inventory.RemoveItem(req._itemType, req._quantity);
         }
 
         // Add upgrade to player's upgrades dictionary
-        if (_currentPlayer.Upgrades.ContainsKey(recipe._upgradeGranted))
+        if (_activeWorkbench._currentPlayer.Upgrades.ContainsKey(recipe._upgradeGranted))
         {
             // Increment existing upgrade level
-            _currentPlayer.Upgrades[recipe._upgradeGranted]++;
-            Debug.Log($"Crafted {recipe.name}! Upgrade level: {_currentPlayer.Upgrades[recipe._upgradeGranted]}");
+            _activeWorkbench._currentPlayer.Upgrades[recipe._upgradeGranted]++;
         }
         else
         {
             // Add new upgrade at level 1
-            _currentPlayer.Upgrades.Add(recipe._upgradeGranted, 1);
-            Debug.Log($"Crafted {recipe.name}! New upgrade unlocked at level 1");
+            _activeWorkbench._currentPlayer.Upgrades.Add(recipe._upgradeGranted, 1);
         }
 
         // Apply all upgrades to player (re-applies all to account for new level)
         if (UpgradeManager.Instance != null)
         {
-            UpgradeManager.Instance.ApplyAllUpgrades(_currentPlayer);
+            UpgradeManager.Instance.ApplyAllUpgrades(_activeWorkbench._currentPlayer);
         }
 
         // Refresh menu to show updated inventory
-        UpdateUpgradeUI();
+        _activeWorkbench.UpdateUpgradeUI();
         OnUpgradeCrafted.Invoke();
     }
 
@@ -242,9 +250,9 @@ public class Workbench : MonoBehaviour
     /// <param name="upgradeType">The type of upgrade to craft.</param>
     public void TryCraftUpgradeByType(UpgradesEnum upgradeType)
     {
-        if (_currentPlayer == null)
+        if (_activeWorkbench._currentPlayer == null)
         {
-            Debug.LogError("No player reference!");
+            Debug.LogError($"No player reference! || {_activeWorkbench.name}");
             return;
         }
 
@@ -266,7 +274,7 @@ public class Workbench : MonoBehaviour
     /// </summary>
     private void UpdateUpgradeUI()
     {
-        if (_currentPlayer == null) return;
+        if (this != _activeWorkbench || _currentPlayer == null) return;
 
         // Update Mobility
         UpdateUpgradeTile(UpgradesEnum.Mobility, _mobilityButton, _mobilityLevelText);

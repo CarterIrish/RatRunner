@@ -37,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Animator animator;
 
+    [SerializeField] private Transform _raycastPoint;
+
 
 
     // Start is called before the first frame update
@@ -98,12 +100,19 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation *= turning;
         }
 
+
         // move if input is received
         if (isMoving)
         {
-            velocity = -transform.forward * speed * Time.fixedDeltaTime;
-            transform.position += velocity;
+            velocity = -transform.forward * speed;
+            playerBody.velocity = new Vector3(velocity.x, playerBody.velocity.y, velocity.z);
         }
+        else
+        {
+            // Stop horizontal movement when not moving
+            playerBody.velocity = new Vector3(0, playerBody.velocity.y, 0);
+        }
+
     }
 
 }

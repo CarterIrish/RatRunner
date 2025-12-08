@@ -172,8 +172,16 @@ public class InputManager : MonoBehaviour
                 }
                 case (GameStates.PAUSED):
                 {
-                    GameManager.Instance.ChangeGameState(GameStates.PLAYING);
-                    break;
+                        if (UIManager.Instance.settingsUI.activeSelf)
+                        {
+                            UIManager.Instance.HideSettingsUI();
+                            break;
+                        }
+                        else
+                        {
+                            GameManager.Instance.ChangeGameState(GameStates.PLAYING);
+                            break;
+                        }
                 }
                 case (GameStates.CONSOLE):
                     GameManager.Instance.ChangeGameState(GameStates.PLAYING);

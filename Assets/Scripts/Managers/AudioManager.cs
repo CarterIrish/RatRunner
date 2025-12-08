@@ -137,6 +137,7 @@ public class AudioManager : MonoBehaviour
             {
                 atmosphere.Stop();
                 atmosphereIsPlaying = false;
+                EnemyNearby.Stop();
             }
         }
         else

@@ -71,11 +71,11 @@ public class EnemyNavigation : MonoBehaviour
 
         // if player close to final enemy, it starts hunting
         // otherwise it stops hunting and sits at current position
-        if (finalEnemy && Vector3.Distance(transform.position, player.transform.position) <= 50.0f)
+        if (finalEnemy && Vector3.Distance(transform.position, player.transform.position) <= 50.0f && !trackingPlayer)
         {
             StartHunting();
         }
-        else if (finalEnemy && Vector3.Distance(transform.position, player.transform.position) > 50.0f)
+        else if (finalEnemy && Vector3.Distance(transform.position, player.transform.position) > 50.0f && trackingPlayer)
         {
             StopHunting();
         }

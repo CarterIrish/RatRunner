@@ -1,5 +1,133 @@
 # Changelog
 
+## [Sprint 6 - Week 2] - 2025-12-01 to 2025-12-07
+
+### Added
+
+- **Dev Console Enhancements:** (Carter)
+  - Scrollable console output using TextMeshPro and ScrollRect
+  - Color-coded log messages (Info, Warning, Error, Exception, Assert)
+  - Timestamped console output for better debugging
+  - Help command that lists all available console commands
+  - Auto-scroll to bottom functionality for new messages
+  - Unity Debug.Log integration - all Debug logs appear in dev console
+  - Additional console keybind for WebGL build compatibility
+
+- **Console Commands:** (Carter)
+  - GiveItem command with support for all item types
+  - Missing item command arguments (cheese, cloth, suspiciousPowder)
+  - Placeholder text field for command feedback
+
+- **Workbench Multi-Instance Support:** (Carter)
+  - Multiple workbenches now work correctly in scene
+  - Static active workbench pattern for proper instance management
+  - UI updates correctly regardless of which workbench is used
+  - Keyboard shortcuts (1-3) work at any workbench
+
+### Changed
+
+- **Dev Console:** (Carter)
+  - Removed placeholder text manipulation in GiveItem command
+  - Improved command feedback with success/error messages via Debug.Log
+  - Added confirmation messages when items are given to player
+  - Removed verbose debug logging for cleaner console output
+
+- **Workbench System:** (Carter)
+  - Refactored to use active workbench delegation pattern
+  - UI updates now call on active workbench instance instead of caller instance
+  - Improved guard clauses to prevent wrong workbench from executing commands
+
+- **Level Design:** (Brice)
+  - Decreased incline on key ramp for better player accessibility
+  - Updated puzzle mechanics to work with new collision system
+
+- **UI Systems:** (Chess)
+  - Settings menu functionality restored
+  - Quit game button now functional across all scenes
+
+- **UI Positioning:** (Brice)
+  - Repositioned "Days Left" text to corner of screen for better visibility
+
+### Fixed
+
+- **Workbench Bugs:** (Carter)
+  - Fixed crafting system error when using second workbench in scene
+  - Fixed UI not updating after crafting at non-primary workbench
+  - Fixed workbench reference issues with UI button callbacks
+  - Added safety checks in OnTriggerExit to prevent clearing wrong active workbench
+
+- **Dev Console:** (Carter)
+  - Fixed ScrollRect content height staying at 0
+  - Fixed scroll view not auto-scrolling to bottom
+  - Fixed layout system not updating when console is inactive
+  - Added force layout rebuild when console opens
+  - Removed infinite logging loop from debug statements
+
+- **Enemy AI Bugs:** (Chess)
+  - Fixed enemy nearby detection glitch
+  - Resolved enemy proximity effect triggering incorrectly
+
+### Removed
+
+- **Debug Code Cleanup:** (Carter)
+  - Removed console-based crafting UI debug logs from Workbench.cs
+  - Removed temporary test log statements from dev console initialization
+  - Cleaned up verbose crafting logs for cleaner output
+
+## [Sprint 6 - Week 1] - 2025-11-17 to 2025-11-23
+
+### Added
+
+- **Player Animation System:** (Chris, Brice)
+  - Player running animation implemented
+  - Player idle animation integrated
+  - Animation controller for player movement states
+  - Run/idle animation transitions based on player input
+
+- **Enemy Animation System:** (Chris, Jake)
+  - Enemy animations implemented (wiggle and breathe)
+  - Animation starting and stopping based on enemy state
+  - Enemy idle behavior animations
+
+- **Final Enemy Enhancements:** (Jake)
+  - Final enemy now patrols instead of remaining stationary
+  - Increased difficulty for final boss encounter
+  - Enhanced final enemy behavior patterns
+
+- **Documentation Updates:** (Carter, Brice)
+  - Project badges added to README
+  - Gameplay and controls section updated
+  - Tech stack section expanded
+  - README structure refactored for better organization
+  - Changelog moved to separate file (changelog.md)
+  - Development section renamed to Documentation
+
+### Changed
+
+- **Player Movement System:** (Carter)
+  - Updated movement logic to use Unity Rigidbody physics
+  - Changed from kinematic approach to physics-based movement
+  - Improved player physics interactions
+
+- **UI Positioning:** (Brice)
+  - "Days Left" text moved to corner for better UI layout
+  - Fixed text positioning issues
+
+- **README Structure:** (Carter, Brice)
+  - Reorganized sections for better readability
+  - Updated spacing and formatting
+  - Separated changelog into dedicated file
+
+### Fixed
+
+- **Enemy AI Bugs:** (Brice)
+  - Fixed enemy aggro detection bug
+  - Resolved issues with enemy targeting behavior
+
+- **Audio Bugs:** (Jake)
+  - Fixed audio glitch with final enemy sounds
+  - Corrected audio playback timing issues
+
 ## [Sprint 5 - Week 2] - 2025-11-10 to 2025-11-16
 
 ### Added

@@ -724,6 +724,17 @@
                     "action": "OpenConsole",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "4ad061eb-bf16-41e5-8198-922a24a1e01d",
+                    "path": "<Keyboard>/slash",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "OpenConsole",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
